@@ -1,0 +1,27 @@
+include ../layout/_mixins
+
+doctype html
+html(lang="ru")
+	- var title = 'Главная | Орехпродукт'
+	include ../layout/_head
+	
+	body
+		|
+		|
+		|
+		// Header
+		include ../layout/_main-header
+
+		|
+		|
+		|
+		// Section
+		main.main-page.fp-sections
+			include ./index/main
+			include ./index/main
+			include ./index/main
+		|
+		|
+		|
+		// Footer
+		include ../layout/_footer
