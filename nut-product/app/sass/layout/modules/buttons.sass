@@ -1,16 +1,21 @@
 ////////// Default btn
 .btn
 	position: relative
-	display: inline-block
-	font-size: 14px
-	border-radius: 4px
-	color: #fff
+	display: flex
+	align-items: center
+	justify-content: center
+	font-weight: bold
+	font-size: 20px
+	line-height: 20px
 	text-align: center
+	color: #FFFFFF
 	text-decoration: none
-	padding: 10px 30px
-	background-color: $c1
+	padding: 20.5px 46.7px
+	background-color: $accent
 	border: none
+	border-radius: 3px
 	outline: none
+	user-select: none
 	transition: all .3s ease
 	&:focus:not(.disabled),
 	&:hover:not(.disabled)
@@ -18,11 +23,67 @@
 		cursor: pointer
 		color: #fff
 		text-decoration: none
-		background-color: lighten($c1, 10%)
+		background-color: lighten($accent, 10%)
 	&:active:not(.disabled)
-		background-color: darken($c1, 5%)
+		background-color: darken($accent, 5%)
+
+	&.disabled
+		opacity: .4
+
+
+	&__icon-wrap
+		display: flex
+		justify-content: center
+		align-items: center
+		margin-right: 16px
+		.icon
+			fill: #fff
+			width: 32px
+			height: 32px
+			transition: all 0.3s ease
+
+.trs-btn
+	position: relative
+	display: flex
+	align-items: center
+	justify-content: center
+	font-weight: bold
+	font-size: 20px
+	line-height: 20px
+	text-align: center
+	color: $c0
+	text-decoration: none
+	padding: 17.5px 27.1px
+	background-color: transparent
+	border: 3px solid $accent
+	border-radius: 3px
+	outline: none
+	user-select: none
+	transition: all .3s ease
+	&:focus:not(.disabled),
+	&:hover:not(.disabled)
+		outline: none
+		cursor: pointer
+		color: #fff
+		text-decoration: none
+		background-color: $accent
+		.trs-btn
+			&__icon-wrap
+				.icon
+					fill: #fff
+	&:active:not(.disabled)
+		background-color: darken($accent, 5%)
 
 	&.disabled
 		opacity: .4
 		
-	user-select: none
+	&__icon-wrap
+		display: flex
+		justify-content: center
+		align-items: center
+		margin-right: 16px
+		.icon
+			fill: $accent
+			width: 27px
+			height: 32px
+			transition: all 0.3s ease

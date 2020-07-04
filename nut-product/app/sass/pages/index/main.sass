@@ -1,9 +1,38 @@
 .main
+
+	&__wrap
+		position: relative
+		z-index: 1
+		display: flex
+		flex-direction: column
+		align-items: center
+		// padding: 16.5vh 0 7vh
+		padding: 14vh 0 6vh
+
+
 	&__logo
-		margin-bottom: 60px
+		margin-bottom: 5.5vh
+		opacity: 0
+
+	&__title
+		margin-bottom: 1.5vh
+		opacity: 0
 
 	&__sub-title
 		font-size: 26px
 		line-height: 40px
 		text-align: center
 		color: $c0
+		margin-bottom: 4.1vh
+		opacity: 0
+
+	&__btn-wrap
+		display: flex
+		align-items: center
+		margin-bottom: 24.5vh
+		// margin-bottom: 22vh
+		opacity: 0
+
+	&__btn
+		&:first-child
+			margin-right: 20px

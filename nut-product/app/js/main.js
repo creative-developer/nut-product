@@ -58,6 +58,11 @@ $(document).ready(function () {
 			licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
 			// Events
 			onLeave: function (origin, destination, direction) {
+				if (destination.anchor !== 'home') {
+					$('.main-header__logo').removeClass('logo--hidden');
+				}else {
+					$('.main-header__logo').addClass('logo--hidden');
+				}
 			},
 			afterLoad: function (origin, destination, direction) {
 
@@ -68,18 +73,78 @@ $(document).ready(function () {
 			afterResponsive: function (isResponsive) { },
 			afterSlideLoad: function (section, origin, destination, direction) { },
 			onSlideLeave: function (section, origin, destination, direction) { 
-				if (destination.anchor !== 'home') {
-					$('.main-header__logo').removeClass('logo--hidden')
-				}else {
-					$('.main-header__logo').addClass('logo--hidden')
-				}
 			}
 		});
 	}
 
-	fpInit();
-	// if (!isMobile) {
-	// }
+	function mainContentAnimation() {
+		// bgElements
+		const nutsLeft = document.querySelectorAll('.main-bg__nuts--left')
+		const nutsRight = document.querySelectorAll('.main-bg__nuts--right')
+		const flowersLeft = document.querySelectorAll('.main-bg__flowers--left')
+		const flowersRight = document.querySelectorAll('.main-bg__flowers--right')
+		const petalLeft = document.querySelectorAll('.main-bg__petal--left')
+		const petalRight = document.querySelectorAll('.main-bg__petal--right')
+
+		// contentElements
+		const contentElements = {
+			hamburger: document.querySelector('.hamburger'),
+			mainLogo: document.querySelector('.main__logo'),
+			mainTitle: document.querySelector('.main__title'),
+			mainDesc: document.querySelector('.main__sub-title'),
+			mainBtnWrap: document.querySelector('.main__btn-wrap'),
+			scrollDown: document.querySelector('.js-scroll-down-fp')
+		}
+
+		let i = 4
+		for (let key in contentElements) {
+			if(contentElements.hasOwnProperty(key)){
+				i++
+				gsap.fromTo(contentElements[key], 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(i / 10)
+			}
+		}
+
+		// center elements
+		// gsap.fromTo(contentElements.hamburger, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.4)
+		// gsap.fromTo(contentElements.mainLogo, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.5)
+		// gsap.fromTo(contentElements.mainTitle, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.6)
+		// gsap.fromTo(contentElements.mainDesc, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.7)
+		// gsap.fromTo(contentElements.mainBtnWrap, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.8)
+		// gsap.fromTo(contentElements.scrollDown, 0.8, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }).delay(0.9)
+
+		// bg elements
+		gsap.fromTo(flowersLeft, 0.8, { x: -300, y: -300}, { x: 0, y: 0 }).delay(1)
+		gsap.fromTo(flowersRight, 0.8, { x: 300, y: -300}, { x: 0, y: 0 }).delay(1)
+		gsap.fromTo(petalLeft, 1.2, { scale: 0}, { scale: 1 })
+		gsap.fromTo(petalRight, 1.2, { scale: 0}, { scale: 1 })
+		gsap.fromTo(nutsLeft, 1.2, { x: -800}, { x: 0 }).delay(1)
+		gsap.fromTo(nutsRight, 1.2, { x: 800}, { x: 0 }).delay(1)
+		setTimeout(() => {
+			mouseMoveParallax();
+			// scrollDownInfinityAnimation
+			gsap.fromTo(contentElements.scrollDown, 1, { y: -10 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2000);
+
+		// mouseMoveParallax
+		function mouseMoveParallax() {
+			$('.main').on('mousemove', function (e) {
+				const posX = e.clientX / 50;
+				const posY = e.clientY / 80;
+				gsap.to(nutsLeft, 0.8,  {x: posX });
+				gsap.to(nutsRight, 0.8, { x: -posX });
+				gsap.to(flowersLeft, 0.3, { x: posX, y: posY });
+				gsap.to(flowersRight, 0.3, { x: -posX, y: posY });
+				gsap.to(petalLeft, 0.01, { x: -e.clientX / 20, y: -e.clientY / 20 });
+				gsap.to(petalRight, 0.2, { x: -e.clientX / 20, y: -e.clientY / 20 });
+			})
+		}
+	}
+
+	mainContentAnimation();
+
+	if (!isMobile) {
+		fpInit();
+	}
 	
 	// Popup opener
 	$('.js-popup').click(function(event) {
@@ -89,11 +154,19 @@ $(document).ready(function () {
 		mfpPopup(popupID);
 	});
 
+	// Optimize Svg Icons in IE
+	svg4everybody();
+	
 	// Mobile menu toggle
 	$('.js-menu').click(function() {
 		$(this).toggleClass('is-active');
 		$('.menu').toggleClass('opened');
 	});
+
+	$('.js-scroll-down-fp').click(function (e) {
+		e.preventDefault();
+		fullpage_api.moveSectionDown();
+	})
 
 	// Phone input mask
 	$('input[type="tel"]').inputmask({

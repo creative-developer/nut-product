@@ -23,6 +23,8 @@
 		left: 0
 		&--top
 			top: 0
+		&--center
+			top: 0
 		&--bottom
 			bottom: 0
 
@@ -32,6 +34,7 @@
 		display: flex
 		justify-content: center
 		align-items: center
+		z-index: 0
 		&--left
 			width: 684px
 			height: 749px
@@ -43,6 +46,22 @@
 			top: -173px
 			right: -202px
 
+	&__petal
+		display: flex
+		justify-content: center
+		align-items: center
+		position: absolute
+		z-index: 1
+		&--left
+			width: 585px
+			height: 444px
+			top: -7px
+			left: -154px
+		&--right
+			width: 574px
+			height: 484px
+			top: -16px
+			right: -49px
 
 	&__nuts
 		display: flex
