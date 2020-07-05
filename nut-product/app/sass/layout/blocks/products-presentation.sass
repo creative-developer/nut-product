@@ -1,0 +1,68 @@
+.products-presentation
+	position: relative
+	&--flour
+		display: block
+		margin: 0 auto
+		margin-top: 7.150vh
+		max-width: 67.188vw
+		width: 100%
+		height: calc( 100vh - 180px)
+		.products-presentation
+			&__background-shadow
+				position: absolute
+				top: -70px
+				left: 0
+				width: 100%
+				height: inherit
+				display: flex
+				justify-content: center
+				align-items: center
+				z-index: 0
+			&__img-wrap
+				&--left
+					top: 20px
+					width: 52.708vw
+					height: 70.787vh
+					z-index: 2
+					margin-left: 51px
+				&--right
+					width: 45vw
+					height: 65.986vh
+					z-index: 1
+					margin-left: 34px
+			&__items-wrap
+				width: inherit
+				height: inherit
+			&__item
+				position: absolute
+				&:nth-child(1)
+					left: 223px
+					bottom: 171px
+				&:nth-child(2)
+					left: 165px
+					bottom: 334px
+				&:nth-child(3)
+					left: 147px
+					top: 168px
+				&:nth-child(4)
+					left: 195px
+					top: 16px
+					z-index: 2
+				&:nth-child(5)
+					right: 150px
+					top: 26px
+					z-index: 1
+				&:nth-child(6)
+					right: 461px
+					bottom: 272px
+					z-index: 1
+				&:nth-child(7)
+					right: 205px
+					bottom: 178px
+					z-index: 1
+
+	&__img-wrap
+		position: absolute
+		top: 0
+		left: 50%
+		transform: translateX(-50%)
