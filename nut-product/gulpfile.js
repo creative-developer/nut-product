@@ -44,7 +44,7 @@ function cssLibs() {
 	return src([
 		'app/libs/magnific-popup/dist/magnific-popup.css',
 		// 'app/libs/owl.carousel/dist/assets/owl.carousel.min.css',
-		// 'app/libs/fancybox/dist/jquery.fancybox.css',
+		'app/libs/fancybox/dist/jquery.fancybox.css',
 	])
 		.pipe(concat('libs.min.css'))
 		.pipe(autoprefixer(['last 10 versions']))

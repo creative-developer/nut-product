@@ -87,3 +87,50 @@
 			width: 27px
 			height: 32px
 			transition: all 0.3s ease
+
+.btn-oval
+	position: relative
+	display: flex
+	align-items: center
+	justify-content: center
+	font-weight: bold
+	font-size: 20px
+	line-height: 20px
+	text-align: center
+	color: #fff
+	text-decoration: none
+	padding: 1.839vh 1.578vw
+	background: #999933
+	box-shadow: 0px 20px 50px rgba(92, 92, 25, 0.51)
+	border: none
+	border-radius: 100px
+	outline: none
+	user-select: none
+	transition: all .3s ease
+	&:focus:not(.disabled),
+	&:hover:not(.disabled)
+		outline: none
+		cursor: pointer
+		color: #fff
+		text-decoration: none
+		background-color: darken(#999933, 5%)
+		.trs-btn
+			&__icon-wrap
+				.icon
+					fill: #fff
+	&:active:not(.disabled)
+		background-color: darken(#999933, 0%)
+
+	&.disabled
+		opacity: .4
+		
+	&__icon-wrap
+		display: flex
+		justify-content: center
+		align-items: center
+		margin-right: 20px
+		.icon
+			fill: #fff
+			width: 44px
+			height: 44px
+			transition: all 0.3s ease

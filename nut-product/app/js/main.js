@@ -32,15 +32,19 @@ $(document).ready(function () {
 			isMobile = false;
 		}
 	});
-
-	let flourFlag = true;
-
+	
 	function fpInit() {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
-			anchors: ['home', 'flour', 'mash'],
+			anchors: ['home', 'flour', 'mash', 'nuts'],
 		};
+
+		const flags = {
+			flourFlag	: true,
+			mashFlag	: true,
+			nutsFlag	: true,
+		}
 		
 		new fullpage(fp.containerSelector, {
 			menu: false,
@@ -68,14 +72,27 @@ $(document).ready(function () {
 				}
 
 				if (destination.anchor === 'flour') {
-					if (flourFlag) {
-						categoriesAnimation();
-						flourFlag = false;
+					if (flags.flourFlag) {
+						flourAnimation();
+						flags.flourFlag = false;
+					}
+				}
+
+				if (destination.anchor === 'mash') {
+					if (flags.mashFlag) {
+						mashAnimation();
+						flags.mashFlag = false;
+					}
+				}
+
+				if (destination.anchor === 'nuts') {
+					if (flags.nutsFlag) {
+						nutsAnimation();
+						flags.nutsFlag = false;
 					}
 				}
 			},
 			afterLoad: function (origin, destination, direction) {
-
 			},
 			afterRender: function () {
 			},
@@ -133,8 +150,8 @@ $(document).ready(function () {
 			mouseMoveParallax();
 			// scrollDownInfinityAnimation
 			gsap.fromTo(contentElements.scrollDown, 1, { y: -10 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
-			gsap.fromTo(nutsLeft, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
-			gsap.fromTo(nutsRight, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
+			// gsap.fromTo(nutsLeft, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
+			// gsap.fromTo(nutsRight, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
 		}, 2500);
 
 		// mouseMoveParallax
@@ -142,8 +159,8 @@ $(document).ready(function () {
 			$('.main').on('mousemove', function (e) {
 				const posX = e.clientX / 50;
 				const posY = e.clientY / 80;
-				// gsap.to(nutsLeft, 0.8,  {x: posX });
-				// gsap.to(nutsRight, 0.8, { x: -posX });
+				gsap.to(nutsLeft, 0.8,  {x: posX });
+				gsap.to(nutsRight, 0.8, { x: -posX });
 				gsap.to(flowersLeft, 0.3, { x: posX, y: posY });
 				gsap.to(flowersRight, 0.3, { x: -posX, y: posY });
 				gsap.to(petalLeft, 0.01, { x: -e.clientX / 20, y: -e.clientY / 20 });
@@ -153,12 +170,12 @@ $(document).ready(function () {
 	}
 	mainContentAnimation();
 
-	const productsLeftImg = document.querySelector('.products-presentation__img-wrap--left')
-	const productsRightImg = document.querySelector('.products-presentation__img-wrap--right')
 	
-	function categoriesAnimation() {
-	const productItems = document.querySelectorAll('.products-presentation__item');
-		const bgShadow = document.querySelector('.products-presentation__background-shadow')
+	function flourAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--flour .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--flour .products-presentation__img-wrap--right')
+		const productItems = document.querySelectorAll('.products-presentation--flour .products-presentation__item');
+		const bgShadow = document.querySelector('.products-presentation--flour .products-presentation__background-shadow')
 
 		// one-off animation
 		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
@@ -170,24 +187,14 @@ $(document).ready(function () {
 			gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
 		});
 
-		// one-off animation
-		// gsap.fromTo(productsLeftImg, 0.8, { rotate: -45, x:-450, y: -500, opacity: 0 }, { rotate: 0, x: 0, y: 0, opacity: 1}).delay(1)
-		// gsap.fromTo(productsRightImg, 0.8, { rotate: 45, x: 450, y: -500, opacity: 0 }, { rotate: 0, x: 0, y: 0, opacity: 1}).delay(0.8)
-		// gsap.fromTo(bgShadow, 0.8, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }).delay(0.6)
-		
-
-		// productItems.forEach((elements, index) => {
-		// 	gsap.fromTo(elements, 0.7, { scale: 0}, { scale: 1, ease: "elastic"}).delay(1.8 + (index / 10))
-		// });
-		
 		function mouseMoveParallax() {
-			const item1 = document.querySelector('.products-presentation__item:nth-child(1)')
-			const item2 = document.querySelector('.products-presentation__item:nth-child(2)')
-			const item3 = document.querySelector('.products-presentation__item:nth-child(3)')
-			const item4 = document.querySelector('.products-presentation__item:nth-child(4)')
-			const item5 = document.querySelector('.products-presentation__item:nth-child(5)')
-			const item6 = document.querySelector('.products-presentation__item:nth-child(6)')
-			const item7 = document.querySelector('.products-presentation__item:nth-child(7)')
+			const item1 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(1)')
+			const item2 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(2)')
+			const item3 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(3)')
+			const item4 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(4)')
+			const item5 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(5)')
+			const item6 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(6)')
+			const item7 = document.querySelector('.products-presentation--flour .products-presentation__item:nth-child(7)')
 
 			
 			$('.category-section--flour').on('mousemove', function (e) {
@@ -202,6 +209,108 @@ $(document).ready(function () {
 				gsap.to(item5, 1, { x: posX, y: posY });
 				gsap.to(item6, 2.5, { x: posX, y: -posX });
 				gsap.to(item7, 1.5, { x: -posX, y: -posY });
+			})
+
+		}
+		setTimeout(() => {
+			mouseMoveParallax()
+			// infinite animation
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
+
+	function mashAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--mash .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--mash .products-presentation__img-wrap--right')
+		const productItems = document.querySelectorAll('.products-presentation--mash .products-presentation__item');
+		const bgShadow = document.querySelector('.products-presentation--mash .products-presentation__background-shadow')
+
+		// one-off animation
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(bgShadow, 0.8, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }).delay(0.6)
+		
+
+		productItems.forEach((elements, index) => {
+			gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
+		});
+
+		function mouseMoveParallax() {
+			const item1 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(1)')
+			const item2 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(2)')
+			const item3 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(3)')
+			const item4 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(4)')
+			const item5 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(5)')
+			const item6 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(6)')
+			const item7 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(7)')
+			const item8 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(8)')
+			const item9 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(9)')
+			const item10 = document.querySelector('.products-presentation--mash .products-presentation__item:nth-child(10)')
+
+			
+			$('.category-section--mash').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: posX });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: posX, y: posY });
+				gsap.to(item5, 1, { x: posX, y: posY });
+				gsap.to(item6, 2.5, { x: posX, y: posY });
+				gsap.to(item7, 1.5, { x: -posX, y: -posY });
+				gsap.to(item8, 1.5, { x: posX, y: posY });
+				gsap.to(item9, 1.5, { x: -posX, y: -posY });
+				gsap.to(item10, 1.5, { x: posX, y: posY });
+			})
+
+		}
+		setTimeout(() => {
+			mouseMoveParallax()
+			// infinite animation
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
+
+	function nutsAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--nuts .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--nuts .products-presentation__img-wrap--right')
+		const productItems = document.querySelectorAll('.products-presentation--nuts .products-presentation__item');
+		const bgShadow = document.querySelector('.products-presentation--nuts .products-presentation__background-shadow')
+
+		// one-off animation
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(bgShadow, 0.8, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }).delay(0.6)
+		
+
+		productItems.forEach((elements, index) => {
+			gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
+		});
+
+		function mouseMoveParallax() {
+			const item1 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(1)')
+			const item2 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(2)')
+			const item3 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(3)')
+			const item4 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(4)')
+			const item5 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(5)')
+			const item6 = document.querySelector('.products-presentation--nuts .products-presentation__item:nth-child(6)')
+
+			
+			$('.category-section--nuts').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: posX });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: posX, y: posY });
+				gsap.to(item5, 1, { x: posX, y: posY });
+				gsap.to(item6, 2.5, { x: posX, y: posY });
 			})
 
 		}
@@ -246,58 +355,58 @@ $(document).ready(function () {
 	});
 
 	// E-mail Ajax Send
-	$('form').submit(function(e) {
-		e.preventDefault();
+	// $('form').submit(function(e) {
+	// 	e.preventDefault();
 
-		let form = $(this);
-		let formData = {};
-		formData.data = {};
+	// 	let form = $(this);
+	// 	let formData = {};
+	// 	formData.data = {};
 
-		// Serialize
-		form.find('input, textarea').each(function() {
-			let name = $(this).attr('name');
-			let title = $(this).attr('data-name');
-			let value = $(this).val();
+	// 	// Serialize
+	// 	form.find('input, textarea').each(function() {
+	// 		let name = $(this).attr('name');
+	// 		let title = $(this).attr('data-name');
+	// 		let value = $(this).val();
 
-			formData.data[name] = {
-				title: title,
-				value: value,
-			};
+	// 		formData.data[name] = {
+	// 			title: title,
+	// 			value: value,
+	// 		};
 
-			if (name === 'subject') {
-				formData.subject = {
-					value: value,
-				};
-				delete formData.data.subject;
-			}
-		});
+	// 		if (name === 'subject') {
+	// 			formData.subject = {
+	// 				value: value,
+	// 			};
+	// 			delete formData.data.subject;
+	// 		}
+	// 	});
 
-		$.ajax({
-			type: 'POST',
-			url: 'mail/mail.php',
-			dataType: 'json',
-			data: formData,
-		}).done(function(data) {
-			if (data.status === 'success') {
-				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-					form.find('.form-result').addClass('form-result--success');
-				} else {
-					mfpPopup('#success');
-				}
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: 'mail/mail.php',
+	// 		dataType: 'json',
+	// 		data: formData,
+	// 	}).done(function(data) {
+	// 		if (data.status === 'success') {
+	// 			if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+	// 				form.find('.form-result').addClass('form-result--success');
+	// 			} else {
+	// 				mfpPopup('#success');
+	// 			}
 
-				setTimeout(function() {
-					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-						form.find('.form-result').removeClass('form-result--success');
-					}
-					$.magnificPopup.close();
-					form.trigger('reset');
-				}, 3000);
-			} else {
-				alert('Ajax result: ' + data.status);
-			}
-		});
-		return false;
-	});
+	// 			setTimeout(function() {
+	// 				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+	// 					form.find('.form-result').removeClass('form-result--success');
+	// 				}
+	// 				$.magnificPopup.close();
+	// 				form.trigger('reset');
+	// 			}, 3000);
+	// 		} else {
+	// 			alert('Ajax result: ' + data.status);
+	// 		}
+	// 	});
+	// 	return false;
+	// });
 
 	////////// Load functions
 	$(window).on('load', function() {
