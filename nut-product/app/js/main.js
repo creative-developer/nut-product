@@ -403,10 +403,10 @@ $(document).ready(function () {
 		gsap.fromTo(item2, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.3)
 		gsap.fromTo(item3, 1, { y: -150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.4)
 		gsap.fromTo(item4, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.5)
-		gsap.fromTo(item5, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.6)
-		gsap.fromTo(item6, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.7)
-		gsap.fromTo(item7, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.8)
-		gsap.fromTo(item8, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.9)
+		gsap.fromTo(item5, 1, { y: -150, x: 30, opacity: 0 }, { y: 0, x: 0, opacity: 1}).delay(1.6)
+		gsap.fromTo(item6, 1, { y: -100, x: 80, opacity: 0 }, { y: 0, x: 0, opacity: 1}).delay(1.7)
+		gsap.fromTo(item7, 1, { y: 100, opacity: 0 }, { y: 0, opacity: 1}).delay(1.8)
+		gsap.fromTo(item8, 1.1, { y: 100, opacity: 0 }, { y: 0, opacity: 1}).delay(1.9)
 
 		function mouseMoveParallax() {
 			$('.category-section--inventory').on('mousemove', function (e) {
