@@ -37,13 +37,15 @@ $(document).ready(function () {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
-			anchors: ['home', 'flour', 'mash', 'nuts'],
+			anchors: ['home', 'flour', 'mash', 'nuts', 'chopped-nuts', 'inventory'],
 		};
 
 		const flags = {
-			flourFlag	: true,
-			mashFlag	: true,
-			nutsFlag	: true,
+			flourFlag: true,
+			mashFlag: true,
+			nutsFlag: true,
+			choppedNutsFlag: true,
+			inventoryFlag: true,
 		}
 		
 		new fullpage(fp.containerSelector, {
@@ -89,6 +91,20 @@ $(document).ready(function () {
 					if (flags.nutsFlag) {
 						nutsAnimation();
 						flags.nutsFlag = false;
+					}
+				}
+
+				if (destination.anchor === 'chopped-nuts') {
+					if (flags.choppedNutsFlag) {
+						choppedNutsAnimation();
+						flags.choppedNutsFlag = false;
+					}
+				}
+
+				if (destination.anchor === 'inventory') {
+					if (flags.inventoryFlag) {
+						inventoryAnimation();
+						flags.inventoryFlag = false;
 					}
 				}
 			},
@@ -319,6 +335,98 @@ $(document).ready(function () {
 			// infinite animation
 			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
 			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
+
+	function choppedNutsAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--chopped-nuts .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--chopped-nuts .products-presentation__img-wrap--right')
+		const productsCenterImg = document.querySelector('.products-presentation--chopped-nuts .products-presentation__img-wrap--center')
+		const productItems = document.querySelectorAll('.products-presentation--chopped-nuts .products-presentation__item');
+
+		// one-off animation
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(productsCenterImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.2)
+		
+
+		productItems.forEach((elements, index) => {
+			gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
+		});
+
+		function mouseMoveParallax() {
+			const item1 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(1)')
+			const item2 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(2)')
+			const item3 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(3)')
+			const item4 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(4)')
+			const item5 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(5)')
+			const item6 = document.querySelector('.products-presentation--chopped-nuts .products-presentation__item:nth-child(6)')
+
+			
+			$('.category-section--chopped-nuts').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: -posX, y: -posY });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: -posY, y: posY });
+				gsap.to(item5, 1, { x: posX, y: posY });
+				gsap.to(item6, 2.5, { x: posX, y: posY });
+			})
+
+		}
+		setTimeout(() => {
+			mouseMoveParallax()
+			// infinite animation
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -10, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsCenterImg, 2, { y: 0 }, { y: -10, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
+
+	function inventoryAnimation() {
+		const item1 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(1)')
+		const item2 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(2)')
+		const item3 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(3)')
+		const item4 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(4)')
+		const item5 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(5)')
+		const item6 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(6)')
+		const item7 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(7)')
+		const item8 = document.querySelector('.products-presentation--inventory .products-presentation__item:nth-child(8)')
+		const bgShadow = document.querySelector('.products-presentation--nuts .products-presentation__background-shadow')
+
+		// one-off animation
+		gsap.fromTo(bgShadow, 1, { scale: 0 }, { scale: 1 }).delay(0.9)
+		gsap.fromTo(item1, 1, { y: 150, x: 150, opacity: 0 }, { y: 0, x: 0, opacity: 1}).delay(1.1)
+		gsap.fromTo(item2, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.3)
+		gsap.fromTo(item3, 1, { y: -150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.4)
+		gsap.fromTo(item4, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.5)
+		gsap.fromTo(item5, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.6)
+		gsap.fromTo(item6, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.7)
+		gsap.fromTo(item7, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.8)
+		gsap.fromTo(item8, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1.9)
+
+		function mouseMoveParallax() {
+			$('.category-section--inventory').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1.75, { x: -posX, y: -posY });
+				gsap.to(item2, 1.75, { x: posX, y: -posY });
+				gsap.to(item3, 1.75, { x: -posX, y: -posY });
+				gsap.to(item4, 1.75, { x: -posX, y: posY });
+				gsap.to(item5, 1.75, { x: -posX, y: -posY });
+				gsap.to(item6, 1.75, { x: posX, y: posY });
+				gsap.to(item7, 1.75, { x: -posX, y: -posY });
+				gsap.to(item8, 1.75, { x: posX, y: posY });
+			})
+		}
+
+		setTimeout(() => {
+			mouseMoveParallax()
 		}, 2500);
 	}
 

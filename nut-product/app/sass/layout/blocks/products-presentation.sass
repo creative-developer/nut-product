@@ -10,7 +10,7 @@
 		.products-presentation
 			&__background-shadow
 				position: absolute
-				top: -70px
+				top: -7.150vw
 				left: 0
 				width: 100%
 				height: inherit
@@ -70,7 +70,7 @@
 		.products-presentation
 			&__background-shadow
 				position: absolute
-				top: -70px
+				top: -7.150vw
 				left: 0
 				width: 100%
 				height: inherit
@@ -164,7 +164,7 @@
 		.products-presentation
 			&__background-shadow
 				position: absolute
-				top: -70px
+				top: -7.150vw
 				left: 0
 				width: 100%
 				height: inherit
@@ -223,15 +223,157 @@
 					width: 15.990vw
 					height: 59.551vh
 					z-index: 1
+	
+	&--chopped-nuts
+		display: block
+		margin: 0 auto
+		margin-top: 7.150vh
+		max-width: 67.188vw
+		width: 100%
+		height: calc( 100vh - 180px)
+		.products-presentation
+			&__background-shadow
+				position: absolute
+				top: -7.150vh
+				left: 0
+				width: 100%
+				height: inherit
+				display: flex
+				justify-content: center
+				align-items: center
+				z-index: 0
+			&__img-wrap
+				&--left
+					top: 31.857vh
+					width: 42.604vw
+					height: 44.740vh
+					z-index: 3
+					margin-left: -21.25vw
+				&--center
+					top: 12.3vh
+					width: 18.125vw
+					height: 34.831vh
+					margin-left: -11.55vw
+					z-index: 1
+				&--right
+					top: 13.808vh
+					width: 60.990vw
+					height: 60.266vh
+					z-index: 2
+					margin-left: 12.73vw
+
+			&__items-wrap
+				width: inherit
+				height: inherit
+			&__item
+				position: absolute
+				&:nth-child(1)
+					left: 11.88vw
+					bottom: 6.741vh
+					width: 6.354vw
+					height: 10.827vw
+					z-index: 3
+				&:nth-child(2)
+					top: 37.613vh
+					left: 7.215vw
+					width: 5.156vw
+					height: 15.935vh
+					z-index: 3
+				&:nth-child(3)
+					left: 9.125vw
+					top: 15.928vh
+					width: 6.823vw
+					height: 16.547vh
+					z-index: 1
+				&:nth-child(4)
+					left: 25.3vw
+					top: 12.207vh
+					width: 6.927vw
+					height: 11.542vh
+					z-index: 0
+				&:nth-child(5)
+					right: 8.05vw
+					top: 10.4vh
+					width: 6.198vw
+					height: 12.462vh
+					z-index: 1
+				&:nth-child(6)
+					right: 5.8vw
+					bottom: 15.9vh
+					width: 17.500vw
+					height: 37.181vh
+					z-index: 2
+	
+	&--inventory
+		display: block
+		margin: 0 auto
+		margin-top: 7.150vh
+		max-width: 67.188vw
+		width: 100%
+		height: calc( 100vh - 180px)
+		.products-presentation
+			&__background-shadow
+				position: absolute
+				top: -7.150vh
+				left: 0
+				width: 100%
+				height: inherit
+				display: flex
+				justify-content: center
+				align-items: center
+				z-index: 0
+			&__items-wrap
+				width: inherit
+				height: inherit
+			&__item
+				position: absolute
+				&:nth-child(1)
+					left: 7.4vw
+					bottom: 19.3vh
+					width: 20.781vw
+					height: 48.212vh
+				&:nth-child(2)
+					top: 3.1vh
+					left: 4.95vw
+					width: 33.229vw
+					height: 68.131vh
+				&:nth-child(3)
+					left: 27.3vw
+					top: 11vh
+					width: 8.281vw
+					height: 19.918vh
+					z-index: 1
+				&:nth-child(4)
+					left: 16.95vw
+					top: 15.6vh
+					width: 30.469vw
+					height: 49.745vh
+					z-index: 1
+				&:nth-child(5)
+					right: 11.55vw
+					top: 0.05vh
+					width: 24.740vw
+					height: 53.218vh
+				&:nth-child(6)
+					right: 10.15vw
+					top: 7.5vh
+					width: 17.969vw
+					height: 37.181vh
+				&:nth-child(7)
+					left: 42.4vw
+					top: 33.3vh
+					width: 24.635vw
+					height: 37.896vh
+					z-index: 2
+				&:nth-child(8)
+					left: 19.5vw
+					top: 43.2vh
+					width: 42.188vw
+					height: 38.202vh
+					z-index: 2
 
 	&__img-wrap
 		position: absolute
 		top: 0
-		left: 50%
-		transform: translateX(-50%)
-
-	&__btn-oval
-		position: absolute
-		bottom: 10vh
 		left: 50%
 		transform: translateX(-50%)
