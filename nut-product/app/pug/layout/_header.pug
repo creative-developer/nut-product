@@ -1,5 +1,28 @@
 header.b-header
 	.container
-		.row
-			.col
-				p Header
+		.row._row
+			._col.-left
+				._logo-wrap
+					a.b-logo._logo(href="/")
+						img._img(src="img/logo/logo.svg", alt="")
+					a.b-btn.-green._btn(href="#")
+						span._icon-wrap
+							+icon('hamburger')
+						span._text Каталог
+			._col.-center
+				nav.b-nav
+					ul._list
+						li._item
+							a._link(href="#") О компании
+						li._item
+							a._link(href="#") Услуги
+						li._item
+							a._link(href="#") Партнерам
+						li._item
+							a._link(href="#") Контакты
+			._col.-right
+				a.b-phone.-accent._phone(href="tel:+74959611721")
+					span._icon-wrap
+						+icon('square-phone')
+					span._text +7 (495) 961-17-21
+				

@@ -16,8 +16,13 @@ $(document).ready(function () {
 	});
 
 	////////// Common functions
-	let isMobile = false;
 	const mobileBreackpoint = 992;
+	let isMobile = false;
+	let isMainPage = false;
+
+	if ($('.main-page').length) {
+		isMainPage = true;
+	}
 
 	if ($('body').width() <= mobileBreackpoint) {
 		isMobile = true;
@@ -227,8 +232,10 @@ $(document).ready(function () {
 		// 	})
 		// }
 	}
-	mainContentAnimation();
 
+	if (isMainPage) {
+		mainContentAnimation();
+	}
 	
 	function flourAnimation() {
 		const productsLeftImg = document.querySelector('.products-presentation--flour .products-presentation__img-wrap--left')
@@ -702,12 +709,6 @@ $('.js-popup').click(function (event) {
 	// Optimize Svg Icons in IE
 	svg4everybody();
 	
-	// Mobile menu toggle
-	// $('.js-menu').click(function() {
-	// 	$(this).toggleClass('is-active');
-	// 	$('.menu').toggleClass('opened');
-	// });
-
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
 		fullpage_api.moveSectionDown();
