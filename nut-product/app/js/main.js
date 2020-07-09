@@ -148,6 +148,11 @@ $(document).ready(function () {
 		});
 	}
 
+	function fpScrollSwitcher(switcher = true) {
+		fullpage_api.setMouseWheelScrolling(switcher);
+    fullpage_api.setAllowScrolling(switcher);
+	}
+
 	function mainContentAnimation() {
 		// bgElements
 		const nutsLeft = document.querySelectorAll('.main-bg__nuts--left')
@@ -649,26 +654,59 @@ $(document).ready(function () {
 		}, 2500);
 	}
 
+	function menuAnimation() {
+		const bigNavItems = document.querySelectorAll('.big-nav__item')
+		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const topRow = document.querySelector('.menu__row--top')
+		const bottomRow = document.querySelector('.menu__row--bottom')
+
+		// top row animation
+		gsap.fromTo(topRow, 0.4, { y: -100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.6)
+
+		// bottom row animation
+		gsap.fromTo(bottomRow, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.6)
+		
+		// big nav items animation
+		bigNavItems.forEach((item, index) => {
+			gsap.fromTo(item, 0.4, { x: -60, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.6 + (index / 20))
+		});
+		
+		// small nav items animation
+		smallNavItems.forEach((item, index) => {
+			gsap.fromTo(item, 0.4, { x: -60, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.6 + (index / 20))
+		});
+	}
+
 	if (!isMobile) {
 		fpInit();
 	}
 	
 	// Popup opener
-	$('.js-popup').click(function(event) {
-		event.preventDefault();
-		let popupID = $(this).attr('href');
+// Popup opener
+$('.js-popup').click(function (event) {
+	event.preventDefault();
+	let popupID = $(this).attr('href');
 
+	if ($.magnificPopup.instance.isOpen) {
+		$.magnificPopup.close();
+		
+		setTimeout(function() {
+			mfpPopup(popupID);
+		}, 300);
+
+	} else {
 		mfpPopup(popupID);
-	});
+	}
+});
 
 	// Optimize Svg Icons in IE
 	svg4everybody();
 	
 	// Mobile menu toggle
-	$('.js-menu').click(function() {
-		$(this).toggleClass('is-active');
-		$('.menu').toggleClass('opened');
-	});
+	// $('.js-menu').click(function() {
+	// 	$(this).toggleClass('is-active');
+	// 	$('.menu').toggleClass('opened');
+	// });
 
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
@@ -741,7 +779,8 @@ $(document).ready(function () {
 	});
 
 	/////////// mfp popup - https://dimsemenov.com/plugins/magnific-popup/
-	let mfpPopup = function(popupID, source) {
+	const closeIcon = '<svg class="icon icon--close"><use xlink:href="img/svg-sprite.svg#close"></use></svg>'
+	let mfpPopup = function(popupID, data) {
 		$.magnificPopup.open({
 			items: {
 				src: popupID,
@@ -753,14 +792,24 @@ $(document).ready(function () {
 			closeBtnInside: true,
 			preloader: false,
 			midClick: true,
-			removalDelay: 300,
-			closeMarkup: '<button type="button" class="mfp-close">&times;</button>',
+			removalDelay: 500,
+			closeMarkup: `<button type="button" class="mfp-close">${closeIcon}</button>`,
 			mainClass: 'mfp-fade-zoom',
-			// callbacks: {
-			// 	open: function() {
-			// 		$('.source').val(source);
-			// 	}
-			// }
+			callbacks: {
+				open: function() {
+					if (popupID === '#menu') {
+						$('.hamburger').addClass('is-active')
+						menuAnimation()
+						fpScrollSwitcher(false)
+					}
+				},
+				close: function() {
+					if (popupID === '#menu') {
+						$('.hamburger').removeClass('is-active')
+						fpScrollSwitcher(true)
+					}
+				}
+			}
 		});
 	};
 

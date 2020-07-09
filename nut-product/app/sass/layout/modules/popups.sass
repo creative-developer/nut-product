@@ -9,16 +9,41 @@
 	background: #fff
 	+md
 		max-width: 450px
-
+	&-container
+		padding: 0
 	.mfp-close
-		top: 5px
-		right: 5px
+		display: flex
+		justify-content: center
+		align-items: center
+		top: 4.086vh
+		right: 2.604vw
+		width: 72px
+		height: 72px
+		min-width: 72px
+		min-height: 72px
 		opacity: 1
 		transition: all .2s ease
+		border-radius: 50%
+		.icon
+			fill: $c0
+			width: 20px
+			height: 20px
+			transition: all 0.2s ease
+			pointer-events: none
 		&:focus
 			outline: none
 		&:active
 			transform: translateY(1px)
+
+	&--menu
+		display: flex
+		max-width: 100vw
+		min-height: 100vh
+		margin: 0 auto
+		padding: 4.086vh 2.604vw 3.064vh 2.604vw
+		.mfp-close
+			background: #FFFFFF
+			border: 1px solid rgba(0, 0, 0, 0.09)
 
 .form-result
 	position: absolute
