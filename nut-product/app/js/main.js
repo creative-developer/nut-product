@@ -37,7 +37,7 @@ $(document).ready(function () {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
-			anchors: ['home', 'flour', 'mash', 'paste', 'praline', 'nuts', 'chopped-nuts', 'inventory', 'marchpane'],
+			anchors: ['home', 'flour', 'mash', 'paste', 'praline', 'spices', 'nuts', 'chopped-nuts', 'inventory', 'marchpane'],
 		};
 
 		const flags = {
@@ -45,6 +45,7 @@ $(document).ready(function () {
 			mashFlag: true,
 			pasteFlag: true,
 			pralineFlag: true,
+			spicesFlag: true,
 			nutsFlag: true,
 			choppedNutsFlag: true,
 			inventoryFlag: true,
@@ -99,6 +100,12 @@ $(document).ready(function () {
 						if (flags.pralineFlag) {
 							pralineAnimation();
 							flags.pralineFlag = false;
+						}
+						break;
+					case 'spices':
+						if (flags.spicesFlag) {
+							spicesAnimation();
+							flags.spicesFlag = false;
 						}
 						break;
 					case 'nuts':
@@ -187,8 +194,6 @@ $(document).ready(function () {
 			mouseMoveParallax();
 			// scrollDownInfinityAnimation
 			gsap.fromTo(contentElements.scrollDown, 1, { y: -10 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
-			// gsap.fromTo(nutsLeft, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
-			// gsap.fromTo(nutsRight, 3, { y: 0 }, { y: 10, repeat: -1, repeatDelay: 0, yoyo: true })
 		}, 2500);
 
 		// mouseMoveParallax
@@ -204,6 +209,18 @@ $(document).ready(function () {
 				gsap.to(petalRight, 0.2, { x: -e.clientX / 20, y: -e.clientY / 20 });
 			})
 		}
+		// function mouseMoveParallax() {
+		// 	$('.main').on('mousemove', function (e) {
+		// 		const posX = e.clientX / 50;
+		// 		const posY = e.clientY / 80;
+		// 		gsap.to(nutsLeft, 5,  {x: posX });
+		// 		gsap.to(nutsRight, 5, { x: -posX });
+		// 		gsap.to(flowersLeft, 3, { x: posX, y: posY });
+		// 		gsap.to(flowersRight, 3, { x: -posX, y: posY });
+		// 		gsap.to(petalLeft, 1, { x: -e.clientX / 20, y: -e.clientY / 20 });
+		// 		gsap.to(petalRight, 1, { x: -e.clientX / 20, y: -e.clientY / 20 });
+		// 	})
+		// }
 	}
 	mainContentAnimation();
 
@@ -383,6 +400,61 @@ $(document).ready(function () {
 				gsap.to(item2, 2, { x: posX, y: posY });
 				gsap.to(item3, 2.5, { x: posX, y: posX });
 				gsap.to(item4, 2, { x: posX, y: posY });
+			})
+
+		}
+		setTimeout(() => {
+			mouseMoveParallax()
+			// infinite animation
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
+	
+	function spicesAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--spices .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--spices .products-presentation__img-wrap--right')
+		const productItems = document.querySelectorAll('.products-presentation--spices .products-presentation__item');
+		const bgShadow = document.querySelector('.products-presentation--spices .products-presentation__background-shadow')
+
+		// one-off animation
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(bgShadow, 0.8, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }).delay(0.6)
+		
+
+		productItems.forEach((elements, index) => {
+			gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
+		});
+
+		function mouseMoveParallax() {
+			const item1 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(1)')
+			const item2 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(2)')
+			const item3 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(3)')
+			const item4 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(4)')
+			const item5 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(5)')
+			const item6 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(6)')
+			const item7 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(7)')
+			const item8 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(8)')
+			const item9 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(9)')
+			const item10 = document.querySelector('.products-presentation--spices .products-presentation__item:nth-child(10)')
+
+			
+			$('.category-section--spices').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: -posX, y: -posY });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: -posX, y: -posY });
+				gsap.to(item5, 1, { x: posX });
+				gsap.to(item6, 2.5, { x: -posX, y: -posY });
+				gsap.to(item7, 1.5, { x: posX, y: posY });
+				gsap.to(item8, 1.5, { x: -posX, y: -posY });
+				gsap.to(item9, 1.5, { x: posX, y: posY });
+				gsap.to(item10, 1.5, { x: -posX, y: -posY });
 			})
 
 		}
