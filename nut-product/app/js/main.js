@@ -37,13 +37,14 @@ $(document).ready(function () {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
-			anchors: ['home', 'flour', 'mash', 'paste', 'nuts', 'chopped-nuts', 'inventory', 'marchpane'],
+			anchors: ['home', 'flour', 'mash', 'paste', 'praline', 'nuts', 'chopped-nuts', 'inventory', 'marchpane'],
 		};
 
 		const flags = {
 			flourFlag: true,
 			mashFlag: true,
 			pasteFlag: true,
+			pralineFlag: true,
 			nutsFlag: true,
 			choppedNutsFlag: true,
 			inventoryFlag: true,
@@ -91,7 +92,13 @@ $(document).ready(function () {
 					case 'paste':
 						if (flags.pasteFlag) {
 							pasteAnimation();
-							flags.mashFlag = false;
+							flags.pasteFlag = false;
+						}
+						break;
+					case 'praline':
+						if (flags.pralineFlag) {
+							pralineAnimation();
+							flags.pralineFlag = false;
 						}
 						break;
 					case 'nuts':
@@ -324,29 +331,19 @@ $(document).ready(function () {
 		gsap.fromTo(prdouctsImgItem5, 1, { y: 150, x: -150, opacity: 0 }, { y: 0, x: 0, opacity: 1}).delay(1.4)
 		gsap.fromTo(item1, 1, { scale: 0 }, { scale: 1 }).delay(1.8)
 		gsap.fromTo(item2, 1, { scale: 0 }, { scale: 1 }).delay(1.8)
-		
-
-		// productItems.forEach((elements, index) => {
-		// 	gsap.fromTo(elements, 0.5, { scale: 0}, { scale: 1}).delay(1.4 + (index / 10))
-		// });
 
 		function mouseMoveParallax() {
-
-			
 			$('.category-section--paste').on('mousemove', function (e) {
 				const posX = e.clientX / 100;
 				const posY = e.clientY / 100;
-					console.log(posX / 2)
-				// if (posX <= posX /2) {
-				// 	console.log('true')
-				// }else {
-				// 	console.log('false')
-				// }
+
+				// prdoucts images animation 
 				gsap.to(prdouctsImgItem1, 2, { y: posY, x: posX });
 				gsap.to(prdouctsImgItem2, 2, { y: -posY, x: -posX });
 				gsap.to(prdouctsImgItem3, 2, { y: posY });
 				gsap.to(prdouctsImgItem4, 2, { y: posY, x: posX });
 				gsap.to(prdouctsImgItem5, 2, { y: -posY, x: -posX });
+
 				// items animation
 				gsap.to(item1, 1, { x: -posX, y: -posY });
 				gsap.to(item2, 2, { x: posX, y: posY });
@@ -354,10 +351,46 @@ $(document).ready(function () {
 
 		}
 		setTimeout(() => {
+			mouseMoveParallax();
+		}, 2500);
+	}
+
+	function pralineAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--praline .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--praline .products-presentation__img-wrap--right')
+		const bgShadow = document.querySelector('.products-presentation--praline .products-presentation__background-shadow')
+		const item1 = document.querySelector('.products-presentation--praline .products-presentation__item:nth-child(1)')
+		const item2 = document.querySelector('.products-presentation--praline .products-presentation__item:nth-child(2)')
+		const item3 = document.querySelector('.products-presentation--praline .products-presentation__item:nth-child(3)')
+		const item4 = document.querySelector('.products-presentation--praline .products-presentation__item:nth-child(4)')
+
+		// one-off animation
+		gsap.fromTo(bgShadow, 0.8, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }).delay(0.6)
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(item1, 0.5, { scale: 0}, { scale: 1}).delay(1.7)
+		gsap.fromTo(item2, 0.5, { scale: 0}, { scale: 1}).delay(1.4)
+		gsap.fromTo(item3, 0.5, { scale: 0}, { scale: 1}).delay(1.5)
+		gsap.fromTo(item4, 0.5, { scale: 0}, { scale: 1}).delay(1.6)
+
+		function mouseMoveParallax() {
+			$('.category-section--praline').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: posX, y: posY });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: posX, y: posY });
+			})
+
+		}
+		setTimeout(() => {
 			mouseMoveParallax()
 			// infinite animation
-			// gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
-			// gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
 		}, 2500);
 	}
 
