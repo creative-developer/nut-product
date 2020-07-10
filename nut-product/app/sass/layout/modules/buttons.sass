@@ -123,6 +123,25 @@
 		background-color: #FFFFFF
 		border: 2px solid $accent
 
+	&--green
+		border-color: $c2
+		background: transparent
+		color: #fff
+		&:focus:not(.disabled),
+		&:hover:not(.disabled)
+			outline: none
+			cursor: pointer
+			color: #fff
+			text-decoration: none
+			background-color: $c2
+			.trs-btn
+				&__icon-wrap
+					.icon
+						fill: #fff
+		&:active:not(.disabled)
+			background-color: #8D8D1D
+			border-color: #8D8D1D
+
 
 .btn-oval
 	position: relative

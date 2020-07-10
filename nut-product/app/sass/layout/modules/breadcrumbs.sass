@@ -1,0 +1,33 @@
+.breadcrumbs
+	display: flex
+	align-items: center
+
+	&__item
+		user-select: none
+		&:not(:last-child)
+			margin-right: 9px
+		&--disabled
+			.breadcrumbs
+				&__link
+					pointer-events: none
+					color: $c2
+	&__link
+		font-size: 16px
+		line-height: 20px
+		color: $c1
+		display: flex
+		align-items: center
+		&:hover
+			color: $c2
+
+	&__seperator
+		display: flex
+		justify-content: center
+		align-items: center
+		width: 13px
+		height: 9px
+		margin-left: 9px
+		.icon
+			width: 100%
+			height: 100%
+			fill: $c4

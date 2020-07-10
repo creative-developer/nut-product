@@ -14,3 +14,10 @@ mixin input(type, name, dataName, placeholder, required)
 mixin textarea(name, dataName, placeholder, required)
 	.input-wrap
 		textarea(name=name, data-name=dataName, cols="30", rows="5" placeholder=placeholder, required=required)
+
+mixin productItem(img, btnName, colModify)
+	.custom-col(class="custom-col--" + colModify)
+		.b-product-item
+			._img-wrap
+				img._img(src=img, alt="")
+			a.b-trs-btn.-small._link.js-more-popup(href="#") !{btnName}

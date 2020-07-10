@@ -1,0 +1,82 @@
+.section
+	padding-bottom: 50px
+	overflow-x: hidden
+	&__bg-wrap
+		position: relative
+		width: 100%
+		padding: 197px 0 144px
+		&:after
+			content: ''
+			position: absolute
+			bottom: 0
+			left: 50%
+			transform: translateX(-50%)
+			width: 100%
+			min-width: 1920px
+			height: 28px
+			background: url('../img/categories/top-line.svg') no-repeat
+			background-size: 100% 100%
+			z-index: 1
+		&:before
+			content: ''
+			position: absolute
+			bottom: 0
+			left: 50%
+			transform: translateX(-50%)
+			width: 100%
+			height: 154px
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.19) 100%)
+			opacity: 0.22
+			z-index: 0
+
+	&__bg-img
+		position: absolute
+		top: 0
+		right: 0
+		z-index: 1
+
+	&__title
+		margin-bottom: 21px
+
+	&__container
+		// padding-top: 116px
+		padding-top: 70px
+
+	&__product-title
+		position: relative
+		z-index: 1
+		padding: 0 30px 0 10px
+		margin-bottom: 0
+		background: #fff
+		display: inline-block
+		&-wrap
+			position: relative
+			display: flex
+			align-items: center
+			margin-bottom: 70px
+			&:after
+				content: ''
+				position: absolute
+				top: 50%
+				left: 0
+				transform: translateY(-50%)
+				width: calc( 100% - 25px)
+				height: 1px
+				background: #EEE8D9
+				margin-top: 3px
+
+	&__banner
+		margin-top: 20px
+		margin-bottom: 120px
+
+	&__desc
+		font-family: $roboto
+		font-size: 16px
+		line-height: 28px
+		color: #000000
+		max-width: 750px
+		&-wrap
+			display: flex
+			justify-content: space-between
+	&__btn-oval
+		&-wrap
