@@ -1,0 +1,26 @@
+section.b-section.-flour
+	._bg-wrap(style="background-color: #FFF6E4")
+		img._bg-img(src="img/categories/flour/bg-img.png", alt="")
+		.container
+			h1._title Мука
+			ul.b-breadcrumbs
+				li._item
+					a._link(href="index.html") Главная
+						span._seperator
+							+icon('arrow-right')
+				li._item.-disabled
+					a._link(href="#") Мука
+	.container._container
+		.b-products
+			.row
+				+productItem('img/categories/flour/item1.png', 'Миндальная мука', 'big')
+				+productItem('img/categories/flour/item2.png', 'Фисташковая мука', 'big')
+				+productItem('img/categories/flour/item3.png', 'Кокосовая мука', 'big')
+				+productItem('img/categories/flour/item4.png', 'Кешью мука', 'big')
+				+productItem('img/categories/flour/item5.png', 'Фундучная мука', 'big')
+				+productItem('img/categories/flour/item6.png', 'Амарантовая мука', 'big')
+				+productItem('img/categories/flour/item7.png', 'Кунжутная мука', 'big')
+				+productItem('img/categories/flour/item8.png', 'Льяная мука', 'big')
+	.b-banner.-flour._banner(style="background: url('img/categories/paste/banner-bg.jpg') no-repeat center center/cover;")
+		._product-img-wrap
+			img._product-img(src="img/categories/flour/banner-img.png", alt="")
