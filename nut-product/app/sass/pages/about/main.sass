@@ -8,13 +8,41 @@
 	&__desc
 		margin-bottom: 80px
 
+	&__row
+		position: relative
+		justify-content: space-between
+		padding-bottom: 49px
+		margin-bottom: 80px
+		&:after
+			content: ''
+			position: absolute
+			bottom: 0
+			left: 50%
+			transform: translateX(-50%)
+			width: calc(100% - 30px)
+			height: 1px
+			background: #EEE8D9
+
+	&__col
+		padding: 0 15px
+		&--left
+			flex-basis: 31%
+			max-width: 31%
+		&--center
+			flex-basis: 27.1%
+			max-width: 27.1%
+		&--right
+			flex-basis: 31.3%
+			max-width: 31.3%
 
 	&__lg-title
 		color: $accent
 		line-height: 38px
 		margin-bottom: 51px
 
-	
+	&__md-title
+		margin-bottom: 52px
+
 	&__banner-wrap
 		position: relative
 		display: flex
@@ -78,5 +106,3 @@
 			margin-bottom: 0
 			&:not(:last-child)
 				margin-bottom: 31px
-
-	&__md-title
