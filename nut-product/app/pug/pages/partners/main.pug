@@ -1,0 +1,32 @@
+mixin infoItem(img, title, desc, rowModify, imgModify)
+	.b-info-item.partners__info-item
+		._row(class="info-item__row--" + rowModify)
+			._col.-img
+				._img-wrap(class="info-item__img-wrap--" + imgModify)
+					img._img(src=img, alt="")
+			._col.-content
+				._content-wrap
+					._title !{title}
+					._desc
+						p !{desc}
+
+section.b-section.-small-header.-marchpane-page
+	._bg-wrap(style="background-color: #F9F6F0")
+	.container
+		h1._title Партнерам
+		ul.b-breadcrumbs
+			li._item
+				a._link(href="index.html") Главная
+					span._seperator
+						+icon('arrow-right')
+			li._item.-disabled
+				a._link(href="#") Партнерам
+	.b-partners._partners
+		.container
+			._lg-desc.lg-desc
+				p Орехпродукт стремится к взаимовыгодному, экономически эффективному и долгосрочному партнерству, позволяющему расширять и укреплять сотрудничество. Наша компания является ответственным и надёжным партнером и поставщиком, своевременно и в полном объеме выполняя принятые на себя обязательства.
+			._wrap
+				+infoItem('img/partners/item1.jpg', 'Дистрибуция', 'Мы открыты для сотрудничества и предлагаем <br>удобные схемы реализации продукции нашего завода <br>на территории РФ.', 'normal', 'long')
+				+infoItem('img/partners/item2.jpg', 'Розничным сетям', 'Наша компания приглашает к сотрудничеству все заинтересованные организации. Политика нашей компании направлена на то, чтобы сделать партнерство с нами максимально комфортным и выгодным для Вас.', 'reverse', 'short')
+				+infoItem('img/partners/item3.jpg', 'Оптовая торговля сырьем', 'В компании действует БОНУСНАЯ СИСТЕМА и СКИДКИ для постоянных клиентов и крупнооптовых <br>покупателей.', 'normal', 'short')
+				+infoItem('img/partners/item4.jpg', 'Фасовка, производство СТМ', 'Важным направлением деятельности нашей компании является производство собственных торговых марок. Речь идет о производстве и фасовке под СТМ: муки, лепестков, пралине, паст.', 'reverse', 'long')

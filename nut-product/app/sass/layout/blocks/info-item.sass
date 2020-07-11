@@ -1,0 +1,47 @@
+.info-item
+
+	&__row
+		display: flex
+		flex-wrap: wrap
+		align-items: center
+		margin: 0 -35px
+		&--normal
+			flex-direction: row
+		&--reverse
+			flex-direction: row-reverse
+			.info-item
+				&__col--content
+					display: flex
+					flex-direction: column
+					align-items: flex-end
+
+	&__col
+		padding: 0 35px
+		flex-basis: 50%
+		max-width: 50%
+
+	&__img
+		&-wrap
+			&--long
+				height: 600px
+			&--short
+				height: 356px
+
+	&__title
+		font-weight: bold
+		font-size: 26px
+		line-height: 38px
+		color: $accent
+		margin-bottom: 19px
+		max-width: 425px
+		display: block
+		text-align: left
+
+
+	&__desc
+		font-size: 16px
+		line-height: 26px
+		color: #726F69
+		max-width: 425px
+		p
+			margin-bottom: 0
