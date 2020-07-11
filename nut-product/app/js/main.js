@@ -684,7 +684,7 @@ $(document).ready(function () {
 		});
 	}
 
-	if (!isMobile) {
+	if (!isMobile && isMainPage) {
 		fpInit();
 	}
 	

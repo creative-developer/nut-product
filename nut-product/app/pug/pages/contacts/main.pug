@@ -1,12 +1,26 @@
-section.b-section.-inventory
+section.b-section.-small-header.-contacts-page
 	._bg-wrap(style="background-color: #F9F6F0")
-		.container
-			h1._title Контакты
-			ul.b-breadcrumbs
-				li._item
-					a._link(href="index.html") Главная
-						span._seperator
-							+icon('arrow-right')
-				li._item.-disabled
-					a._link(href="#") Контакты
-	.container._container
+	.container
+		h1._title Контакты
+		ul.b-breadcrumbs
+			li._item
+				a._link(href="index.html") Главная
+					span._seperator
+						+icon('arrow-right')
+			li._item.-disabled
+				a._link(href="#") Контакты
+	.b-contacts._contacts
+		.container._container
+			.row._row
+				._col.-left
+					._small-title Телефон / факс
+					a.b-phone.-normal.-black.-big.-fw-medium._phone(href="tel:+74959611721") +7 (495) 961-17-21
+					a.b-trs-btn.-small._btn(href="#") Оставить заявку
+				._col.-center
+					._small-title Адрес
+					._address-text г. Москва, м. Шелепиха, <br>Шмитовский проезд, дом 34,<br> стр. 2, этаж 1, офис 7.
+				._col.-right
+					._small-title E-mail
+					a.b-email.-big.-fw-medium._email(href="mailto:peresvet@orehprodukt.ru") peresvet@orehprodukt.ru
+	.b-map
+		#map

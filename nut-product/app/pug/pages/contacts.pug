@@ -1,11 +1,24 @@
-extend ../layout/template
+include ../layout/_mixins
 
-block head
-	- var title = 'Контакты | Орехпродукт'
-	|
-	|
+doctype html
+html(lang="ru")
+	block head
+		- var title = 'Контакты | Орехпродукт'
+	include ../layout/_head
+	body
+		|
+		|
+		// Header
+		include ../layout/_header
 
-block content
-	main.contacts-page
-		// Sections
-		include ./contacts/main.pug
+		// content
+		main.contacts-page
+			// Sections
+			include ./contacts/main.pug
+		|
+		|
+		|
+		// Scripts
+		script(src="js/libs.min.js")
+		script(src="js/main.min.js")
+		script(src="js/maps.js")
