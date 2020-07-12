@@ -27,7 +27,10 @@ mixin productItemModified(img, btnName, colModify, itemModify)
 		.b-product-item(class="product-item--" + itemModify)
 			._img-wrap
 				img._img(src=img, alt="")
-			a.b-trs-btn.-small._link.js-more-popup(href="#") !{btnName}
+			if itemModify === 'bg'
+				a.b-trs-btn.-small._link.js-more-title-popup(href="#") !{btnName}
+			else
+				a.b-trs-btn.-small._link.js-more-popup(href="#") !{btnName}
 
 mixin productItemHover(img, hoverImg, btnName, colModify, itemModify)
 	.custom-col(class="custom-col--" + colModify)
@@ -37,4 +40,4 @@ mixin productItemHover(img, hoverImg, btnName, colModify, itemModify)
 					img._img(src=img, alt="")
 				._img-wrap.-hover
 					img._img(src=hoverImg, alt="")
-			a.b-trs-btn.-small._link.js-more-popup(href="#") !{btnName}
+			a.b-trs-btn.-small._link.js-more-title-popup(href="#") !{btnName}
