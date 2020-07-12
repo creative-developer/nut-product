@@ -751,6 +751,11 @@ $('.js-more-popup').click(function(e) {
 		showMaskOnHover: false,
 	});
 
+	// Lazy Load Init
+	new LazyLoad({
+		elements_selector: ".lazy"
+	});
+
 	// E-mail Ajax Send
 	// $('form').submit(function(e) {
 	// 	e.preventDefault();
