@@ -27,11 +27,13 @@ function jsLibs() {
 		'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
 		'app/libs/fullPage.js-master/fullPage.js-master/dist/fullpage.js',
 		'app/libs/gsap/gsap.min.js',
-		// 'app/libs/owl.carousel/dist/owl.carousel.min.js',
+		'app/libs/owl.carousel/dist/owl.carousel.min.js',
 		'app/libs/fancybox/dist/jquery.fancybox.min.js',
+		'app/libs/lazyload/lazyload.min.js',
 		'app/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 		'app/libs/jQuery-Plugin-For-matchMedia-API/dist/jquery.matchMedia.js',
 		'app/libs/svg4everybody-master/svg4everybody-master/dist/svg4everybody.min.js',
+		'app/libs/zoomove-master/dist/zoomove.min.js',
 	])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
@@ -43,8 +45,9 @@ function jsLibs() {
 function cssLibs() {
 	return src([
 		'app/libs/magnific-popup/dist/magnific-popup.css',
-		// 'app/libs/owl.carousel/dist/assets/owl.carousel.min.css',
+		'app/libs/owl.carousel/dist/assets/owl.carousel.min.css',
 		'app/libs/fancybox/dist/jquery.fancybox.css',
+		'app/libs/zoomove-master/dist/zoomove.min.css',
 	])
 		.pipe(concat('libs.min.css'))
 		.pipe(autoprefixer(['last 10 versions']))

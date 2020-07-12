@@ -706,6 +706,37 @@ $('.js-popup').click(function (event) {
 	}
 });
 
+// modal-advanatages
+$('.js-more-popup').click(function(e) {
+	e.preventDefault();
+	let popupID = $(this).attr('href');
+
+	if ($.magnificPopup.instance.isOpen) {
+		$.magnificPopup.close();
+		
+		setTimeout(function() {
+			mfpPopup(popupID);
+		}, 300);
+
+	} else {
+		mfpPopup(popupID);
+	}
+
+	// const btn = $(this);
+	// const base = btn.parent().siblings();
+	// const popupID = '#houses-popup';
+	// const images = base.find('.house-item__data-images-wrap .house-item__data-img');
+	// const src = images.map((i, element) => element.dataset.img);
+
+	// const data = {
+	// 	title 	: base.find('.house-item__data-title').text(),
+	// 	desc		: base.find('.house-item__data-desc').text(),
+	// 	img 		: src
+	// }
+
+	// mfpPopup(popupID, data);
+});
+
 	// Optimize Svg Icons in IE
 	svg4everybody();
 	
