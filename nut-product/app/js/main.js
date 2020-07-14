@@ -694,6 +694,9 @@ $(document).ready(function () {
 		event.preventDefault();
 		let popupID = $(this).attr('href');
 
+		if (popupID === '#catalog') {
+			popupPosition = true;
+		}
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
 			
@@ -705,6 +708,7 @@ $(document).ready(function () {
 			mfpPopup(popupID);
 		}
 	});
+
 	const infoList = $('.info-list')
 	function baseTemplate(title, value) {
 		const html = `
