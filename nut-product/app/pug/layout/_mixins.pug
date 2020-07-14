@@ -23,7 +23,7 @@ mixin productItem(img, btnName, colModify)
 					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt="")
 				else if colModify == 'big'
 					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
-			a.b-trs-btn.-small._link.js-more-popup(href="#product") !{btnName}
+			a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id="praline1") !{btnName}
 
 mixin productItemModified(img, btnName, colModify, itemModify)
 	.custom-col(class="custom-col--" + colModify)

@@ -14,10 +14,87 @@
 		&--right
 			flex-basis: 50.1%
 			max-width: 50.1%
+			overflow: auto
 
 	&__content
 		height: 100vh
 		&--left
+			padding-top: 145px
 			background: #F7F7F7
 		&--right
+			padding-top: 153px
 			background: #fff
+			padding-left: 51px
+
+	&__container
+		&--left
+			margin: 0 134px 0 auto
+			max-width: 315px
+		&--right
+			max-width: 602px
+			padding-bottom: 50px
+
+	&__sliders-wrap
+		display: flex
+		flex-direction: column
+		align-items: center
+
+	&__img-title
+		font-size: 14px
+		line-height: 20px
+		color: #726F69
+		&--left
+			text-align: center
+			margin-bottom: 198px
+		&--right
+			margin-bottom: 8px
+	
+	&__product-slider
+		margin-bottom: 105px !important
+
+	&__title
+		font-weight: bold
+		font-size: 42px
+		line-height: 45px
+		color: $c0
+		margin-bottom: 53px
+
+	&__info-list
+		margin-bottom: 60px
+
+	&__link
+		display: inline-block
+		font-family: $roboto
+		font-weight: normal
+		font-size: 14px
+		line-height: 14px
+		text-decoration: none
+		margin-bottom: 47px
+
+	&__toggle-desc
+		overflow: hidden
+		height: 88px
+		transition: all 0.5s ease
+		margin-bottom: 15px
+
+
+	&__desc
+		font-size: 14px
+		line-height: 22px
+		color: #726F69
+		max-width: 506px
+		p
+			margin-bottom: 0
+			&:not(:last-child)
+				margin-bottom: 15px
+
+	&__btn-wrap
+		display: flex
+		align-items: center
+
+	&__order-btn
+		padding: 17.5px 55.7px
+		margin-right: 16px
+
+	&__offer-btn
+		padding: 15.5px 28.5px

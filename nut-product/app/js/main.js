@@ -19,6 +19,7 @@ $(document).ready(function () {
 	const mobileBreackpoint = 992;
 	let isMobile = false;
 	let isMainPage = false;
+	let popupPosition = false;
 
 	if ($('.main-page').length) {
 		isMainPage = true;
@@ -689,56 +690,107 @@ $(document).ready(function () {
 	}
 	
 	// Popup opener
-// Popup opener
-$('.js-popup').click(function (event) {
-	event.preventDefault();
-	let popupID = $(this).attr('href');
+	$('.js-popup').click(function (event) {
+		event.preventDefault();
+		let popupID = $(this).attr('href');
 
-	if ($.magnificPopup.instance.isOpen) {
-		$.magnificPopup.close();
-		
-		setTimeout(function() {
+		if ($.magnificPopup.instance.isOpen) {
+			$.magnificPopup.close();
+			
+			setTimeout(function() {
+				mfpPopup(popupID);
+			}, 300);
+
+		} else {
 			mfpPopup(popupID);
-		}, 300);
-
-	} else {
-		mfpPopup(popupID);
-	}
-});
-
-// modal-advanatages
-$('.js-more-popup').click(function(e) {
-	e.preventDefault();
-	let popupID = $(this).attr('href');
-
-	if ($.magnificPopup.instance.isOpen) {
-		$.magnificPopup.close();
-		
-		setTimeout(function() {
-			mfpPopup(popupID);
-		}, 300);
-
-	} else {
-		mfpPopup(popupID);
+		}
+	});
+	const infoList = $('.info-list')
+	function baseTemplate(title, value) {
+		const html = `
+			<div class="info-list__row">
+				<div class="info-list__title">${title}</div>
+				<div class="info-list__value">${value}</div>
+			</div>
+		`
+		infoList.append($(html));
 	}
 
-	// const btn = $(this);
-	// const base = btn.parent().siblings();
-	// const popupID = '#houses-popup';
-	// const images = base.find('.house-item__data-images-wrap .house-item__data-img');
-	// const src = images.map((i, element) => element.dataset.img);
+	// modal-advanatages
+	$('.js-more-popup').click(function(e) {
+		e.preventDefault();
+		let popupID = $(this).attr('href');
+		let productId = $(this).attr('data-Id');
+		let btn = $(this)
+		console.log(productId)
 
-	// const data = {
-	// 	title 	: base.find('.house-item__data-title').text(),
-	// 	desc		: base.find('.house-item__data-desc').text(),
-	// 	img 		: src
-	// }
+		if (popupID === '#product') {
+			popupPosition = true;
+		}
 
-	// mfpPopup(popupID, data);
-});
+		fetch('js/data.json')
+			.then(response => response.json())
+			.then(json => {
+				json
+					.filter(element => element.productId === productId)
+					.forEach(element => {
+						element.data.forEach(element => {
+							if (element.body !== undefined) {
+								$('.product-info__desc').text(element.body);
+							}
+
+							if (element.title !== undefined || element.value !== undefined) {
+								baseTemplate(element.title, element.value)
+							}
+						})
+					})
+			})
+		$('.product-info__title').text(btn.text())
+		$('.product-info__img-title--right').text($('.section__title').text())
+		if ($.magnificPopup.instance.isOpen) {
+			$.magnificPopup.close();
+			
+			setTimeout(function() {
+				mfpPopup(popupID);
+			}, 300);
+
+		} else {
+			mfpPopup(popupID);
+		}
+
+		// const btn = $(this);
+		// const base = btn.parent().siblings();
+		// const popupID = '#houses-popup';
+		// const images = base.find('.house-item__data-images-wrap .house-item__data-img');
+		// const src = images.map((i, element) => element.dataset.img);
+
+		// const data = {
+		// 	title 	: base.find('.house-item__data-title').text(),
+		// 	desc		: base.find('.house-item__data-desc').text(),
+		// 	img 		: src
+		// }
+
+		// mfpPopup(popupID, data);
+	});
 
 	// Optimize Svg Icons in IE
 	svg4everybody();
+
+
+	$('.product-info__link').click(function (e) {
+		e.preventDefault();
+		const showHeight = $('.product-info__desc').outerHeight();
+		const unShowHeight = 88;
+		const toggleDesc = $('.product-info__toggle-desc');
+		toggleDesc.toggleClass('show');
+		if (toggleDesc.hasClass('show')) {
+			toggleDesc.css('height', showHeight)
+			$(this).text('Скрыть все')
+		} else {
+			toggleDesc.css('height', unShowHeight)
+			$(this).text('Показать все')
+		}
+	})
 	
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
@@ -755,6 +807,67 @@ $('.js-more-popup').click(function(e) {
 	new LazyLoad({
 		elements_selector: ".lazy"
 	});
+
+	const productSlider = $('.product-slider');
+	const productNavSlider = $('.product-slider-navigation');
+	const productSliderSettings = {
+		loop: false,
+		nav: false,
+		dots: false,
+		items: 1,
+		animateOut: 'fadeOut',
+		animateIn: 'fadeIn',
+		slideSpeed: 1,
+		mouseDrag: false,
+		touchDrag: false,
+		pullDrag: false,
+		responsive: {
+			0: {
+			},
+			767: {
+
+			},
+			992: {
+			},
+		},
+		onInitialized: function (e) {
+		}
+	}
+	const productNavSliderSettings = {
+		loop: false,
+		nav: false,
+		dots: false,
+		items: 2,
+		mouseDrag: false,
+		touchDrag: false,
+		pullDrag: false,
+		responsive: {
+			0: {
+			},
+			767: {
+
+			},
+			992: {
+			},
+		},
+		onTranslate: function(e){
+			const index = e.item.index;
+			productSlider.trigger('to.owl.carousel', index);
+		},
+		onInitialized: function(e){
+
+			$('.product-slider-navigation__item').click(function (e) {
+				e.preventDefault();
+				const index = $(this).parent().index();
+				console.log(index)
+				productSlider.trigger('to.owl.carousel', index);
+				console.log('ishledi')
+			})
+		}
+	}
+
+	productSlider.owlCarousel(productSliderSettings);
+	productNavSlider.owlCarousel(productNavSliderSettings);
 
 	// E-mail Ajax Send
 	// $('form').submit(function(e) {
@@ -829,6 +942,7 @@ $('.js-more-popup').click(function(e) {
 			closeBtnInside: true,
 			preloader: false,
 			midClick: true,
+			fixedContentPos: popupPosition,
 			removalDelay: 500,
 			closeMarkup: `<button type="button" class="mfp-close">${closeIcon}</button>`,
 			mainClass: 'mfp-fade-zoom',
@@ -839,11 +953,15 @@ $('.js-more-popup').click(function(e) {
 						menuAnimation()
 						fpScrollSwitcher(false)
 					}
+				
 				},
 				close: function() {
 					if (popupID === '#menu') {
 						$('.hamburger').removeClass('is-active')
 						fpScrollSwitcher(true)
+					}
+					if (popupID === '#product') {
+						$('.info-list').html('')
 					}
 				}
 			}
