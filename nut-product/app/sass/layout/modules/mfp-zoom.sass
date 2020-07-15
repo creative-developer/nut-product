@@ -23,3 +23,28 @@
 		.zoom-anim-dialog
 			transform: translateX(-100%)
 			opacity: 0
+.custom-zoom
+	.mfp-fade-zoom
+		&.mfp-bg 
+			opacity: 0
+			transition: opacity .5s cubic-bezier(.57,.04,.46,.98)
+		.zoom-anim-dialog
+			opacity: 0
+			transform: scale(0) !important
+			transition: all .5s cubic-bezier(.57,.04,.46,.98)
+		
+		// animate in
+		&.mfp-ready
+			&.mfp-bg
+				opacity: 0.8
+			.zoom-anim-dialog
+				opacity: 1
+				transform: scale(1) !important
+
+		// animate out
+		&.mfp-removing
+			&.mfp-bg
+				opacity: 0
+			.zoom-anim-dialog
+				transform: scale(2) !important
+				opacity: 0

@@ -15,7 +15,7 @@ mixin textarea(name, dataName, placeholder, required)
 	.input-wrap
 		textarea(name=name, data-name=dataName, cols="30", rows="5" placeholder=placeholder, required=required)
 
-mixin productItem(img, btnName, colModify)
+mixin productItem(img, btnName, colModify, dataId)
 	.custom-col(class="custom-col--" + colModify)
 		.b-product-item
 			._img-wrap
@@ -23,9 +23,9 @@ mixin productItem(img, btnName, colModify)
 					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt="")
 				else if colModify == 'big'
 					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
-			a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id="praline1") !{btnName}
+			a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id=dataId) !{btnName}
 
-mixin productItemModified(img, btnName, colModify, itemModify)
+mixin productItemModified(img, btnName, colModify, itemModify, dataId)
 	.custom-col(class="custom-col--" + colModify)
 		.b-product-item(class="product-item--" + itemModify)
 			._img-wrap
@@ -34,9 +34,9 @@ mixin productItemModified(img, btnName, colModify, itemModify)
 				else
 					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
 			if itemModify == 'bg'
-				a.b-trs-btn.-small._link.js-more-title-popup(href="#") !{btnName}
+				a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}
 			else
-				a.b-trs-btn.-small._link.js-more-popup(href="#product") !{btnName}
+				a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id=dataId) !{btnName}
 
 mixin productItemHover(img, hoverImg, btnName, colModify, itemModify)
 	.custom-col(class="custom-col--" + colModify)
@@ -52,4 +52,4 @@ mixin productItemHover(img, hoverImg, btnName, colModify, itemModify)
 						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
 					._img-wrap.-hover
 						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=hoverImg, alt="")
-			a.b-trs-btn.-small._link.js-more-title-popup(href="#") !{btnName}
+			a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}

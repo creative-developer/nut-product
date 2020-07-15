@@ -688,7 +688,36 @@ $(document).ready(function () {
 	if (!isMobile && isMainPage) {
 		fpInit();
 	}
+
+	function popupClassRemover(popupID) {
+		if (popupID === '#request') {
+			$('body').addClass('custom-zoom');
+		}else {
+			$('body').removeClass('custom-zoom');
+		}
+	}
 	
+	// Popup opener
+	$('.js-more-title-popup').click(function (event) {
+		event.preventDefault();
+		const btnText = $(this).text();
+		let popupID = $(this).attr('href');
+		const data = {
+			title: btnText
+		}
+		popupClassRemover(popupID)
+		if ($.magnificPopup.instance.isOpen) {
+			$.magnificPopup.close();
+			
+			setTimeout(function() {
+				mfpPopup(popupID);
+			}, 300);
+
+		} else {
+			mfpPopup(popupID, data);
+		}
+	});
+
 	// Popup opener
 	$('.js-popup').click(function (event) {
 		event.preventDefault();
@@ -697,6 +726,9 @@ $(document).ready(function () {
 		if (popupID === '#catalog') {
 			popupPosition = true;
 		}
+
+		popupClassRemover(popupID)
+
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
 			
@@ -720,37 +752,58 @@ $(document).ready(function () {
 		infoList.append($(html));
 	}
 
-	// modal-advanatages
-	$('.js-more-popup').click(function(e) {
-		e.preventDefault();
-		let popupID = $(this).attr('href');
-		let productId = $(this).attr('data-Id');
-		let btn = $(this)
-		console.log(productId)
-
-		if (popupID === '#product') {
-			popupPosition = true;
-		}
-
-		fetch('js/data.json')
-			.then(response => response.json())
+	function serverRequest(path, id, btn) {
+		fetch(path)
+			.then(response => {
+				try {
+					if (response.ok) {
+						setTimeout(() => {
+							$('.preloader').addClass('preloader--hidden')
+						}, 1000);
+						return response.json()
+					}
+				} catch (error) {
+					console.error(error)
+					return response.json().then(error => {
+						const e = new Error('Что-то пошло не так')
+						e.data = error
+						throw e
+					})
+				}
+			})
 			.then(json => {
 				json
-					.filter(element => element.productId === productId)
-					.forEach(element => {
-						element.data.forEach(element => {
-							if (element.body !== undefined) {
-								$('.product-info__desc').text(element.body);
+					.filter(element => element.productId === id)
+					.forEach(({data}) => {
+						data.forEach(({title, value, body}) => {
+							if (body !== undefined) {
+								$('.product-info__desc').text(body);
 							}
-
-							if (element.title !== undefined || element.value !== undefined) {
-								baseTemplate(element.title, element.value)
+							if (title !== undefined || value !== undefined) {
+								baseTemplate(title, value)
 							}
 						})
 					})
 			})
 		$('.product-info__title').text(btn.text())
 		$('.product-info__img-title--right').text($('.section__title').text())
+	}
+
+	// modal-advanatages
+	$('.js-more-popup').click(function(e) {
+		e.preventDefault();
+		let popupID = $(this).attr('href');
+		let productId = $(this).attr('data-Id');
+		let btn = $(this)
+
+		if (popupID === '#product') {
+			popupPosition = true;
+			$('.preloader').removeClass('preloader--hidden')
+		}
+
+		popupClassRemover(popupID)
+		serverRequest('js/data.json', productId, btn)
+
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
 			
@@ -957,7 +1010,9 @@ $(document).ready(function () {
 						menuAnimation()
 						fpScrollSwitcher(false)
 					}
-				
+					if (popupID === '#request') {
+						$('.mfp__title').text(data.title)
+					}
 				},
 				close: function() {
 					if (popupID === '#menu') {
@@ -966,6 +1021,12 @@ $(document).ready(function () {
 					}
 					if (popupID === '#product') {
 						$('.info-list').html('')
+						$('.product-info__desc').html('')
+					}
+					if (popupID === '#request') {
+						// setTimeout(() => {
+						// 	$('body').removeClass('custom-zoom');
+						// }, 500);
 					}
 				}
 			}

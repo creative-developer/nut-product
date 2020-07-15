@@ -1,0 +1,12 @@
+.b-mfp.-request-popup.zoom-anim-dialog.mfp-hide#request
+	h2._title Насадки, шприцы, мешочки, переходники
+	form._form
+		+input('text','name','Имя','Ваше имя', true)
+		+input('text','phone','Телефон','Телефон', true)
+		+input('email','email','Email','email', true)
+		+textarea('comments', 'comments', 'Комментарий', false)
+		button.b-trs-btn(type='submit') Получить предложение
+		.b-form-result
+			.b-mess
+				._title Спасибо!
+				._desc Мы свяжемся с Вами в течении дня.

@@ -42,6 +42,8 @@ include ./modules/menu-popup
 // Product popup
 .b-mfp.-product.zoom-anim-dialog.mfp-hide#product
 	.b-product-info
+		.b-preloader
+			._circle
 		._row
 			._col.-left
 				._content.-left
@@ -105,15 +107,7 @@ include ./modules/menu-popup
 
 
 // Request popup
-.b-mfp.-request-popup.zoom-anim-dialog.mfp-hide#request
-	form._form
-		+input('text','name','Имя','Ваше имя', true)
-		+input('text','phone','Телефон','Телефон', false)
-		button.btn Send
-		.b-form-result
-			.b-mess
-				._title Success!
-				._desc We will contact with you soon
+include ./modules/request-popup
 
 |
 |
