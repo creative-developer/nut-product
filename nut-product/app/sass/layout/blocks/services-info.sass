@@ -1,0 +1,54 @@
+.services-info
+
+	&__row
+		display: flex
+		align-items: center
+		flex-wrap: wrap
+		flex-direction: row
+		&--reverse
+			flex-direction: row-reverse
+			.services-info
+				&__col--left
+					display: flex
+					justify-content: flex-end
+					align-items: center
+		&:not(:last-child)
+			margin-bottom: 45px
+		&:nth-child(1)
+			.services-info
+				&__img-wrap
+					width: 595px
+					height: 477px
+					margin-left: -114px
+		&:nth-child(2)
+			&:not(:last-child)
+				margin-bottom: 60px
+			.services-info
+				&__img-wrap
+					width: 543px
+					height: 606px
+					margin-right: -60px
+					margin-bottom: -55px
+
+		&:nth-child(3)
+			.services-info
+				&__img-wrap
+					width: 683px
+					height: 447px
+					margin-left: -190px
+					margin-bottom: -17px
+
+	&__col
+		&--left
+			flex-basis: 49%
+			max-width: 49%
+		&--right
+			flex-basis: 51%
+			max-width: 51%
+
+	&__title
+		font-weight: bold
+		font-size: 32px
+		line-height: 42px
+		color: $accent
+		margin-bottom: 44px

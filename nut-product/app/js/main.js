@@ -685,6 +685,17 @@ $(document).ready(function () {
 		});
 	}
 
+	function servicesAnimation() {
+		const leftItem1 = document.querySelector('.services-parallax__item--left-img1')
+		const leftItem2 = document.querySelector('.services-parallax__item--left-img2')
+		const rightItem = document.querySelector('.services-parallax__item--right-img')
+		gsap.fromTo(leftItem1, 4, { y: 15 }, { y: -15, repeat: -1, repeatDelay: 0, yoyo: true })
+		gsap.fromTo(leftItem2, 4, { y: 15 }, { y: -15, repeat: -1, repeatDelay: 0, yoyo: true })
+		gsap.fromTo(rightItem, 4, { y: 50 }, { y: 0, repeat: -1, repeatDelay: 0, yoyo: true })
+	}
+	if ($('.services-page').length) {
+		servicesAnimation()
+	}
 	if (!isMobile && isMainPage) {
 		fpInit();
 	}
@@ -711,7 +722,7 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID);
-			}, 300);
+			}, 500);
 
 		} else {
 			mfpPopup(popupID, data);
@@ -723,7 +734,7 @@ $(document).ready(function () {
 		event.preventDefault();
 		let popupID = $(this).attr('href');
 
-		if (popupID === '#catalog') {
+		if (popupID === '#catalog'|| popupID === '#ask-popup') {
 			popupPosition = true;
 		}
 
@@ -734,14 +745,14 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID);
-			}, 300);
+			}, 500);
 
 		} else {
 			mfpPopup(popupID);
 		}
 	});
 
-	const infoList = $('.info-list')
+	// const infoList = $('.info-list')
 	function baseTemplate(title, value) {
 		const html = `
 			<div class="info-list__row">
@@ -749,7 +760,7 @@ $(document).ready(function () {
 				<div class="info-list__value">${value}</div>
 			</div>
 		`
-		infoList.append($(html));
+		$('.info-list').append($(html));
 	}
 
 	function serverRequest(path, id, btn) {
@@ -789,7 +800,7 @@ $(document).ready(function () {
 		$('.product-info__img-title--right').text($('.section__title').text())
 	}
 
-	// modal-advanatages
+	// product Popup
 	$('.js-more-popup').click(function(e) {
 		e.preventDefault();
 		let popupID = $(this).attr('href');
@@ -809,25 +820,11 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID);
-			}, 300);
+			}, 500);
 
 		} else {
 			mfpPopup(popupID);
 		}
-
-		// const btn = $(this);
-		// const base = btn.parent().siblings();
-		// const popupID = '#houses-popup';
-		// const images = base.find('.house-item__data-images-wrap .house-item__data-img');
-		// const src = images.map((i, element) => element.dataset.img);
-
-		// const data = {
-		// 	title 	: base.find('.house-item__data-title').text(),
-		// 	desc		: base.find('.house-item__data-desc').text(),
-		// 	img 		: src
-		// }
-
-		// mfpPopup(popupID, data);
 	});
 
 	// Optimize Svg Icons in IE
@@ -1010,8 +1007,12 @@ $(document).ready(function () {
 						menuAnimation()
 						fpScrollSwitcher(false)
 					}
+					if (popupID === '#ask-popup') {
+						fpScrollSwitcher(false)
+					}
 					if (popupID === '#request') {
-						$('.mfp__title').text(data.title)
+						$('.request-popup__title').text(data.title)
+						$('.request-popup').find('textarea').val(data.title)
 					}
 				},
 				close: function() {
@@ -1019,14 +1020,12 @@ $(document).ready(function () {
 						$('.hamburger').removeClass('is-active')
 						fpScrollSwitcher(true)
 					}
+					if (popupID === '#ask-popup') {
+						fpScrollSwitcher(true)
+					}
 					if (popupID === '#product') {
 						$('.info-list').html('')
 						$('.product-info__desc').html('')
-					}
-					if (popupID === '#request') {
-						// setTimeout(() => {
-						// 	$('body').removeClass('custom-zoom');
-						// }, 500);
 					}
 				}
 			}

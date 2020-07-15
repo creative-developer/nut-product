@@ -1,6 +1,9 @@
-.b-mfp.-request-popup.zoom-anim-dialog.mfp-hide#request
+.b-mfp.-ask-popup.zoom-anim-dialog.mfp-hide#ask-popup
 	.b-request-popup
-		h2._title Насадки, шприцы, мешочки, переходники
+		._top-row
+			a.b-logo._logo(href="index.html")
+				img._img(src="img/logo/logo.svg", alt="")
+		h2._title Задать вопрос
 		form._form
 			._inputs
 				+input('text','name','Имя','ФИО', true)

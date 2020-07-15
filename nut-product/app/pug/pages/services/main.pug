@@ -1,0 +1,62 @@
+mixin servicesBenefits(text)
+	.services-benefits__item
+		.services-benefits__icon-wrap
+			+icon('square-check')
+		.services-benefits__text !{text}
+
+section.b-section.-small-header.-services-page
+	._bg-wrap(style="background-color: #F9F6F0")
+	.container
+		h1._title Услуги
+		ul.b-breadcrumbs
+			li._item
+				a._link(href="index.html") Главная
+					span._seperator
+						+icon('arrow-right')
+			li._item.-disabled
+				a._link(href="#") Услуги
+	.b-services._services
+		.b-services-parallax
+			._item.-left-img1
+				img._img(src="img/services/parallax-left-item1.png", alt="")
+			._item.-left-img2
+				img._img(src="img/services/parallax-left-item2.png", alt="")
+			._item.-right-img
+				img._img(src="img/services/parallax-right-item.png", alt="")
+		.container
+			._lg-desc.lg-desc
+				p Компания ОрехПродукт предлагает целый спектр услуг в сфере производства, изготовления, переработки и бланширования пищевой продукции, а также создание индивидуальных образцов по рецептам заказчика.
+			._small-title Полный список услуг:
+			.b-services-info
+				._row
+					._col.-left
+						._img-wrap
+							img._img(src="img/services/item1.png", alt="")
+					._col.-right
+						._title Изготовление продукции <br>по индивидуальным рецептам
+						.b-services-benefits
+							+servicesBenefits('Изготовление кремов, паст и начинок.')
+							+servicesBenefits('Изготовление, упаковка, маркировка продукции, сертификация.')
+							+servicesBenefits('Изысканные пасты и начинки по индивидуальным рецептам, <br>разработка рецептуры по вашим заказам с нашими технологами.')
+				._row.-reverse
+					._col.-left
+						._img-wrap
+							img._img(src="img/services/item2.png", alt="")
+					._col.-right
+						._title Переработка фруктов/ягод, <br>создание эксклюзивных миксов <br>по вашим рецептам
+						.b-services-benefits
+							+servicesBenefits('Изготовление, упаковка, маркировка продукции, заморозка.')
+							+servicesBenefits('Ягодные и фруктовые пюре.')
+							+servicesBenefits('Пюре из экзотических фруктов.')
+							+servicesBenefits('Пюре Микс (сочетание различных фруктов и ягод по вашей рецептуре).')
+				._row
+					._col.-left
+						._img-wrap
+							img._img(src="img/services/item3.png", alt="")
+					._col.-right
+						._title Переработка ореховой группы
+						.b-services-benefits
+							+servicesBenefits('Бланширование орехов (миндаля фундука, фисташки, арахиса и тд.).')
+							+servicesBenefits('Дробление (измельчение по фракциям: 1-2мм, 2-4мм, 3-5мм, 5-7мм).')
+							+servicesBenefits('Создание дробленых миксов из смеси орехов')
+							+servicesBenefits('Измельчение по фракциям и смешивание (1-2мм, 2-4мм, 3-5мм, 5-7мм).')
