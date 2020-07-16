@@ -155,8 +155,10 @@ $(document).ready(function () {
 	}
 
 	function fpScrollSwitcher(switcher = true) {
-		fullpage_api.setMouseWheelScrolling(switcher);
-    fullpage_api.setAllowScrolling(switcher);
+		if (isMainPage && !isMobile) {
+			fullpage_api.setMouseWheelScrolling(switcher);
+			fullpage_api.setAllowScrolling(switcher);
+		}
 	}
 
 	function mainContentAnimation() {
@@ -701,7 +703,7 @@ $(document).ready(function () {
 	}
 
 	function popupClassRemover(popupID) {
-		if (popupID === '#request') {
+		if (popupID === '#request' || popupID === '#feedback' || popupID === '#price-list') {
 			$('body').addClass('custom-zoom');
 		}else {
 			$('body').removeClass('custom-zoom');
@@ -733,10 +735,15 @@ $(document).ready(function () {
 	$('.js-popup').click(function (event) {
 		event.preventDefault();
 		let popupID = $(this).attr('href');
+		const btn = $(this);
+		const data = {
+			title: btn.text()
+		}
 
 		if (popupID === '#catalog'|| popupID === '#ask-popup') {
 			popupPosition = true;
 		}
+
 
 		popupClassRemover(popupID)
 
@@ -744,11 +751,11 @@ $(document).ready(function () {
 			$.magnificPopup.close();
 			
 			setTimeout(function() {
-				mfpPopup(popupID);
+				mfpPopup(popupID, data);
 			}, 500);
 
 		} else {
-			mfpPopup(popupID);
+			mfpPopup(popupID, data);
 		}
 	});
 
@@ -1009,6 +1016,7 @@ $(document).ready(function () {
 					}
 					if (popupID === '#ask-popup') {
 						fpScrollSwitcher(false)
+						$('.request-popup__title').text(data.title)
 					}
 					if (popupID === '#request') {
 						$('.request-popup__title').text(data.title)
