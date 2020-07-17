@@ -11,6 +11,13 @@
 				&__link
 					pointer-events: none
 					color: $c2
+		&:last-child
+			.breadcrumbs__link
+				+lg
+					text-overflow: ellipsis
+					white-space: nowrap
+					overflow: hidden
+					display: block
 	&__link
 		font-size: 16px
 		line-height: 20px

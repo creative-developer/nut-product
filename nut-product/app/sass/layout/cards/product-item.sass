@@ -6,12 +6,13 @@
 	position: relative
 
 	&--hover
-		&:hover
-			.product-item
-				&__img-wrap
-					transform: scale(0)
-					&--hover
-						transform: translate(-50%, -50%) scale(1)
+		+min_lg
+			&:hover
+				.product-item
+					&__img-wrap
+						transform: scale(0)
+						&--hover
+							transform: translate(-50%, -50%) scale(1)
 
 		.product-item
 			&__img-wrap
@@ -43,6 +44,8 @@
 					height: 300px
 					background: #F7F7F4
 					margin-bottom: 40px
+					+lg
+						margin-bottom: 30px
 
 			&__link
 				height: 53px
