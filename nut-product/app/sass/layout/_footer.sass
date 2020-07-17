@@ -2,7 +2,6 @@
 	background: rgba(#4A3F1E, .99)
 	position: relative
 	padding-top: 60px
-	display: none !important
 	&:after
 		content: ''
 		position: absolute
@@ -13,29 +12,50 @@
 		background: url('../img/layouts/footer-top-line.svg') no-repeat center center
 		transform: translateY(-100%)
 
+	&__row
+		+lg
+			flex-direction: column
+			align-items: center
 	&__top-line
 		padding-bottom: 73px
+		+lg
+			padding-bottom: 30px
 
 	&__bottom
 		&-line
 			background: rgba(#61522A, 0.22)
 			padding: 27.5px 0
+			+lg
+				padding: 17px 0
 		&-row
 			align-items: center
 
 	&__col
 		padding: 0 15px
 		padding-top: 1px
+		+lg
+			display: flex
+			align-items: center
+			flex-direction: column
 		&--left
 			flex-basis: 28.1%
 			max-width: 28.1%
 			padding-top: 0
+			+lg
+				display: none
 		&--center
 			flex-basis: 40.2%
 			max-width: 40.2%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+				margin-bottom: 30px
 		&--right
 			flex-basis: 31.7%
 			max-width: 31.7%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
 
 	&__bottom-col
 		padding: 0 15px
@@ -59,6 +79,8 @@
 		display: inline-block
 		padding: 15.5px 37.4px
 		margin-bottom: 70px
+		+lg
+			margin-bottom: 30px
 
 	&__small-title
 		font-family: $roboto
@@ -66,6 +88,8 @@
 		line-height: 22px
 		color: rgba(#fff, .5)
 		margin-bottom: 20px
+		+sm
+			margin-bottom: 10px
 
 	&__email
 
@@ -74,6 +98,15 @@
 		font-size: 22px
 		line-height: 34px
 		color: #fff
+		text-align: center
+		+lg
+			margin-bottom: 70px
+		+sm
+			font-size: 20px
+			line-height: 28px
+		+xsm
+			br
+				display: none
 
 	&__socials
 	&__copyright
@@ -83,3 +116,5 @@
 		line-height: 22px
 		color: #FFFFFF
 		opacity: 0.5
+		+lg
+			text-align: center

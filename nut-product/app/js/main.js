@@ -14,9 +14,11 @@ $(document).ready(function () {
 	MQ(lg, function () {
 		$('.main__mobile-container').append($('.main__btn-wrap'))
 		$('.main-header__logo').removeClass('logo--hidden')
+		$('.footer__col--right').append($('.footer__socials'))
 	}, function () {
 		$('.scroll-down').before($('.main__btn-wrap'))
 		$('.main-header__logo').addClass ('logo--hidden')
+		$('.footer__bottom-col--right').append($('.footer__socials'))
 	});
 
 	////////// Common functions
