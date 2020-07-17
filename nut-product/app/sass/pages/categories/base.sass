@@ -5,6 +5,8 @@
 		.section
 			&__banner
 				margin-bottom: 137px
+				+lg
+					margin-bottom: 125px
 
 	&--spices
 		.section
@@ -43,12 +45,20 @@
 			background: url('../img/about/nut2.png') no-repeat center center
 			background-size: 100% 100%
 			z-index: 1
-
+	&--flour
+		.section
+			&__bg-img-wrap
+				// +xxxl
+				// 	width: 570px
+				// 	height: 331px
 
 	&__bg-wrap
 		position: relative
 		width: 100%
 		padding: 197px 0 144px
+		+lg
+			background: none !important
+			padding: 25px 0 50px
 		&:after
 			content: ''
 			position: absolute
@@ -61,6 +71,8 @@
 			background: url('../img/categories/top-line.svg') no-repeat
 			background-size: 100% 100%
 			z-index: 1
+			+lg
+				display: none
 		&:before
 			content: ''
 			position: absolute
@@ -72,19 +84,26 @@
 			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.19) 100%)
 			opacity: 0.22
 			z-index: 0
+			+lg
+				display: none
 
-	&__bg-img
+	&__bg-img-wrap
 		position: absolute
 		top: 0
 		right: 0
 		z-index: 1
+		+lg
+			display: none
 
 	&__title
 		margin-bottom: 21px
+		+lg
+			margin-bottom: 20px
 
 	&__container
 		// padding-top: 116px
-		padding-top: 70px
+		+min_lg
+			padding-top: 70px
 
 	&__product-title
 		position: relative
@@ -112,6 +131,8 @@
 	&__banner
 		margin-top: 20px
 		margin-bottom: 120px
+		+lg
+			margin-top: 30px
 
 	&__desc
 		font-family: $roboto

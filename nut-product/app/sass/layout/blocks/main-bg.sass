@@ -2,6 +2,8 @@
 	width: 100%
 	height: 100%
 	position: absolute
+	+lg
+		display: none
 
 	&__layer
 		&-wrap
@@ -36,15 +38,18 @@
 		align-items: center
 		z-index: 0
 		&--left
-			width: 684px
-			height: 749px
-			top: -115px
-			left: -253px
+			width: 35.625vw
+			height: 76.507vh
+			top: -11.747vh
+			left: -13.177vw
 		&--right
-			width: 836px
-			height: 884px
-			top: -173px
-			right: -202px
+			width: 43.542vw
+			height: 90.296vh
+			top: -17.671vh
+			right: -10.521vw
+			+xxl
+				top: -19.671vh
+				right: -11.521vw
 
 	&__petal
 		display: flex
@@ -53,15 +58,15 @@
 		position: absolute
 		z-index: 1
 		&--left
-			width: 585px
-			height: 444px
-			top: -7px
-			left: -154px
+			width: 30.469vw
+			height: 45.352vh
+			top: -0.715vh
+			left: -8.021vw
 		&--right
-			width: 574px
-			height: 484px
-			top: -16px
-			right: -49px
+			width: 29.896vw
+			height: 49.438vh
+			top: -1.634vh
+			right: -2.552vw
 
 	&__nuts
 		display: flex
@@ -69,12 +74,16 @@
 		align-items: center
 		position: absolute
 		&--left
-			left: -67px
-			bottom: -69px
-			width: 740px
-			height: 452px
+			left: -3.490vw
+			bottom: -7.048vh
+			width: 38.542vw
+			height: 46.170vh
+			+xl
+				bottom: -8.048vh
 		&--right
-			right: -258px
+			right: -13.438vw
 			bottom: 0
-			width: 1110px
-			height: 426px
+			width: 57.813vw
+			height: 43.514vh
+			+xl
+				bottom: -4vh

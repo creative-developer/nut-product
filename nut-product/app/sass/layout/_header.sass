@@ -1,11 +1,16 @@
 .header
 	padding: 20px 0
-	position: absolute
-	top: 0
-	left: 50%
-	transform: translateX(-50%)
 	width: 100%
-	z-index: 2
+	+min_lg
+		position: absolute
+		top: 0
+		left: 50%
+		transform: translateX(-50%)
+		z-index: 2
+	+lg
+		padding: 15px 0
+		background: #fff
+		border-bottom: 1px solid #E9E9E9
 	&__row
 		align-items: center
 		justify-content: space-between
@@ -15,13 +20,26 @@
 		&--left
 			flex-basis: 28.3%
 			max-width: 28.3%
+			+xl
+				flex-basis: 35.5%
+				max-width: 35.5%
+		&--center
+			+lg
+				display: none
 
 	&__logo
 		margin-right: 60px
+		+lg
+			display: none
 		&-wrap
 			display: flex
 			align-items: center
 
 	&__phone
+		+lg
+			display: none
 		.phone__icon-wrap
 			margin-right: 12px
+	&__btn
+		+lg
+			display: none

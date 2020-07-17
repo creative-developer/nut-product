@@ -1,4 +1,8 @@
 .main
+	&__bg-wrap
+		+lg
+			background: url('../img/index/responsive/bg.jpg') no-repeat center center
+			background-size: cover
 
 	&__wrap
 		position: relative
@@ -8,31 +12,87 @@
 		align-items: center
 		// padding: 16.5vh 0 7vh
 		padding: 14vh 0 6vh
+		+h840
+			padding: 10vh 0 4vh
+		+lg
+			padding: 160px 0 164px
+		+sm
+			padding: 150px 0 165px
 
+	&__mobile-container
+		+lg
+			padding-top: 16px
+			padding-bottom: 16px
+		+sm
+			padding-top: 16px
+			padding-bottom: 36px
 
 	&__logo
-		margin-bottom: 5.5vh
-		opacity: 0
+		+min_lg
+			opacity: 0
+			margin-bottom: 5.5vh
+		+lg
+			display: none
 
 	&__title
-		margin-bottom: 1.5vh
-		opacity: 0
+		text-align: center
+		+min_lg
+			opacity: 0
+			margin-bottom: 1.5vh
+		+lg
+			margin-bottom: 10px
 
 	&__sub-title
 		font-size: 26px
 		line-height: 40px
 		text-align: center
 		color: $c0
-		margin-bottom: 4.1vh
-		opacity: 0
+		+xl
+			font-size: 24px
+			line-height: 36px
+		+min_lg
+			margin-bottom: 4.1vh
+			opacity: 0
+		+lg
+			margin-bottom: 40px
+			font-size: 22px
+			line-height: 28px
+		+md
+			font-size: 20px
+			line-height: 24px
+		+sm
+			font-size: 16px
+			line-height: 20px
+
 
 	&__btn-wrap
 		display: flex
 		align-items: center
 		margin-bottom: 24.5vh
-		// margin-bottom: 22vh
-		opacity: 0
+		+min_lg
+			opacity: 0
+		+xxl
+			margin-bottom: 27.5vh
+		+h730
+			margin-bottom: 20vh
+		+xl
+			margin-bottom: 23vh
+		+lg
+			margin: 0 auto
+			justify-content: center
+		+md
+			flex-direction: column
+
 
 	&__btn
 		&:first-child
-			margin-right: 20px
+			+min_md
+				margin-right: 20px
+			+md
+				order: 1
+		&:last-child
+			+md
+				margin-bottom: 10px
+				order: 0
+		+md
+			width: 100%

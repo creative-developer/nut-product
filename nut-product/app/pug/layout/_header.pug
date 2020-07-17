@@ -5,6 +5,10 @@ header.b-header
 				._logo-wrap
 					a.b-logo._logo(href="index.html")
 						img._img(src="img/logo/logo.svg", alt="")
+					a.b-logo.-mobile-logo._logo(href="index.html")
+						span._img-wrap
+							img._img(src="img/logo/mobile-logo.png", alt="")
+						span._text Орехпродукт
 					a.b-btn.-green._btn.js-popup(href="#catalog")
 						span._icon-wrap
 							+icon('hamburger')
@@ -25,4 +29,6 @@ header.b-header
 					span._icon-wrap
 						+icon('square-phone')
 					span._text +7 (495) 961-17-21
-				
+				a.b-hamburger.-green.-small.-slider._hamburger.js-menu.js-popup(href="#menu")
+					span.hamburger-box
+						span.hamburger-inner

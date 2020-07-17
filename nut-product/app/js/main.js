@@ -12,7 +12,11 @@ $(document).ready(function () {
 	// MediaQueries
 	// lg
 	MQ(lg, function () {
+		$('.main__mobile-container').append($('.main__btn-wrap'))
+		$('.main-header__logo').removeClass('logo--hidden')
 	}, function () {
+		$('.scroll-down').before($('.main__btn-wrap'))
+		$('.main-header__logo').addClass ('logo--hidden')
 	});
 
 	////////// Common functions
@@ -236,7 +240,7 @@ $(document).ready(function () {
 		// }
 	}
 
-	if (isMainPage) {
+	if (isMainPage && !isMobile) {
 		mainContentAnimation();
 	}
 	

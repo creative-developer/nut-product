@@ -9,3 +9,44 @@
 	background: #fff
 	&:focus
 		outline: none
+	&--green
+		background: $c2
+		box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15)
+		.hamburger
+			&-box
+			&-inner
+				background: #fff
+				&:after,
+				&:before
+					background: #fff
+	&--small
+		display: none
+		+lg
+			width: 50px
+			height: 50px
+			display: flex
+		.hamburger
+			&-box
+				+lg
+					width: 16px
+					height: 16px
+			&-inner
+				+lg
+					width: 16px
+					height: 2px
+				&:after,
+				&:before
+					+lg
+						width: 16px
+						height: 2px
+				&:before
+					+lg
+						top: 6px
+				&:after
+					+lg
+						top: 12px
+		&.hamburger--slider
+			&.is-active
+				.hamburger-inner:after
+					+lg
+						transform: translate3d(0, -12px, 0) rotate(-90deg)
