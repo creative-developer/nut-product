@@ -14,7 +14,10 @@
 
 	&__hamburger
 		margin-left: auto
-		opacity: 0
+		display: flex
+		+min_lg
+			opacity: 0
 
 	&__logo
-		transition-delay: 0.8s
+		+min_lg
+			transition-delay: 0.8s

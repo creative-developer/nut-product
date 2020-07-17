@@ -13,22 +13,29 @@
 		display: none
 		justify-content: center
 		align-items: center
-		width: 600px
-		height: 550px
+		// width: 600px
+		// height: 550px
 		+lg
 			display: flex
+			margin-bottom: 60px
+		+sm
+			min-width: 400px
 
 	&__title
 		text-align: center
 		margin-bottom: 23px
+		+lg
+			margin-bottom: 65px
 		&-wrap
 			position: relative
 			z-index: 5
 			display: flex
 			flex-direction: column
 			align-items: center
+
 	&__link
 		display: inline-block
+
 	&__btn-oval
 		&-wrap
 			display: flex
@@ -39,6 +46,8 @@
 			left: 50%
 			transform: translateX(-50%)
 			z-index: 3
+			+lg
+				display: none
 
 	&--flour
 		background-image: linear-gradient(353.81deg, #A6C1EE 3.04%, #FBC2EB 121.9%)

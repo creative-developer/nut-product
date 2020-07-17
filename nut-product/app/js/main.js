@@ -781,13 +781,9 @@ $(document).ready(function () {
 			.then(response => {
 				try {
 					if (response.ok) {
-						setTimeout(() => {
-							$('.preloader').addClass('preloader--hidden')
-						}, 1000);
 						return response.json()
 					}
 				} catch (error) {
-					console.error(error)
 					return response.json().then(error => {
 						const e = new Error('Что-то пошло не так')
 						e.data = error
@@ -796,18 +792,22 @@ $(document).ready(function () {
 				}
 			})
 			.then(json => {
-				json
-					.filter(element => element.productId === id)
-					.forEach(({data}) => {
-						data.forEach(({title, value, body}) => {
-							if (body !== undefined) {
-								$('.product-info__desc').text(body);
-							}
-							if (title !== undefined || value !== undefined) {
-								baseTemplate(title, value)
-							}
-						})
+				const filteredElem = json.filter(element => element.productId === id)
+
+				if (filteredElem.length) {
+					filteredElem[0].data.forEach(({title, value, body}) => {
+						if (body !== undefined) {
+							$('.product-info__desc').text(body);
+						}
+						if (title !== undefined || value !== undefined) {
+							baseTemplate(title, value)
+						}
 					})
+				}
+			}).catch(err => {
+				throw new Error(err)
+			}).finally(() => {
+				$('.preloader').addClass('preloader--hidden')
 			})
 		$('.product-info__title').text(btn.text())
 		$('.product-info__img-title--right').text($('.section__title').text())
