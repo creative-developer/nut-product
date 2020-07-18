@@ -7,8 +7,23 @@
 	padding: 6.1875rem 6.1875rem 5.625rem
 	margin: 2.5rem auto
 	background: #fff
+	+xxxl
+		padding: 60px 69px 60px
+		min-height: 500px
+	+lg
+		padding: 60px 40px 60px
+		min-height: 500px
+		max-width: 500px
 	+md
 		max-width: 450px
+	+sm
+		min-height: 450px
+		padding: 50px 40px 50px
+
+	&-content
+		// +sm
+		// 	padding-left: 15px
+		// 	padding-right: 15px
 	&-container
 		padding: 0
 	.mfp-close
@@ -29,6 +44,16 @@
 			height: 50px
 			min-width: 50px
 			min-height: 50px
+		+lg
+			top: 15px
+			right: 15px
+		+sm
+			top: 10px
+			right: 10px
+			width: 40px
+			height: 40px
+			min-width: 40px
+			min-height: 40px
 		.icon
 			fill: $c0
 			width: 20px
@@ -38,6 +63,9 @@
 			+xxl
 				width: 16px
 				height: 16px
+			+sm
+				width: 12px
+				height: 12px
 		&:focus
 			outline: none
 		&:active
@@ -63,23 +91,34 @@
 		.mfp-close
 			background: #F9F9F9
 			border: 1px solid rgba(0, 0, 0, 0.09)
-			+lg
-				top: 15px
 	&--request-popup
 		.mfp-close
 			background: #F9F9F9
 			border: none
-			width: 50px
-			height: 50px
-			min-width: 50px
-			min-height: 50px
-			top: 31px
-			right: 20px
+			+min_lg
+				width: 50px
+				height: 50px
+				min-width: 50px
+				min-height: 50px
+				top: 31px
+				right: 20px
 			.icon
-				width: 16px
-				height: 16px
+				+min_sm
+					width: 16px
+					height: 16px
+
 	&--feedback-popup
 		min-height: 550px
+		+xxxl
+			min-height: 450px
+			max-width: 600px
+		+lg
+			max-width: 550px
+			min-height: 430px
+		+sm
+			max-width: 550px
+			min-height: 300px
+
 
 	&--product
 		display: flex
@@ -90,16 +129,17 @@
 		.mfp-close
 			background: #F9F9F9
 			border: none
-			width: 50px
-			height: 50px
-			min-width: 50px
-			min-height: 50px
-			top: 3.064vh
-			right: 2.083vw
-			// right: 1.563vw
+			+min_lg
+				width: 50px
+				height: 50px
+				min-width: 50px
+				min-height: 50px
+				top: 3.064vh
+				right: 2.083vw
 			.icon
-				width: 16px
-				height: 16px
+				+min_sm
+					width: 16px
+					height: 16px
 
 	&--catalog-popup
 		max-width: 100vw
@@ -109,25 +149,37 @@
 		.mfp-close
 			background: #F9F9F9
 			border: none
-			width: 50px
-			height: 50px
-			min-width: 50px
-			min-height: 50px
-			top: 3.064vh
-			right: 2.083vw
-			// right: 1.563vw
+			+min_lg
+				width: 50px
+				height: 50px
+				min-width: 50px
+				min-height: 50px
+				top: 3.064vh
+				right: 2.083vw
 			.icon
-				width: 16px
-				height: 16px
+				+min_sm
+					width: 16px
+					height: 16px
 
 	&--ask-popup
-		max-width: 100vw
-		min-height: 100vh
 		margin: 0 auto
 		padding: 40px 50px
+		+xxl
+			padding: 20px 30px
+		+min_lg
+			max-width: 100vw
+			min-height: 100vh
+		+lg
+			max-width: 600px
+			min-height: 650px
+		+sm
+			max-width: 550px
+			min-height: 550px
+			padding: 20px 20px
 		.mfp-close
 			background: #fff
 			border: 1px solid rgba(0, 0, 0, 0.09)
+			
 		.request-popup
 			&__inputs
 				margin-bottom: 62px

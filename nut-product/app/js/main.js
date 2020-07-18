@@ -697,6 +697,41 @@ $(document).ready(function () {
 		});
 	}
 
+	function menuResponsiveAnimation() {
+		const bigNavItems = document.querySelectorAll('.big-nav__item')
+		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const topRow = document.querySelector('.menu__row--top')
+		const bottomRow = document.querySelector('.menu__row--bottom')
+		const btn = document.querySelector('.menu__btn-wrap')
+		const feedback = document.querySelector('.menu__feedback-wrap')
+		const address = document.querySelector('.menu__address')
+
+		// top row animation
+		gsap.fromTo(topRow, 0.4, { x: -100, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.4)
+		
+		// // bottom row animation
+		// gsap.fromTo(bottomRow, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.6)
+		
+		// big nav items animation
+		bigNavItems.forEach((item, index) => {
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.6 + (index / 20))
+		});
+		
+		// small nav items animation
+		smallNavItems.forEach((item, index) => {
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.8 + (index / 20))
+		});
+
+		// btn animation
+		gsap.fromTo(btn, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.3)
+
+		// feedback animation
+		gsap.fromTo(feedback, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.35)
+
+		// address animation
+		gsap.fromTo(address, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.4)
+	}
+
 	function servicesAnimation() {
 		const leftItem1 = document.querySelector('.services-parallax__item--left-img1')
 		const leftItem2 = document.querySelector('.services-parallax__item--left-img2')
@@ -713,7 +748,11 @@ $(document).ready(function () {
 	}
 
 	function popupClassRemover(popupID) {
-		if (popupID === '#request' || popupID === '#feedback' || popupID === '#price-list') {
+		if (popupID === '#ask-popup' && isMobile) {
+			setTimeout(() => {
+				$('body').addClass('custom-zoom');
+			}, 500);
+		} else if(popupID === '#request' || popupID === '#feedback' || popupID === '#price-list') {
 			$('body').addClass('custom-zoom');
 		}else {
 			$('body').removeClass('custom-zoom');
@@ -1021,7 +1060,12 @@ $(document).ready(function () {
 				open: function() {
 					if (popupID === '#menu') {
 						$('.hamburger').addClass('is-active')
-						menuAnimation()
+						if (!isMobile) {
+							menuAnimation()
+						}
+						if (isMobile) {
+							menuResponsiveAnimation()
+						}
 						fpScrollSwitcher(false)
 					}
 					if (popupID === '#ask-popup') {

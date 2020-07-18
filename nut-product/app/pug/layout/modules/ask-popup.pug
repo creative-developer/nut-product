@@ -3,14 +3,15 @@
 		._top-row
 			a.b-logo._logo(href="index.html")
 				img._img(src="img/logo/logo.svg", alt="")
-		h2._title Задать вопрос
-		form._form
-			._inputs
-				+input('text','name','Имя','ФИО', true)
-				+input('email','email','email','Email', true)
-				+input('text','phone','Телефон','Телефон', true)
-				+textarea('comments', 'comments', 'Комментарий', false)
-			button.b-trs-btn.-small._btn(type='submit') Получить предложение
+		._wrap
+			h2._title Задать вопрос
+			form._form
+				._inputs
+					+input('text','name','Имя','ФИО', true)
+					+input('email','email','email','Email', true)
+					+input('text','phone','Телефон','Телефон', true)
+					+textarea('comments', 'comments', 'Комментарий', false)
+				button.b-trs-btn.-small._btn(type='submit') Получить предложение
 			.b-form-result
 				.b-mess
 					._title Спасибо!
