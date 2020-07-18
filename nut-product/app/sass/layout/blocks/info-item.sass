@@ -5,27 +5,47 @@
 		flex-wrap: wrap
 		align-items: center
 		margin: 0 -35px
+		+xl
+			margin: 0 -25px
+		+lg
+			margin: 0 -20px
+
 		&--normal
-			flex-direction: row
+			+min_lg
+				flex-direction: row
 		&--reverse
-			flex-direction: row-reverse
+			+min_lg
+				flex-direction: row-reverse
 			.info-item
 				&__col--content
-					display: flex
-					flex-direction: column
-					align-items: flex-end
+					+min_lg
+						display: flex
+						flex-direction: column
+						align-items: flex-end
 
 	&__col
 		padding: 0 35px
 		flex-basis: 50%
 		max-width: 50%
+		+xl
+			padding: 0 25px
+		+lg
+			flex-basis: 100%
+			max-width: 100%
+		+lg
+			padding: 0 20px
+
 
 	&__img
 		&-wrap
+			+lg
+				margin-bottom: 30px
 			&--long
-				height: 600px
+				+min_lg
+					height: 600px
 			&--short
-				height: 356px
+				+min_lg
+					height: 356px
 
 	&__title
 		font-weight: bold
@@ -36,6 +56,8 @@
 		max-width: 425px
 		display: block
 		text-align: left
+		+lg
+			margin-bottom: 15px
 
 
 	&__desc
@@ -43,5 +65,8 @@
 		line-height: 26px
 		color: #726F69
 		max-width: 425px
+		+sm
+			br
+				display: none
 		p
 			margin-bottom: 0
