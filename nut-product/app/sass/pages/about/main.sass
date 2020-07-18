@@ -1,18 +1,41 @@
 .about
 	padding: 78px 0 194px
+	+xl
+		padding: 60px 0 160px
+	+sm
+		padding: 50px 0 70px
+
+	&__container
+		position: relative
+		z-index: 2
 
 	&__title
+		font-size: 32px
+		line-height: 38px
 		color: $accent
 		margin-bottom: 31px
+		+xl
+			margin-bottom: 20px
+		+lg
+			font-size: 26px
+			line-height: 36px
 
 	&__desc
 		margin-bottom: 80px
+		+xl
+			margin-bottom: 60px
+		+sm
+			line-height: 26px
+			margin-bottom: 50px
 
 	&__row
 		position: relative
 		justify-content: space-between
-		padding-bottom: 49px
-		margin-bottom: 80px
+		+min_lg
+			padding-bottom: 49px
+			margin-bottom: 80px
+		+lg
+			margin-bottom: 70px
 		&:after
 			content: ''
 			position: absolute
@@ -22,26 +45,53 @@
 			width: calc(100% - 30px)
 			height: 1px
 			background: #EEE8D9
+			+lg
+				display: none
 
 	&__col
 		padding: 0 15px
+		+sm
+			padding: 0 20px
+
+		&:not(:last-child)
+			+lg
+				margin-bottom: 30px
+		+lg
+			flex-basis: 100% !important
+			max-width: 100% !important
 		&--left
 			flex-basis: 31%
 			max-width: 31%
+			+xl
+				flex-basis: 33.33%
+				max-width: 33.33%
+
 		&--center
 			flex-basis: 27.1%
 			max-width: 27.1%
+			+xl
+				flex-basis: 33.33%
+				max-width: 33.33%
+
 		&--right
 			flex-basis: 31.3%
 			max-width: 31.3%
+			+xl
+				flex-basis: 33.33%
+				max-width: 33.33%
 
 	&__lg-title
 		color: $accent
 		line-height: 38px
 		margin-bottom: 51px
+		+xl
+			margin-bottom: 30px
+		+sm
+			line-height: 30px
 
 	&__md-title
 		margin-bottom: 52px
+		// +sm
 
 	&__banner-wrap
 		position: relative
@@ -49,18 +99,20 @@
 		align-items: flex-end
 		height: 530px
 		background: radial-gradient(50% 50% at 50% 50%, rgba(126, 98, 20, 0.34) 0%, rgba(255, 255, 255, 0.04) 83.33%), #7E6214
-		// background: #7E6214
 		padding: 0 0 50px 60px
 		margin-bottom: 79px
-		// &:after
-		// 	content: ''
-		// 	position: absolute
-		// 	top: 0
-		// 	left: 0
-		// 	width: 100%
-		// 	height: 100%
-		// 	background: radial-gradient(50% 50% at 50% 50%, rgba(126, 98, 20, 0.34) 0%, rgba(255, 255, 255, 0.04) 83.33%)
-		// 	z-index: -1
+		+xl
+			height: 480px
+		+lg
+			padding: 0 0 40px 40px
+			height: 500px
+		+sm
+			margin-bottom: 75px
+			margin-left: -20px
+			margin-right: -20px
+			height: 510px
+			padding: 0 0 35px 40px
+
 
 	&__banner-img
 		&-wrap
@@ -74,6 +126,26 @@
 			height: 451px
 			transform: translateX(-50%)
 			margin-left: -22px
+			+xl
+				width: 650px
+				height: 367px
+				margin-left: 0
+				bottom: auto
+				+min_lg
+					top: 50%
+					transform: translate(-50%, -50%)
+			+lg
+				top: 50px
+				width: 601px
+				height: 340px
+			+sm
+				width: 500px
+				height: 283px
+				top: 110px
+			+xsm
+				width: 438px
+				height: 248px
+
 
 	&__play-btn
 		display: flex
@@ -102,7 +174,11 @@
 	&__md-desc
 		max-width: 1125px
 		margin-bottom: 78px
+		+sm
+			margin-bottom: 90px
 		p
 			margin-bottom: 0
 			&:not(:last-child)
 				margin-bottom: 31px
+				+sm
+					margin-bottom: 26px

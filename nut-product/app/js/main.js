@@ -17,12 +17,14 @@ $(document).ready(function () {
 		$('.footer__col--right').append($('.footer__socials'))
 		$('.menu__col--mobile').prepend($('.menu__feedback-wrap'))
 		$('.menu__col--mobile').prepend($('.menu__btn-wrap'))
+		$('.about-gallery__wrap').append($('.about-gallery__small-desc'))
 	}, function () {
 		$('.scroll-down').before($('.main__btn-wrap'))
 		$('.main-header__logo').addClass ('logo--hidden')
 		$('.footer__bottom-col--right').append($('.footer__socials'))
 		$('.menu__info-wrap').append($('.menu__feedback-wrap'))
 		$('.menu__info-wrap').append($('.menu__btn-wrap'))
+		$('.about-gallery__img-wrap:nth-child(2)').append($('.about-gallery__small-desc'))
 	});
 
 	////////// Common functions

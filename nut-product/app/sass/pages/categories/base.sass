@@ -43,6 +43,13 @@
 			height: 284px
 			background: url('../img/about/nut1.png') no-repeat center center
 			background-size: 100% 100%
+			+xxxl
+				width: 250px
+				height: 245px
+				left: -100px
+			+lg
+				display: none
+
 		&:after
 			content: ''
 			position: absolute
@@ -53,6 +60,12 @@
 			background: url('../img/about/nut2.png') no-repeat center center
 			background-size: 100% 100%
 			z-index: 1
+			+xxxl
+				width: 511px
+				height: 470px
+			+lg
+				display: none
+
 	&--inventory
 		.custom-col--small
 			+lg

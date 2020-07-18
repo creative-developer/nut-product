@@ -1,40 +1,113 @@
 .about-gallery
 	padding-bottom: 28px
+	font-size: 16px
+	+xl
+		font-size: 13px
+	+md
+		font-size: 10px
+	+sm
+		font-size: 9px
+	@media only screen and (max-width: 480px)
+		font-size: 8px
+	@media only screen and (max-width: 420px)
+		font-size: 7px
+
 
 	&__wrap
 		position: relative
-		padding-top: 58px
-		min-height: 851px
+		+min_lg
+			padding-top: 3.625em
+			min-height: 53.1875em
 
 	&__content-wrap
 		background: #fff
 		position: relative
 		z-index: 1
 		background: #fff
-		padding: 67px 59px 157px 2px
-		max-width: 591px
+		+min_lg
+			max-width: 36.9375em
+			padding: 4.1875em 3.6875em 9.8125em 0.125em
+		+lg
+			margin-bottom: 30px
+
 
 	&__title
-		margin-bottom: 22px
+		margin-bottom: 1.375em
+		+min_lg
+			font-size: 1.75em
+			line-height: 1.875em
+		+lg
+			font-size: 28px
+			line-height: 30px
 
 	&__desc
+		+min_lg
+			font-size: 1.125em
+			line-height: 1.875em
+		+lg
+			font-size: 16px
+			line-height: 26px
+
+	&__images
+		+lg
+			position: relative
+			display: flex
+			flex-direction: column
+			align-items: flex-end
+			margin-bottom: 30px
+
 	&__img
 		&-wrap
-			position: absolute
+			+min_lg
+				position: absolute
 			&:nth-child(1)
-				top: 0
-				right: 0
+				width: 40.9375em
+				height: 30.25em
+				+min_lg
+					top: 0
+					right: 0
+				+lg
+					margin-bottom: 20px
+				+xsm
+					width: 247px
+					height: 192px
 			&:nth-child(2)
-				top: 397px
-				right: 509px
-				z-index: 2
 				display: flex
 				flex-direction: column
 				align-items: flex-end
-			&:nth-child(3)
-				right: 0px
-				bottom: 0
+				width: 16.25em
+				height: 22.25em
 				z-index: 2
+				+min_lg
+					top: 24.8125em
+					right: 31.8125em
+				+lg
+					position: absolute
+					bottom: 31px
+					left: 0
+				+sm
+					left: auto
+					right: 300px
+				@media only screen and (max-width: 480px)
+					right: 250px
+				@media only screen and (max-width: 420px)
+					right: 220px
+				+xsm
+					width: 95px
+					height: 133px
+					right: auto
+					left: 0
+				
+			&:nth-child(3)
+				z-index: 2
+				width: 28.1875em
+				height: 18.75em
+				+min_lg
+					right: 0px
+					bottom: 0
+				+xsm
+					width: 165px
+					height: 112px
 
 	&__small-desc
 		font-family: $roboto
@@ -43,6 +116,9 @@
 		font-size: 14px
 		line-height: 22px
 		color: $c1
-		max-width: 335px
-		margin-top: 36px
-		margin-right: -3px
+		+min_lg
+			max-width: 20.9375em
+			margin-top: 2.25em
+			margin-right: -3px
+		+lg
+			max-width: 300px
