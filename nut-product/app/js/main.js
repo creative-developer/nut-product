@@ -742,7 +742,7 @@ $(document).ready(function () {
 		gsap.fromTo(leftItem2, 4, { y: 15 }, { y: -15, repeat: -1, repeatDelay: 0, yoyo: true })
 		gsap.fromTo(rightItem, 4, { y: 50 }, { y: 0, repeat: -1, repeatDelay: 0, yoyo: true })
 	}
-	if ($('.services-page').length) {
+	if ($('.services-page').length && $('body').width() >= 1440) {
 		servicesAnimation()
 	}
 	if (!isMobile && isMainPage) {

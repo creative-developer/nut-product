@@ -1,10 +1,19 @@
 .services
-	padding: 64px 0 210px
 	position: relative
+	padding: 64px 0 210px
+	+xl
+		padding: 50px 0 160px
+	+lg
+		padding: 50px 0 110px
+
 
 	&__lg-desc
 		max-width: 1034px
 		margin-bottom: 52px
+		+xl
+			margin-bottom: 40px
+		+lg
+			margin-bottom: 30px
 		p
 			margin-bottom: 0
 			&:not(:last-child)
@@ -16,3 +25,7 @@
 		line-height: 32px
 		color: $c1
 		margin-bottom: 100px
+		+xl
+			margin-bottom: 60px
+		+lg
+			margin-bottom: 50px

@@ -1,4 +1,13 @@
 .services-info
+	font-size: 14px
+	+lg
+		font-size: 11px
+	+md
+		font-size: 10px
+	// +sm
+	// 	font-size: 9px
+	// +xsm
+	// 	font-size: 8px
 
 	&__row
 		display: flex
@@ -6,45 +15,74 @@
 		flex-wrap: wrap
 		flex-direction: row
 		&--reverse
-			flex-direction: row-reverse
-			.services-info
-				&__col--left
-					display: flex
-					justify-content: flex-end
-					align-items: center
+			+min_lg
+				flex-direction: row-reverse
+				.services-info
+					&__col--left
+						display: flex
+						justify-content: flex-end
+						align-items: center
 		&:not(:last-child)
 			margin-bottom: 45px
 		&:nth-child(1)
 			.services-info
 				&__img-wrap
-					width: 595px
-					height: 477px
-					margin-left: -114px
+					+min_sm
+						width: 37.1875em
+						height: 29.8125em
+						margin-left: -7.125em
+					+sm
+						margin-left: -20px
 		&:nth-child(2)
 			&:not(:last-child)
 				margin-bottom: 60px
 			.services-info
 				&__img-wrap
-					width: 543px
-					height: 606px
-					margin-right: -60px
-					margin-bottom: -55px
+					+min_sm
+						width: 33.9375em
+						height: 37.875em
+						margin-right: -3.75em
+					+min_lg
+						margin-bottom: -55px
+					+sm
+						margin-bottom: 0px
+						margin-left: -20px
 
 		&:nth-child(3)
 			.services-info
 				&__img-wrap
-					width: 683px
-					height: 447px
-					margin-left: -190px
-					margin-bottom: -17px
+					+min_sm
+						width: 42.6875em
+						height: 27.9375em
+						margin-left: -11.875em
+					+min_lg
+						margin-bottom: -17px
 
 	&__col
 		&--left
 			flex-basis: 49%
 			max-width: 49%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
 		&--right
 			flex-basis: 51%
 			max-width: 51%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+
+	&__img
+		+sm
+			display: none
+		&--mobile
+			+min_sm
+				display: none
+			+sm
+				display: block
+		&-wrap
+			+lg
+				margin-bottom: 40px
 
 	&__title
 		font-weight: bold
@@ -52,3 +90,15 @@
 		line-height: 42px
 		color: $accent
 		margin-bottom: 44px
+		+xl
+			font-size: 30px
+			line-height: 36px
+			margin-bottom: 30px
+		+lg
+			font-size: 28px
+			line-height: 32px
+		+sm
+			font-size: 24px
+			line-height: 30px
+			br
+				display: none
