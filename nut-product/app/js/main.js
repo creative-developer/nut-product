@@ -15,10 +15,14 @@ $(document).ready(function () {
 		$('.main__mobile-container').append($('.main__btn-wrap'))
 		$('.main-header__logo').removeClass('logo--hidden')
 		$('.footer__col--right').append($('.footer__socials'))
+		$('.menu__col--mobile').prepend($('.menu__feedback-wrap'))
+		$('.menu__col--mobile').prepend($('.menu__btn-wrap'))
 	}, function () {
 		$('.scroll-down').before($('.main__btn-wrap'))
 		$('.main-header__logo').addClass ('logo--hidden')
 		$('.footer__bottom-col--right').append($('.footer__socials'))
+		$('.menu__info-wrap').append($('.menu__feedback-wrap'))
+		$('.menu__info-wrap').append($('.menu__btn-wrap'))
 	});
 
 	////////// Common functions

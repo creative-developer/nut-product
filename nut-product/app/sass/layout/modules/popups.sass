@@ -24,12 +24,20 @@
 		opacity: 1
 		transition: all .2s ease
 		border-radius: 50%
+		+xxl
+			width: 50px
+			height: 50px
+			min-width: 50px
+			min-height: 50px
 		.icon
 			fill: $c0
 			width: 20px
 			height: 20px
 			transition: all 0.2s ease
 			pointer-events: none
+			+xxl
+				width: 16px
+				height: 16px
 		&:focus
 			outline: none
 		&:active
@@ -41,9 +49,22 @@
 		min-height: 100vh
 		margin: 0 auto
 		padding: 4.086vh 2.604vw 3.064vh 2.604vw
+		+lg
+			padding: 40px 40px 30px
+			max-width: calc( 100% - 70px )
+			margin: 0 auto 0 0
+			position: fixed
+			top: 0
+			width: 100%
+			height: 100%
+		+sm
+			padding: 32px 20px 20px
+			max-width: calc( 100% - 30px )
 		.mfp-close
 			background: #F9F9F9
 			border: 1px solid rgba(0, 0, 0, 0.09)
+			+lg
+				top: 15px
 	&--request-popup
 		.mfp-close
 			background: #F9F9F9

@@ -3,10 +3,36 @@
 	&__item
 		&:not(:last-child)
 			margin-bottom: 2.860vh
+			+xxl
+				margin-bottom: 2vh
+			+h840
+				margin-bottom: 2vh
+			+lg
+				margin-bottom: 15px
+			+md
+				margin-bottom: 13px
+			+sm
+				margin-bottom: 10px
+
 	&__link
 		font-weight: bold
 		font-size: 36px
 		line-height: 36px
 		color: $accent
+		+xxl
+			font-size: 24px
+			line-height: 24px
+		+h730
+			font-size: 24px
+			line-height: 24px
+		+lg
+			font-size: 22px
+			line-height: 22px
+		+md
+			font-size: 20px
+			line-height: 20px
+		+sm
+			font-size: 16px
+			line-height: 16px
 		&:hover
 			color: lighten($accent, 5%)
