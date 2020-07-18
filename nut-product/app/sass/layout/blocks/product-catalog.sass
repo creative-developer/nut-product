@@ -1,4 +1,15 @@
 .product-catalog
+	font-size: 16px
+	+xxxl
+		font-size: 15px
+	+h840
+		font-size: 15px
+	+h730
+		font-size: 13.5px
+	+xxl
+		font-size: 13.5px
+	+xl
+		font-size: 11.5px
 	&__col
 		padding: 0 15px
 		flex-basis: 33.333%
@@ -11,87 +22,98 @@
 		line-height: 26px
 		color: $c0
 		max-width: 155px
+		+xl
+			font-size: 18px
+			line-height: 22px
 
 	&__item
 		position: relative
 		display: flex
-		padding: 60px 0 0 40px
+		padding: 6.129vh 0 0 4.086vh
 		height: 200px
 		overflow: hidden
+		+xxxl
+			height: 170px
+		+h840
+			height: 170px
+		+h730
+			height: 160px
+		+xxl
+			height: 160px
 		&:hover
 			transform: translateY(-3px)
 		&--flour
 			background: linear-gradient(353.58deg, #A6C1EE 3.04%, #FBC2EB 121.9%)
 			.product-catalog
 				&__img-wrap
-					top: 24px
-					right: 6px
-					width: 218px
-					height: 176px
+					top: 1.5em
+					right: 0.375em
+					width: 13.625em
+					height: 11rem
 		&--mash
 			background: linear-gradient(170.49deg, #FFFDCA -20.83%, #F3E0A0 103.63%)
 			.product-catalog
 				&__img-wrap
-					top: 31px
-					right: 11px
-					width: 251px
-					height: 168px
+					top: 1.9375em
+					right: 0.6875em
+					width: 15.6875em
+					height: 10.5em
 		&--paste
 			background: linear-gradient(156.5deg, #D4D1C4 11.2%, #FFFACD 90.81%)
 			.product-catalog
 				&__img-wrap
-					top: 39px
-					right: -1px
-					width: 234px
-					height: 151px
+					top: 2.4375em
+					right: -0.0625em
+					width: 14.625em
+					height: 9.4375em
 		&--praline
 			background: linear-gradient(171deg, #FFE1B4 -10.85%, #FFF3E0 105.61%)
 			.product-catalog
 				&__img-wrap
-					top: 29px
-					right: -4px
-					width: 282px
-					height: 171px
+					top: 1.8125em
+					right: -0.25em
+					width: 17.625em
+					height: 10.6875em
 		&--spices
 			background: linear-gradient(162.48deg, #DFE9F3 7.77%, #FFFFFF 88.26%)
 			.product-catalog
 				&__img-wrap
-					top: 42px
-					right: 5px
-					width: 279px
-					height: 157px
+					top: 2.625em
+					right: 0.3125em
+					width: 17.4375em
+					height: 9.8125em
 		&--nuts
 			background: linear-gradient(163.23deg, #D4FC79 7.85%, #96E6A1 97.52%)
 			.product-catalog
 				&__img-wrap
-					top: 53px
-					right: -1px
-					width: 301px
-					height: 139px
+					top: 3.3125em
+					right: -0.0625em
+					width: 18.8125em
+					height: 8.6875em
 		&--chopped-nuts
 			background: linear-gradient(9.99deg, #BDC2E8 3.59%, #BDC2E8 4.64%, #E6DEE9 109.15%)
 			.product-catalog
 				&__img-wrap
-					top: 28px
-					right: -4px
-					width: 267px
-					height: 170px
+					top: 1.75em
+					right: -0.25em
+					width: 16.6875em
+					height: 10.625em
 		&--inventory
 			background: linear-gradient(353.45deg, #A8EDEA -45.5%, #FED6E3 116.3%)
 			.product-catalog
 				&__img-wrap
-					top: 21px
-					right: -5px
-					width: 281px
-					height: 180px
+					top: 1.3125em
+					right: -0.3125em
+					width: 17.5625em
+					height: 11.25em
 		&--marchpane
 			background: linear-gradient(168.04deg, #DDD6F3 -13.55%, #FAACA8 102.69%, #FAACA8 102.69%)
 			.product-catalog
 				&__img-wrap
-					top: 19px
-					right: -24px
-					width: 283px
-					height: 182px
+					top: 1.1875em
+					right: -1.5em
+					width: 17.6875em
+					height: 11.375em
 	&__img
 		&-wrap
 			position: absolute
