@@ -1,0 +1,114 @@
+.bourbon-banner
+	background: #FEFAEC
+	max-width: 1500px
+	margin: 0 auto
+	position: relative
+	z-index: 1
+	padding: 14px 14px 31px
+	&:after
+		content: ''
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: calc( 100% - 20px )
+		height: calc( 100% - 20px )
+		border: 1.4px solid #EFDB84
+		z-index: -1
+	&:before
+		content: ''
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: calc( 100% - 28px )
+		height: calc( 100% - 28px )
+		border: 1px solid #F5E6A4
+		z-index: -1
+	&__row
+		display: flex
+		flex-wrap: wrap
+
+	&__col
+		&--left
+			flex-basis: 21.55%
+			max-width: 21.55%
+			padding-top: 189px
+			+xl
+				flex-basis: 28.5%
+				max-width: 28.5%
+				padding-top: 120px
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+				padding-top: 40px
+				margin-bottom: 50px
+
+
+		&--right
+			flex-basis: 78.45%
+			max-width: 78.45%
+			padding-top: 86px
+			+xl
+				flex-basis: 71.5%
+				max-width: 71.5%
+				padding-top: 70px
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+				padding-top: 0
+			+sm
+				display: flex
+				justify-content: center
+
+	&__title
+		font-weight: bold
+		font-size: 32px
+		line-height: 40px
+		color: $c1
+		margin-bottom: 22px
+		+lg
+			font-size: 28px
+			line-height: 32px
+			text-align: center
+		+md
+			font-size: 24px
+			line-height: 28px
+		+sm
+			font-size: 20px
+			line-height: 26px
+	&__btn
+		background: transparent
+		padding: 15.5px 15px
+		max-width: 200px
+		+lg
+			margin: 0 auto
+
+	&__img
+		&-wrap
+			width: 1144px
+			height: 392px
+			display: flex
+			justify-content: center
+			align-items: center
+			margin-left: -79px
+			+xl
+				width: 899px
+				height: 308px
+			+lg
+				margin-left: -125px
+			+md
+				width: 750px
+				height: 258px
+				margin-left: -150px
+			+sm
+				width: 380px
+				height: 130px
+				min-width: 380px
+				min-height: 130px
+				margin-left: 0
+			+xsm
+				width: 300px
+				height: 103px
+				min-width: 300px
+				min-height: 103px
