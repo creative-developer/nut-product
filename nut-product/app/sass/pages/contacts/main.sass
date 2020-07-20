@@ -4,6 +4,8 @@
 		padding-top: 50px
 		padding-bottom: 50px
 	&__row
+		+min_lg
+			margin-bottom: 50px
 		+lg
 			flex-direction: column
 	&__col
@@ -53,12 +55,17 @@
 		color: rgba($c1, .5)
 		margin-bottom: 14px
 
-	&__address-text
+	&__text
 		font-family: $roboto
 		font-weight: normal
 		font-size: 22px
 		line-height: 32px
 		color: $c1
+		&--address
+			margin-bottom: 50px
+		&--worktime
+			text-transform: uppercase
+
 		+xsm
 			br
 				display: none
