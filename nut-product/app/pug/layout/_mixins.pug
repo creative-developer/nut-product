@@ -15,41 +15,41 @@ mixin textarea(name, dataName, placeholder, required)
 	.input-wrap
 		textarea(name=name, data-name=dataName, cols="30", rows="1" placeholder=placeholder, required=required)
 
-mixin productItem(img, btnName, colModify, dataId)
+mixin productItem(img, btnName, colModify, dataId, title)
 	.custom-col(class="custom-col--" + colModify)
 		.b-product-item
 			._img-wrap
 				if colModify == 'small'
-					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt="")
+					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt=title, title=title)
 				else if colModify == 'big'
-					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
+					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt=title, title=title)
 			a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id=dataId) !{btnName}
 
-mixin productItemModified(img, btnName, colModify, itemModify, dataId)
+mixin productItemModified(img, btnName, colModify, itemModify, dataId, title)
 	.custom-col(class="custom-col--" + colModify)
 		.b-product-item(class="product-item--" + itemModify)
 			._img-wrap
 				if colModify == 'small'
-					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt="")
+					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt=title, title=title)
 				else
-					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
+					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt=title, title=title)
 			if itemModify == 'bg'
 				a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}
 			else
 				a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id=dataId) !{btnName}
 
-mixin productItemHover(img, hoverImg, btnName, colModify, itemModify)
+mixin productItemHover(img, hoverImg, btnName, colModify, itemModify, title)
 	.custom-col(class="custom-col--" + colModify)
 		.b-product-item(class="product-item--" + itemModify)
 			._wrap
 				if colModify == 'small'
 					._img-wrap
-						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt="")
+						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt=title, title=title)
 					._img-wrap.-hover
-						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=hoverImg, alt="")
+						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=hoverImg, alt=btnName, title=btnName)
 				else
 					._img-wrap
-						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt="")
+						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt=title, title=title)
 					._img-wrap.-hover
-						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=hoverImg, alt="")
+						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=hoverImg, alt=btnName, title=btnName)
 			a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}
