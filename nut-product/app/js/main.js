@@ -18,6 +18,7 @@ $(document).ready(function () {
 		$('.menu__col--mobile').prepend($('.menu__feedback-wrap'))
 		$('.menu__col--mobile').prepend($('.menu__btn-wrap'))
 		$('.about-gallery__wrap').append($('.about-gallery__small-desc'))
+		// $('.products-presentation').remove()
 	}, function () {
 		$('.scroll-down').before($('.main__btn-wrap'))
 		$('.main-header__logo').addClass ('logo--hidden')
