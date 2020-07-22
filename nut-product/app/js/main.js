@@ -862,6 +862,8 @@ $(document).ready(function () {
 
 	// const infoList = $('.info-list')
 	function baseTemplate(title, value) {
+		// const filteredStr = value.split('<br>')
+		// console.log(filteredStr)
 		const html = `
 			<div class="info-list__row">
 				<div class="info-list__title">${title}</div>
@@ -1115,7 +1117,7 @@ $(document).ready(function () {
 						productSlider.html('')
 						productNavSlider.html('')
 						productSlider.trigger('destroy.owl.carousel');
-						productNavSlider.trigger('destroy.owl.carousel')
+						$('.product-info__toggle-desc').removeClass('show').css('height', 88)
 					}
 				}
 			}
