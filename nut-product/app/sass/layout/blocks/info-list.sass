@@ -15,14 +15,27 @@
 		font-size: 14px
 		line-height: 22px
 		color: $c1
-		flex-basis: 120px
-		max-width: 120px
+		flex-basis: 140px
+		max-width: 140px
 		margin-right: 4px
+		// +lg
+		// 	flex-basis: 140px
+		// 	max-width: 140px
+		+sm
+			flex-basis: 120px
+			max-width: 120px
+			
 
 	&__value
 		font-family: $roboto
 		font-size: 14px
 		line-height: 20px
 		color: #726F69
-		flex-basis: 350px
-		max-width: 350px
+		flex-basis: 400px
+		max-width: 400px
+		+lg
+			flex-basis: calc( 100% - 140px)
+			max-width: calc( 100% - 140px)
+		+sm
+			flex-basis: calc( 100% - 120px)
+			max-width: calc( 100% - 120px)
