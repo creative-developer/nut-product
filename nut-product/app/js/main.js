@@ -754,7 +754,7 @@ $(document).ready(function () {
 		if (popupID === '#ask-popup' && isMobile) {
 			setTimeout(() => {
 				$('body').addClass('custom-zoom');
-			}, 500);
+			}, 300);
 		} else if(popupID === '#request' || popupID === '#feedback' || popupID === '#price-list') {
 			$('body').addClass('custom-zoom');
 		}else {
@@ -825,7 +825,7 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID);
-			}, 500);
+			}, 300);
 
 		} else {
 			mfpPopup(popupID, data);
@@ -853,7 +853,7 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID, data);
-			}, 500);
+			}, 300);
 
 		} else {
 			mfpPopup(popupID, data);
@@ -960,7 +960,7 @@ $(document).ready(function () {
 			
 			setTimeout(function() {
 				mfpPopup(popupID);
-			}, 500);
+			}, 300);
 
 		} else {
 			mfpPopup(popupID);
@@ -1003,58 +1003,58 @@ $(document).ready(function () {
 	});
 
 	// E-mail Ajax Send
-	// $('form').submit(function(e) {
-	// 	e.preventDefault();
+	$('form').submit(function(e) {
+		e.preventDefault();
 
-	// 	let form = $(this);
-	// 	let formData = {};
-	// 	formData.data = {};
+		let form = $(this);
+		let formData = {};
+		formData.data = {};
 
-	// 	// Serialize
-	// 	form.find('input, textarea').each(function() {
-	// 		let name = $(this).attr('name');
-	// 		let title = $(this).attr('data-name');
-	// 		let value = $(this).val();
+		// Serialize
+		form.find('input, textarea').each(function() {
+			let name = $(this).attr('name');
+			let title = $(this).attr('data-name');
+			let value = $(this).val();
 
-	// 		formData.data[name] = {
-	// 			title: title,
-	// 			value: value,
-	// 		};
+			formData.data[name] = {
+				title: title,
+				value: value,
+			};
 
-	// 		if (name === 'subject') {
-	// 			formData.subject = {
-	// 				value: value,
-	// 			};
-	// 			delete formData.data.subject;
-	// 		}
-	// 	});
+			if (name === 'subject') {
+				formData.subject = {
+					value: value,
+				};
+				delete formData.data.subject;
+			}
+		});
 
-	// 	$.ajax({
-	// 		type: 'POST',
-	// 		url: 'mail/mail.php',
-	// 		dataType: 'json',
-	// 		data: formData,
-	// 	}).done(function(data) {
-	// 		if (data.status === 'success') {
-	// 			if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-	// 				form.find('.form-result').addClass('form-result--success');
-	// 			} else {
-	// 				mfpPopup('#success');
-	// 			}
+		$.ajax({
+			type: 'POST',
+			url: 'mail/mail.php',
+			dataType: 'json',
+			data: formData,
+		}).done(function(data) {
+			if (data.status === 'success') {
+				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+					form.find('.form-result').addClass('form-result--success');
+				} else {
+					mfpPopup('#success');
+				}
 
-	// 			setTimeout(function() {
-	// 				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-	// 					form.find('.form-result').removeClass('form-result--success');
-	// 				}
-	// 				$.magnificPopup.close();
-	// 				form.trigger('reset');
-	// 			}, 3000);
-	// 		} else {
-	// 			alert('Ajax result: ' + data.status);
-	// 		}
-	// 	});
-	// 	return false;
-	// });
+				setTimeout(function() {
+					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+						form.find('.form-result').removeClass('form-result--success');
+					}
+					$.magnificPopup.close();
+					form.trigger('reset');
+				}, 3000);
+			} else {
+				alert('Ajax result: ' + data.status);
+			}
+		});
+		return false;
+	});
 
 	////////// Load functions
 	$(window).on('load', function() {
@@ -1076,7 +1076,7 @@ $(document).ready(function () {
 			preloader: false,
 			midClick: true,
 			fixedContentPos: popupPosition,
-			removalDelay: 500,
+			removalDelay: 300,
 			closeMarkup: `<button type="button" class="mfp-close">${closeIcon}</button>`,
 			mainClass: 'mfp-fade-zoom',
 			callbacks: {
