@@ -787,11 +787,18 @@ $(document).ready(function () {
 			},
 		},
 		onInitialized: function(e){
+			
 			const slider = $(e.target);
+			console.log(slider)
 			const items = slider.find('.owl-item');
-			const height = slider.find('.product-item__img-wrap').outerHeight();
-			console.log(height)
-			items.find('.product-item__img-wrap').height(height);
+			const images = slider.find('.product-item__img-wrap');
+			const getMaxOfArray = (numArray) => Math.max.apply(null, numArray);
+			let heights = [];
+			images.map((idx, el) => {
+				heights.push($(el).outerHeight());
+			})
+			items.find('.product-item__img-wrap').height(getMaxOfArray(heights));
+				
 		}
 	}
 	const productSliderSettings = {
