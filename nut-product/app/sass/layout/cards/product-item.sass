@@ -5,13 +5,13 @@
 	height: 100%
 	position: relative
 
-	&--hover
+	&--spices
 		+min_lg
 			&:hover
 				.product-item
 					&__img-wrap
 						transform: scale(0)
-						&--hover
+						&--spices
 							transform: translate(-50%, -50%) scale(1)
 
 		.product-item
@@ -24,7 +24,9 @@
 			&__img-wrap
 				 margin-bottom: 30px
 
-	&--shaded
+	&--chopped-nuts,
+	&--nuts
+		height: auto
 		.product-item
 			&__img
 				width: 101%
@@ -35,7 +37,7 @@
 					overflow: hidden
 					border-radius: 50%
 
-	&--bg
+	&--inventory
 		width: 100%
 		.product-item
 			&__img
@@ -63,7 +65,7 @@
 			align-items: center
 			margin-bottom: 15px
 			transition: all 0.3s ease
-			&--hover
+			&--spices
 				position: absolute
 				top: 50%
 				left: 50%

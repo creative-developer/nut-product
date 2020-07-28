@@ -33,7 +33,7 @@ mixin productItemModified(img, btnName, colModify, itemModify, dataId, title, ty
 					img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt=title, title=title)
 				else
 					img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt=title, title=title)
-			if itemModify == 'bg' || type == 'simple'
+			if itemModify == 'inventory' || type == 'simple'
 				a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}
 			else
 				a.b-trs-btn.-small._link.js-more-popup(href="#product", data-Id=dataId) !{btnName}
@@ -45,11 +45,11 @@ mixin productItemHover(img, hoverImg, btnName, colModify, itemModify, title)
 				if colModify == 'small'
 					._img-wrap
 						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=img, alt=title, title=title)
-					._img-wrap.-hover
+					._img-wrap(class='product-item__img-wrap--' + itemModify)
 						img._img.lazy(src="img/thumbs/dummy-image-270x340.gif", data-src=hoverImg, alt=btnName, title=btnName)
 				else
 					._img-wrap
 						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=img, alt=title, title=title)
-					._img-wrap.-hover
+					._img-wrap(class='product-item__img-wrap--' + itemModify)
 						img._img.lazy(src="img/thumbs/dummy-image-360x260.gif", data-src=hoverImg, alt=btnName, title=btnName)
 			a.b-trs-btn.-small._link.js-more-title-popup(href="#request") !{btnName}

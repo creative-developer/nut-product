@@ -1,0 +1,152 @@
+.single
+
+	&__wrap
+		display: flex
+		align-items: flex-start
+		justify-content: flex-start
+		+xl
+			flex-direction: column
+			align-items: center
+
+	&__row
+		display: flex
+		margin: 0 -30px 112px
+		+xl
+			margin: 0 -15px 112px
+		+lg
+			flex-wrap: wrap
+			margin: 0 -15px 80px
+
+
+	&__col
+		padding: 0 30px
+		+xl
+			padding: 0 15px
+
+		&--left
+			flex-basis: 51.8%
+			max-width: 51.8%
+			+xl
+				flex-basis: 50%
+				max-width: 50%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+				margin-bottom: 30px
+		&--right
+			flex-basis: 48.2%
+			max-width: 48.2%
+			+xl
+				flex-basis: 50%
+				max-width: 50%
+			+lg
+				flex-basis: 100%
+				max-width: 100%
+				display: flex
+				flex-direction: column
+
+	&__info-list
+		+min_lg
+			margin-bottom: 50px
+		+lg
+			order: 1
+
+	&__product-slider-navigation
+		max-width: 115px
+		+min_xl
+			transform: translateY(25px) rotate(90deg)
+			padding-top: 57px
+		+xl
+			order: 1
+		&.nav-disabled
+			+min_xl
+				transform: rotate(90deg)
+
+
+	&__product-slider
+		background: #F6F6F4
+		max-width: 31.25rem
+		height: 31.25rem
+		width: 100%
+		display: flex
+		justify-content: center
+		align-items: center
+		+min_xl
+			margin-left: -28px
+		+xl
+			order: 0
+			margin-bottom: 30px
+		+sm
+			height: 280px
+			padding: 30px
+
+	&__btn-wrap
+		display: flex
+		align-items: center
+		justify-content: space-between
+		+lg
+			order: 0
+			margin-bottom: 80px
+			justify-content: center
+		+sm
+			flex-direction: column
+
+	&__order-btn
+		padding: 15px 48.21px
+		margin-right: 17px
+		+xl
+			margin-right: 10px
+			padding: 15px 19.21px
+		+lg
+			padding: 15px 48.21px
+			margin-right: 20px
+		+md
+			padding: 15px 19.21px
+		+sm
+			margin-right: 0
+			margin-bottom: 15px
+			width: 100%
+
+	&__offer-btn
+		padding: 13px 23px
+		+xl
+			padding: 13px 15px
+		+lg
+			padding: 13px 23px
+		+md
+			padding: 13px 15px
+		+sm
+			width: 100%
+
+	.btn__icon-wrap
+		margin-right: 10px
+		svg
+			width: 22px
+			height: 22px
+			fill: #fff
+	.trs-btn__icon-wrap
+		margin-right: 10px
+		svg
+			width: 18px
+			height: 22px
+
+	&__section-title
+		font-family: $roboto
+		font-weight: bold
+		font-size: 22px
+		line-height: 26px
+		color: #383033
+		margin-bottom: 39px
+		margin-top: 112px
+		+lg
+			margin-top: 80px
+
+	&__desc
+		font-family: $roboto
+		font-size: 15px
+		line-height: 30px
+		color: $c4
+		p
+			margin-bottom: 0
+			&:not(:last-child)
+				margin-bottom: 30px

@@ -27,7 +27,7 @@ $(document).ready(function () {
 		$('.menu__info-wrap').append($('.menu__btn-wrap'))
 		$('.about-gallery__img-wrap:nth-child(2)').append($('.about-gallery__small-desc'))
 	});
-
+	
 	////////// Common functions
 	const mobileBreackpoint = 992;
 	let isMobile = false;
@@ -763,7 +763,37 @@ $(document).ready(function () {
 	}
 
 	const productSlider = $('.product-slider');
+	const categorySlider = $('.category-slider');
 	const productNavSlider = $('.product-slider-navigation');
+	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
+	// const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="img/svg-sprite.svg#triangle"></use></svg>'
+	const categorySliderSettings = {
+		loop: false,
+		nav: true,
+		dots: false,
+		margin: 30,
+		items: 3,
+		navText: [sliderArrow, sliderArrow],
+		slideSpeed: 1,
+		responsive: {
+			0: {
+				items: 2
+			},
+			767: {
+				items: 2
+			},
+			992: {
+				items: 3
+			},
+		},
+		onInitialized: function(e){
+			const slider = $(e.target);
+			const items = slider.find('.owl-item');
+			const height = slider.find('.product-item__img-wrap').outerHeight();
+			console.log(height)
+			items.find('.product-item__img-wrap').height(height);
+		}
+	}
 	const productSliderSettings = {
 		loop: false,
 		nav: false,
@@ -785,31 +815,60 @@ $(document).ready(function () {
 			},
 		}
 	}
-	// const productNavSliderSettings = {
-	// 	loop: false,
-	// 	nav: false,
-	// 	dots: false,
-	// 	items: 2,
-	// 	mouseDrag: false,
-	// 	touchDrag: false,
-	// 	pullDrag: false,
-	// 	responsive: {
-	// 		0: {
-	// 		},
-	// 		767: {
+	const productNavSliderSettings = {
+		loop: false,
+		nav: true,
+		dots: false,
+		items: 2,
+		margin: 0,
+		autoWidth: true,
+		mouseDrag: false,
+		touchDrag: false,
+		pullDrag: false,
+		navText: [sliderArrow, sliderArrow],
+		responsive: {
+			0: {
+			},
+			767: {
 
-	// 		},
-	// 		992: {
-	// 		},
-	// 	},
-	// 	onTranslate: function(e){
-	// 		const index = e.item.index;
-	// 		productSlider.trigger('to.owl.carousel', index);
-	// 	},
-	// 	onInitialized: function(e){
+			},
+			992: {
+			},
+		},
+		onTranslate: function(e){
+			const slider = $(e.target)
+			var count = e.item.count;
+			const items = slider.find('.owl-item');
+			const activeItems = count - 2;
+			const index = e.item.index;
+			items.removeClass('bordered');
+			$(items[index]).addClass('bordered')
+			productSlider.trigger('to.owl.carousel', index);
+			if (activeItems === index) {
+				slider.find('.owl-next').addClass('next-disabled')
+			}else {
+				slider.find('.owl-next').removeClass('next-disabled')
+			}
+		},
+		onInitialized: function(e){
+			const slider = $(e.target);
+			const index = e.item.index;
+			const items = slider.find('.owl-item');
+			items.removeClass('bordered');
+			$(items[index]).addClass('bordered');
 
-	// 	}
-	// }
+			$('.product-slider-navigation__item').click(function (e) {
+				e.preventDefault();
+				const i = $(this).parent().index();
+				productSlider.trigger('to.owl.carousel', i);
+				items.removeClass('bordered');
+				$(this).parent().addClass('bordered');
+			})
+			if (slider.find('.owl-nav').hasClass('disabled')) {
+				slider.parent().addClass('nav-disabled')
+			}
+		}
+	}
 
 	// Popup opener
 	$('.js-more-title-popup').click(function (event) {
@@ -860,100 +919,100 @@ $(document).ready(function () {
 		}
 	});
 
-	// const infoList = $('.info-list')
-	function baseTemplate(title, value) {
-		// const filteredStr = value.split('<br>')
-		// console.log(filteredStr)
-		const html = `
-			<div class="info-list__row">
-				<div class="info-list__title">${title}</div>
-				<div class="info-list__value">${value}</div>
-			</div>
-		`
-		$('.info-list').append($(html));
-	}
-	function productSliderNav() {
-		$('.product-slider-navigation__item').click(function (e) {
-			e.preventDefault();
-			const index = $(this).index();
-			productSlider.trigger('to.owl.carousel', index);
-		})
-	}
+	// function baseTemplate(title, value) {
+	// 	const html = `
+	// 		<div class="info-list__row">
+	// 			<div class="info-list__title">${title}</div>
+	// 			<div class="info-list__value">${value}</div>
+	// 		</div>
+	// 	`
+	// 	$('.info-list').append($(html));
+	// }
 
-	function serverRequest(path, id, btn) {
-		fetch(path)
-			.then(response => {
-				try {
-					if (response.ok) {
-						return response.json()
-					}
-				} catch (error) {
-					return response.json().then(error => {
-						const e = new Error('Что-то пошло не так')
-						e.data = error
-						throw e
-					})
-				}
-			})
-			.then(json => {
-				const filteredElem = json.filter(element => element.productId === id)
-				if (filteredElem.length) {
-					filteredElem[0].data.forEach(({title, value, body, images}) => {
-						if (body !== undefined) {
-							const filterStr = body.split('<br>');
-							filterStr.forEach(text => {
-								$('.product-info__desc').append(`<p>${text}</p>`)
-							});
-						}
-						if (images !== undefined) {
-							images.forEach(({src}) => {
-								$('.product-slider').append(
-								`	<div class="product-slider__item">
-										<div class="product-slider__img-wrap">
-											<img class="product-slider__img" src=${src} alt="">
-										</div>
-									</div>`
-									)
-								$('.product-slider-navigation').append(
-									`<div class="product-slider-navigation__item">
-										<div class="product-slider-navigation__img-wrap">
-											<img class="product-slider-navigation__img" src=${src} alt="">
-										</div>
-									</div>`
-								)
-							});
-						}
-						if (title !== undefined || value !== undefined) {
-							baseTemplate(title, value)
-						}
-					})
-				}
-			}).catch(err => {
-				throw new Error(err)
-			}).finally(() => {
-				$('.preloader').addClass('preloader--hidden')
-				productSlider.owlCarousel(productSliderSettings);
-				// productNavSlider.owlCarousel(productNavSliderSettings);
-				productSliderNav()
-			})
-		$('.product-info__title').text(btn.text())
-		$('.product-info__img-title--right').text($('.section__title').text())
-	}
+	// function serverRequest(path, id, btn) {
+	// 	fetch(path)
+	// 		.then(response => {
+	// 			try {
+	// 				if (response.ok) {
+	// 					return response.json()
+	// 				}
+	// 			} catch (error) {
+	// 				return response.json().then(error => {
+	// 					const e = new Error('Что-то пошло не так')
+	// 					e.data = error
+	// 					throw e
+	// 				})
+	// 			}
+	// 		})
+	// 		.then(json => {
+	// 			const filteredElem = json.filter(element => element.productId === id)
+	// 			if (filteredElem.length) {
+	// 				filteredElem[0].data.forEach(({title, value, body, images}) => {
+	// 					if (body !== undefined) {
+	// 						const filterStr = body.split('<br>');
+	// 						filterStr.forEach(text => {
+	// 							$('.product-info__desc').append(`<p>${text}</p>`)
+	// 						});
+	// 					}
+	// 					if (images !== undefined) {
+	// 						images.forEach(({src}) => {
+	// 							$('.product-slider').append(
+	// 							`	<div class="product-slider__item">
+	// 									<div class="product-slider__img-wrap">
+	// 										<img class="product-slider__img" src=${src} alt="">
+	// 									</div>
+	// 								</div>`
+	// 								)
+	// 							$('.product-slider-navigation').append(
+	// 								`<div class="product-slider-navigation__item">
+	// 									<div class="product-slider-navigation__img-wrap">
+	// 										<img class="product-slider-navigation__img" src=${src} alt="">
+	// 									</div>
+	// 								</div>`
+	// 							)
+	// 						});
+	// 					}
+	// 					if (title !== undefined || value !== undefined) {
+	// 						baseTemplate(title, value)
+	// 					}
+	// 				})
+	// 			}
+	// 		}).catch(err => {
+	// 			throw new Error(err)
+	// 		}).finally(() => {
+	// 			$('.preloader').addClass('preloader--hidden')
+	// 			productSlider.owlCarousel(productSliderSettings);
+	// 			// productNavSlider.owlCarousel(productNavSliderSettings);
+	// 			// productSliderNav()
+	// 		})
+	// 	$('.product-info__title').text(btn.text())
+	// 	$('.product-info__img-title--right').text($('.section__title').text())
+	// }
+	productSlider.owlCarousel(productSliderSettings);
+	productNavSlider.owlCarousel(productNavSliderSettings);
 
+	// sm
+	MQ(sm, function () {
+		categorySlider.trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
+	}, function () {
+		categorySlider.owlCarousel(categorySliderSettings).addClass('owl-carousel');
+	});
+
+	// productSliderNav();
 	// product Popup
 	$('.js-more-popup').click(function(e) {
 		e.preventDefault();
 		let popupID = $(this).attr('href');
-		let productId = $(this).attr('data-Id');
-		let btn = $(this)
+		// let productId = $(this).attr('data-Id');
+		// let btn = $(this)
 
-		if (popupID === '#product') {
-			popupPosition = true;
-			$('.preloader').removeClass('preloader--hidden')
-		}
+		// if (popupID === '#product') {
+		// 	popupPosition = true;
+		// 	$('.preloader').removeClass('preloader--hidden')
+		// }
 
 		popupClassRemover(popupID)
-		serverRequest('js/data.json', productId, btn)
+		// serverRequest('js/data.json', productId, btn)
 
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
@@ -971,20 +1030,20 @@ $(document).ready(function () {
 	svg4everybody();
 
 
-	$('.product-info__link').click(function (e) {
-		e.preventDefault();
-		const showHeight = $('.product-info__desc').outerHeight();
-		const unShowHeight = 88;
-		const toggleDesc = $('.product-info__toggle-desc');
-		toggleDesc.toggleClass('show');
-		if (toggleDesc.hasClass('show')) {
-			toggleDesc.css('height', showHeight)
-			$(this).text('Скрыть все')
-		} else {
-			toggleDesc.css('height', unShowHeight)
-			$(this).text('Показать все')
-		}
-	})
+	// $('.product-info__link').click(function (e) {
+	// 	e.preventDefault();
+	// 	const showHeight = $('.product-info__desc').outerHeight();
+	// 	const unShowHeight = 88;
+	// 	const toggleDesc = $('.product-info__toggle-desc');
+	// 	toggleDesc.toggleClass('show');
+	// 	if (toggleDesc.hasClass('show')) {
+	// 		toggleDesc.css('height', showHeight)
+	// 		$(this).text('Скрыть все')
+	// 	} else {
+	// 		toggleDesc.css('height', unShowHeight)
+	// 		$(this).text('Показать все')
+	// 	}
+	// })
 	
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
@@ -1062,7 +1121,8 @@ $(document).ready(function () {
 	});
 
 	/////////// mfp popup - https://dimsemenov.com/plugins/magnific-popup/
-	const closeIcon = '<svg class="icon icon--close"><use xlink:href="img/svg-sprite.svg#close"></use></svg>'
+	const closeIcon = '<svg class="icon icon--close"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#close"></use></svg>'
+	// const closeIcon = '<svg class="icon icon--close"><use xlink:href="img/svg-sprite.svg#close"></use></svg>'
 	let mfpPopup = function(popupID, data) {
 		$.magnificPopup.open({
 			items: {
@@ -1099,9 +1159,6 @@ $(document).ready(function () {
 						$('.request-popup__title').text(data.title)
 						$('.request-popup').find('textarea').val(data.title)
 					}
-					// if (popupID === '#product') {
-
-					// }
 				},
 				close: function() {
 					if (popupID === '#menu') {
@@ -1111,14 +1168,14 @@ $(document).ready(function () {
 					if (popupID === '#ask-popup') {
 						fpScrollSwitcher(true)
 					}
-					if (popupID === '#product') {
-						$('.info-list').html('')
-						$('.product-info__desc').html('')
-						productSlider.html('')
-						productNavSlider.html('')
-						productSlider.trigger('destroy.owl.carousel');
-						$('.product-info__toggle-desc').removeClass('show').css('height', 88)
-					}
+					// if (popupID === '#product') {
+					// 	$('.info-list').html('')
+					// 	$('.product-info__desc').html('')
+					// 	productSlider.html('')
+					// 	productNavSlider.html('')
+					// 	productSlider.trigger('destroy.owl.carousel');
+					// 	$('.product-info__toggle-desc').removeClass('show').css('height', 88)
+					// }
 				}
 			}
 		});
