@@ -1,21 +1,33 @@
 .contacts
-	padding-top: 125px
+	padding-top: 75px
+	padding-bottom: 50px
 	+lg
 		padding-top: 50px
-		padding-bottom: 50px
+
+	&__feedback-btn-wrap
+		display: flex
+		align-items: center
+		justify-content: center
+
+	&__feedback-item
+		&:not(:last-child)
+			margin-bottom: 15px
+		&-list
+
 	&__row
-		+min_lg
-			margin-bottom: 50px
 		+lg
 			flex-direction: column
+
 	&__col
 		padding: 0 15px
 		+lg
 			display: flex
 			align-items: flex-start
 			flex-direction: column
+			margin-bottom: 50px
 		+sm
 			padding: 0 20px
+			margin-bottom: 30px
 
 		&--left
 			flex-basis: 35.2%
@@ -23,14 +35,14 @@
 			+lg
 				flex-basis: 100%
 				max-width: 100%
-				margin-bottom: 50px
+				// margin-bottom: 50px
 		&--center
 			flex-basis: 38.7%
 			max-width: 38.7%
 			+lg
 				flex-basis: 100%
 				max-width: 100%
-				margin-bottom: 50px
+				// margin-bottom: 50px
 		&--right
 			flex-basis: 26.1%
 			max-width: 26.1%
@@ -39,10 +51,9 @@
 				max-width: 100%
 
 	&__phone
-		margin-bottom: 14px
+		margin-bottom: 5px
 
 	&__email
-		margin-bottom: 20px
 		display: inline-block
 
 	&__btn
@@ -57,6 +68,8 @@
 		line-height: 22px
 		color: rgba($c1, .5)
 		margin-bottom: 14px
+		+sm
+			margin-bottom: 7px
 
 	&__text
 		font-family: $roboto
@@ -65,8 +78,9 @@
 		line-height: 32px
 		color: $c1
 		&--address
-			margin-bottom: 50px
 			max-width: 340px
+			+min_lg
+				margin-bottom: 50px
 		&--worktime
 			text-transform: uppercase
 
