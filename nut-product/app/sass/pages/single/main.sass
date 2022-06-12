@@ -1,5 +1,7 @@
 .single
-
+	.product-slider__img-wrap
+		height: auto !important
+		width: auto !important
 	&__wrap
 		display: flex
 		align-items: flex-start
@@ -53,6 +55,8 @@
 
 	&__product-slider-navigation
 		max-width: 115px
+		.owl-carousel .owl-nav.disabled
+			display: flex !important
 		+min_xl
 			transform: translateY(25px) rotate(90deg)
 			padding-top: 57px
@@ -77,7 +81,7 @@
 			order: 0
 			margin-bottom: 30px
 		+sm
-			height: 280px
+			height: auto
 			padding: 30px
 
 	&__btn-wrap

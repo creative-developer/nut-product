@@ -4,9 +4,11 @@
 	flex-wrap: wrap
 
 	&__item
-		display: flex;
-		align-items: center;
+		display: flex
+		align-items: center
 		user-select: none
+		+sm
+			margin-bottom: 5px
 		&:not(:last-child)
 			margin-right: 9px
 		&--disabled
@@ -14,6 +16,9 @@
 				&__link
 					pointer-events: none
 					color: $c2
+				&__seperator
+					pointer-events: none
+
 		&:last-child
 			.breadcrumbs__link
 				+lg
