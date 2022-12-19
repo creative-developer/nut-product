@@ -23,7 +23,7 @@ const { watch, src, dest, parallel } = require('gulp'),
 // js libs
 function jsLibs() {
 	return src([
-		'app/libs/jquery/dist/jquery.min.js',
+    'app/libs/jquery/dist/jquery.min.js',
 		'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
 		'app/libs/fullPage.js-master/fullPage.js-master/dist/fullpage.js',
 		'app/libs/gsap/gsap.min.js',
@@ -33,6 +33,7 @@ function jsLibs() {
 		'app/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
 		'app/libs/jQuery-Plugin-For-matchMedia-API/dist/jquery.matchMedia.js',
 		'app/libs/svg4everybody-master/svg4everybody-master/dist/svg4everybody.min.js',
+		'app/libs/jquery-validation/dist/jquery.validate.min.js',
 	])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())

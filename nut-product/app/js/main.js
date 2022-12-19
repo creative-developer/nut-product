@@ -51,6 +51,90 @@ $(document).ready(function () {
 			isMobile = false;
 		}
 	});
+
+  
+	$( 'form' ).each( function() {
+		$( this ).validate({
+			errorPlacement: function(error, element) {},
+			rules: {
+				name: {
+					required: true,
+					minlength: 2
+				},
+				phone: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				check: 'Обязательное поле',
+				name: '',
+				surname: '',
+				phone: '',
+				email: ''
+			},
+			submitHandler: function(form) {
+				formSubmit(form);
+			},
+		});
+	});
+
+	function formSubmit(form) {
+		var form = $(form); 
+		var formData = {};
+		formData.data = {};
+
+		// Serialize
+		form.find('input, textarea').each(function () {
+			var name = $(this).attr('name');
+			var title = $(this).attr('data-name');
+			var value = $(this).val();
+
+			formData.data[name] = {
+				title: title,
+				value: value
+			};
+
+			if (name === 'subject') {
+				formData.subject = {
+					value: value
+				};
+				delete formData.data.subject;
+			}
+		});
+
+		$.ajax({
+			type: 'POST',
+			url: '/wp-content/themes/nut-theme/assets/mail/mail.php',
+			dataType: 'json',
+			data: formData
+		}).done(function (data) {
+
+			if (data.status === 'success') {
+				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+					form.find('.form-result').addClass('form-result--success');
+				} else {
+					mfpPopup('#success');
+				}
+
+				setTimeout(function () {
+					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+						form.find('.form-result').removeClass('form-result--success');
+					}
+					$.magnificPopup.close();
+					form.trigger('reset');
+				}, 6000);
+
+			} else {
+				alert('Ajax result: ' + data.status);
+			}
+
+		});
+		return false;
+	};
 	
 	function fpInit() {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
@@ -883,7 +967,6 @@ $(document).ready(function () {
 		onInitialized: function(e){
 			
 			const slider = $(e.target);
-			console.log(slider)
 			const items = slider.find('.owl-item');
 			const images = slider.find('.product-item__img-wrap');
 			const getMaxOfArray = (numArray) => Math.max.apply(null, numArray);
@@ -903,18 +986,14 @@ $(document).ready(function () {
 		animateOut: 'fadeOut',
 		animateIn: 'fadeIn',
 		slideSpeed: 1,
-		mouseDrag: false,
-		touchDrag: false,
-		pullDrag: false,
-		responsive: {
-			0: {
-			},
-			767: {
-
-			},
-			992: {
-			},
-		}
+		// mouseDrag: false,
+		// touchDrag: false,
+		// pullDrag: false,
+		onTranslate: function(e){
+			const index = e.item.index;
+			productNavSlider.trigger('to.owl.carousel', index);
+			console.log(index)
+		},
 	}
 	const productNavSliderSettings = {
 		loop: false,
@@ -940,24 +1019,32 @@ $(document).ready(function () {
 			const slider = $(e.target)
 			var count = e.item.count;
 			const items = slider.find('.owl-item');
-			const activeItems = count - 2;
+			// const activeItems = count - 2;
 			const index = e.item.index;
 			items.removeClass('bordered');
 			$(items[index]).addClass('bordered')
-			productSlider.trigger('to.owl.carousel', index);
-			if (activeItems === index) {
-				slider.find('.owl-next').addClass('next-disabled')
-			}else {
-				slider.find('.owl-next').removeClass('next-disabled')
-			}
 		},
 		onInitialized: function(e){
 			const slider = $(e.target);
 			const index = e.item.index;
 			const items = slider.find('.owl-item');
+			const nextBtn = slider.find('.owl-next');
+			const prevBtn = slider.find('.owl-prev');
+
+			// next slide
+			nextBtn.click(function () {
+				productSlider.trigger('next.owl.carousel');
+			})
+			// prev slide 
+			prevBtn.click(function () {
+				productSlider.trigger('prev.owl.carousel');
+			})
+
+			// remove items
 			items.removeClass('bordered');
 			$(items[index]).addClass('bordered');
 
+			// add class bordered
 			$('.product-slider-navigation__item').click(function (e) {
 				e.preventDefault();
 				const i = $(this).parent().index();
@@ -965,6 +1052,7 @@ $(document).ready(function () {
 				items.removeClass('bordered');
 				$(this).parent().addClass('bordered');
 			})
+
 			if (slider.find('.owl-nav').hasClass('disabled')) {
 				slider.parent().addClass('nav-disabled')
 			}
@@ -1001,10 +1089,9 @@ $(document).ready(function () {
 			title: btn.text()
 		}
 
-		if (popupID === '#catalog'|| popupID === '#ask-popup') {
+		if (popupID === '#catalog' || popupID === '#ask-popup' || popupID === '#order-popup') {
 			popupPosition = true;
 		}
-
 
 		popupClassRemover(popupID)
 
@@ -1020,75 +1107,6 @@ $(document).ready(function () {
 		}
 	});
 
-	// function baseTemplate(title, value) {
-	// 	const html = `
-	// 		<div class="info-list__row">
-	// 			<div class="info-list__title">${title}</div>
-	// 			<div class="info-list__value">${value}</div>
-	// 		</div>
-	// 	`
-	// 	$('.info-list').append($(html));
-	// }
-
-	// function serverRequest(path, id, btn) {
-	// 	fetch(path)
-	// 		.then(response => {
-	// 			try {
-	// 				if (response.ok) {
-	// 					return response.json()
-	// 				}
-	// 			} catch (error) {
-	// 				return response.json().then(error => {
-	// 					const e = new Error('Что-то пошло не так')
-	// 					e.data = error
-	// 					throw e
-	// 				})
-	// 			}
-	// 		})
-	// 		.then(json => {
-	// 			const filteredElem = json.filter(element => element.productId === id)
-	// 			if (filteredElem.length) {
-	// 				filteredElem[0].data.forEach(({title, value, body, images}) => {
-	// 					if (body !== undefined) {
-	// 						const filterStr = body.split('<br>');
-	// 						filterStr.forEach(text => {
-	// 							$('.product-info__desc').append(`<p>${text}</p>`)
-	// 						});
-	// 					}
-	// 					if (images !== undefined) {
-	// 						images.forEach(({src}) => {
-	// 							$('.product-slider').append(
-	// 							`	<div class="product-slider__item">
-	// 									<div class="product-slider__img-wrap">
-	// 										<img class="product-slider__img" src=${src} alt="">
-	// 									</div>
-	// 								</div>`
-	// 								)
-	// 							$('.product-slider-navigation').append(
-	// 								`<div class="product-slider-navigation__item">
-	// 									<div class="product-slider-navigation__img-wrap">
-	// 										<img class="product-slider-navigation__img" src=${src} alt="">
-	// 									</div>
-	// 								</div>`
-	// 							)
-	// 						});
-	// 					}
-	// 					if (title !== undefined || value !== undefined) {
-	// 						baseTemplate(title, value)
-	// 					}
-	// 				})
-	// 			}
-	// 		}).catch(err => {
-	// 			throw new Error(err)
-	// 		}).finally(() => {
-	// 			$('.preloader').addClass('preloader--hidden')
-	// 			productSlider.owlCarousel(productSliderSettings);
-	// 			// productNavSlider.owlCarousel(productNavSliderSettings);
-	// 			// productSliderNav()
-	// 		})
-	// 	$('.product-info__title').text(btn.text())
-	// 	$('.product-info__img-title--right').text($('.section__title').text())
-	// }
 	productSlider.owlCarousel(productSliderSettings);
 	productNavSlider.owlCarousel(productNavSliderSettings);
 
@@ -1104,16 +1122,7 @@ $(document).ready(function () {
 	$('.js-more-popup').click(function(e) {
 		e.preventDefault();
 		let popupID = $(this).attr('href');
-		// let productId = $(this).attr('data-Id');
-		// let btn = $(this)
-
-		// if (popupID === '#product') {
-		// 	popupPosition = true;
-		// 	$('.preloader').removeClass('preloader--hidden')
-		// }
-
 		popupClassRemover(popupID)
-		// serverRequest('js/data.json', productId, btn)
 
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
@@ -1131,28 +1140,13 @@ $(document).ready(function () {
 	svg4everybody();
 
 
-	// $('.product-info__link').click(function (e) {
-	// 	e.preventDefault();
-	// 	const showHeight = $('.product-info__desc').outerHeight();
-	// 	const unShowHeight = 88;
-	// 	const toggleDesc = $('.product-info__toggle-desc');
-	// 	toggleDesc.toggleClass('show');
-	// 	if (toggleDesc.hasClass('show')) {
-	// 		toggleDesc.css('height', showHeight)
-	// 		$(this).text('Скрыть все')
-	// 	} else {
-	// 		toggleDesc.css('height', unShowHeight)
-	// 		$(this).text('Показать все')
-	// 	}
-	// })
-	
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
 		fullpage_api.moveSectionDown();
 	})
 
 	// Phone input mask
-	$('input[type="tel"]').inputmask({
+	$('input[name="phone"]').inputmask({
 		mask: '+7 (999) 999-99-99',
 		showMaskOnHover: false,
 	});
@@ -1160,60 +1154,6 @@ $(document).ready(function () {
 	// Lazy Load Init
 	new LazyLoad({
 		elements_selector: ".lazy"
-	});
-
-	// E-mail Ajax Send
-	$('form').submit(function(e) {
-		e.preventDefault();
-
-		let form = $(this);
-		let formData = {};
-		formData.data = {};
-
-		// Serialize
-		form.find('input, textarea').each(function() {
-			let name = $(this).attr('name');
-			let title = $(this).attr('data-name');
-			let value = $(this).val();
-
-			formData.data[name] = {
-				title: title,
-				value: value,
-			};
-
-			if (name === 'subject') {
-				formData.subject = {
-					value: value,
-				};
-				delete formData.data.subject;
-			}
-		});
-
-		$.ajax({
-			type: 'POST',
-			url: 'mail/mail.php',
-			dataType: 'json',
-			data: formData,
-		}).done(function(data) {
-			if (data.status === 'success') {
-				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-					form.find('.form-result').addClass('form-result--success');
-				} else {
-					mfpPopup('#success');
-				}
-
-				setTimeout(function() {
-					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-						form.find('.form-result').removeClass('form-result--success');
-					}
-					$.magnificPopup.close();
-					form.trigger('reset');
-				}, 3000);
-			} else {
-				alert('Ajax result: ' + data.status);
-			}
-		});
-		return false;
 	});
 
 	////////// Load functions
