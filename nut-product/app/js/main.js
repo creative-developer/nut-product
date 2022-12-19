@@ -52,14 +52,13 @@ $(document).ready(function () {
 		}
 	});
 
-  
 	$( 'form' ).each( function() {
 		$( this ).validate({
 			errorPlacement: function(error, element) {},
 			rules: {
 				name: {
 					required: true,
-					minlength: 2
+					minlength: 3
 				},
 				phone: {
 					required: true
@@ -135,25 +134,25 @@ $(document).ready(function () {
 		});
 		return false;
 	};
-	
+
 	function fpInit() {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
 		};
 
-    const sectionClassNames = {
-      flour: 'category-section--flour',
-      mash: 'category-section--mash',
-      paste: 'category-section--paste',
-      praline: 'category-section--praline',
-      friedOnion: 'category-section--fried-onion',
-      spices: 'category-section--spices',
-      nuts: 'category-section--nuts',
-      choppedNuts: 'category-section--chopped-nuts',
-      inventory: 'category-section--inventory',
-      marchpane: 'category-section--marchpane',
-    }
+		const sectionClassNames = {
+			flour: 'category-section--flour',
+			mash: 'category-section--mash',
+			paste: 'category-section--paste',
+			praline: 'category-section--praline',
+			friedOnion: 'category-section--fried-onion',
+			spices: 'category-section--spices',
+			nuts: 'category-section--nuts',
+			choppedNuts: 'category-section--chopped-nuts',
+			inventory: 'category-section--inventory',
+			marchpane: 'category-section--marchpane',
+		}
 
 		const flags = {
 			flourFlag: true,
@@ -192,98 +191,97 @@ $(document).ready(function () {
 					$('.main-header__logo').addClass('logo--hidden');
 				}
 
+				const destinationItem = $(destination.item);
 
-        const destinationItem = $(destination.item);
+				if (destinationItem.hasClass(sectionClassNames.flour)) {
+					if (flags.flourFlag) {
+						flourAnimation();
+						flags.flourFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.flour)) {
-          if (flags.flourFlag) {
-            flourAnimation();
-            flags.flourFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.mash)) {
+					if (flags.mashFlag) {
+						mashAnimation();
+						flags.mashFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.mash)) {
-          if (flags.mashFlag) {
-            mashAnimation();
-            flags.mashFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.paste)) {
+					if (flags.pasteFlag) {
+						pasteAnimation();
+						flags.pasteFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.paste)) {
-          if (flags.pasteFlag) {
-            pasteAnimation();
-            flags.pasteFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.praline)) {
+					if (flags.pralineFlag) {
+						pralineAnimation();
+						flags.pralineFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.praline)) {
-          if (flags.pralineFlag) {
-            pralineAnimation();
-            flags.pralineFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.friedOnion)) {
+					if (flags.friedOnionFlag) {
+						friedOnionAnimation();
+						flags.friedOnionFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.friedOnion)) {
-          if (flags.friedOnionFlag) {
-            friedOnionAnimation();
-            flags.friedOnionFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.spices)) {
+					if (flags.spicesFlag) {
+						spicesAnimation();
+						flags.spicesFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.spices)) {
-          if (flags.spicesFlag) {
-            spicesAnimation();
-            flags.spicesFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.nuts)) {
+					if (flags.nutsFlag) {
+						nutsAnimation();
+						flags.nutsFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.nuts)) {
-          if (flags.nutsFlag) {
-            nutsAnimation();
-            flags.nutsFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.choppedNuts)) {
+					if (flags.choppedNutsFlag) {
+						choppedNutsAnimation();
+						flags.choppedNutsFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.choppedNuts)) {
-          if (flags.choppedNutsFlag) {
-            choppedNutsAnimation();
-            flags.choppedNutsFlag = false;
-          }
+					return
+				}
 
-          return
-        }
+				if (destinationItem.hasClass(sectionClassNames.inventory)) {
+					if (flags.inventoryFlag) {
+						inventoryAnimation();
+						flags.inventoryFlag = false;
+					}
 
-        if (destinationItem.hasClass(sectionClassNames.inventory)) {
-          if (flags.inventoryFlag) {
-            inventoryAnimation();
-            flags.inventoryFlag = false;
-          }
-
-          return
-        }
-        
-        if (destinationItem.hasClass(sectionClassNames.marchpane)) {
+					return
+				}
+				
+				if (destinationItem.hasClass(sectionClassNames.marchpane)) {
 					if (flags.marchpaneFlag) {
 						marchpaneAnimation();
 						flags.marchpaneFlag = false;
 					}
 
-          return
-        }
+					return
+				}
 
 				return
 			},
@@ -570,7 +568,7 @@ $(document).ready(function () {
 			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
 		}, 2500);
 	}
-	
+
 	function friedOnionAnimation() {
 		const productsLeftImg = document.querySelector('.products-presentation--fried-onion .products-presentation__img-wrap--left')
 		const productsRightImg = document.querySelector('.products-presentation--fried-onion .products-presentation__img-wrap--right')
@@ -879,8 +877,8 @@ $(document).ready(function () {
 	}
 
 	function menuResponsiveAnimation() {
-		const bigNavItems = document.querySelectorAll('.big-nav__item')
-		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const bigNavItems = document.querySelectorAll('.big-nav__list li')
+		const smallNavItems = document.querySelectorAll('.small-nav__list li')
 		const topRow = document.querySelector('.menu__row--top')
 		const bottomRow = document.querySelector('.menu__row--bottom')
 		const btn = document.querySelector('.menu__btn-wrap')
@@ -895,22 +893,22 @@ $(document).ready(function () {
 		
 		// big nav items animation
 		bigNavItems.forEach((item, index) => {
-			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.6 + (index / 20))
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.3 + (index / 40))
 		});
 		
 		// small nav items animation
 		smallNavItems.forEach((item, index) => {
-			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.8 + (index / 20))
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.4 + (index / 40))
 		});
 
 		// btn animation
-		gsap.fromTo(btn, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.3)
+		gsap.fromTo(btn, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.8)
 
 		// feedback animation
-		gsap.fromTo(feedback, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.35)
+		gsap.fromTo(feedback, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.85)
 
 		// address animation
-		gsap.fromTo(address, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.4)
+		gsap.fromTo(address, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.9)
 	}
 
 	function servicesAnimation() {
@@ -944,6 +942,7 @@ $(document).ready(function () {
 	const categorySlider = $('.category-slider');
 	const productNavSlider = $('.product-slider-navigation');
 	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
+	let sliderFlag = true;
 	// const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="img/svg-sprite.svg#triangle"></use></svg>'
 	const categorySliderSettings = {
 		loop: false,
@@ -1122,6 +1121,7 @@ $(document).ready(function () {
 	$('.js-more-popup').click(function(e) {
 		e.preventDefault();
 		let popupID = $(this).attr('href');
+
 		popupClassRemover(popupID)
 
 		if ($.magnificPopup.instance.isOpen) {
