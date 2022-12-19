@@ -58,6 +58,19 @@ $(document).ready(function () {
 			containerSelector: '.fp-sections',
 		};
 
+    const sectionClassNames = {
+      flour: 'category-section--flour',
+      mash: 'category-section--mash',
+      paste: 'category-section--paste',
+      praline: 'category-section--praline',
+      friedOnion: 'category-section--fried-onion',
+      spices: 'category-section--spices',
+      nuts: 'category-section--nuts',
+      choppedNuts: 'category-section--chopped-nuts',
+      inventory: 'category-section--inventory',
+      marchpane: 'category-section--marchpane',
+    }
+
 		const flags = {
 			flourFlag: true,
 			mashFlag: true,
@@ -95,70 +108,100 @@ $(document).ready(function () {
 					$('.main-header__logo').addClass('logo--hidden');
 				}
 
-				switch (destination.anchor) {
-					case 'flour':
-						if (flags.flourFlag) {
-							flourAnimation();
-							flags.flourFlag = false;
-						}
-						break;
-					case 'mash':
-						if (flags.mashFlag) {
-							mashAnimation();
-							flags.mashFlag = false;
-						}
-						break;
-					case 'paste':
-						if (flags.pasteFlag) {
-							pasteAnimation();
-							flags.pasteFlag = false;
-						}
-						break;
-					case 'praline':
-						if (flags.pralineFlag) {
-							pralineAnimation();
-							flags.pralineFlag = false;
-						}
-						break;
-					case 'fried-onion':
-						if (flags.friedOnionFlag) {
-							friedOnionAnimation();
-							flags.friedOnionFlag = false;
-						}
-						break;
-					case 'spices':
-						if (flags.spicesFlag) {
-							spicesAnimation();
-							flags.spicesFlag = false;
-						}
-						break;
-					case 'nuts':
-						if (flags.nutsFlag) {
-							nutsAnimation();
-							flags.nutsFlag = false;
-						}
-						break;
-					case 'chopped-nuts':
-						if (flags.choppedNutsFlag) {
-							choppedNutsAnimation();
-							flags.choppedNutsFlag = false;
-						}
-						break;
-					case 'inventory':
-						if (flags.inventoryFlag) {
-							inventoryAnimation();
-							flags.inventoryFlag = false;
-						}
-						break;
-					case 'marchpane':
-						if (flags.marchpaneFlag) {
-							marchpaneAnimation();
-							flags.marchpaneFlag = false;
-						}
-						break;
-					default:
-						break;
-				}
+
+        const destinationItem = $(destination.item);
+
+        if (destinationItem.hasClass(sectionClassNames.flour)) {
+          if (flags.flourFlag) {
+            flourAnimation();
+            flags.flourFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.mash)) {
+          if (flags.mashFlag) {
+            mashAnimation();
+            flags.mashFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.paste)) {
+          if (flags.pasteFlag) {
+            pasteAnimation();
+            flags.pasteFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.praline)) {
+          if (flags.pralineFlag) {
+            pralineAnimation();
+            flags.pralineFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.friedOnion)) {
+          if (flags.friedOnionFlag) {
+            friedOnionAnimation();
+            flags.friedOnionFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.spices)) {
+          if (flags.spicesFlag) {
+            spicesAnimation();
+            flags.spicesFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.nuts)) {
+          if (flags.nutsFlag) {
+            nutsAnimation();
+            flags.nutsFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.choppedNuts)) {
+          if (flags.choppedNutsFlag) {
+            choppedNutsAnimation();
+            flags.choppedNutsFlag = false;
+          }
+
+          return
+        }
+
+        if (destinationItem.hasClass(sectionClassNames.inventory)) {
+          if (flags.inventoryFlag) {
+            inventoryAnimation();
+            flags.inventoryFlag = false;
+          }
+
+          return
+        }
+        
+        if (destinationItem.hasClass(sectionClassNames.marchpane)) {
+					if (flags.marchpaneFlag) {
+						marchpaneAnimation();
+						flags.marchpaneFlag = false;
+					}
+
+          return
+        }
+
+				return
 			},
 			afterLoad: function (origin, destination, direction) {
 			},
@@ -816,7 +859,7 @@ $(document).ready(function () {
 	const productSlider = $('.product-slider');
 	const categorySlider = $('.category-slider');
 	const productNavSlider = $('.product-slider-navigation');
-	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
+	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
 	// const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="img/svg-sprite.svg#triangle"></use></svg>'
 	const categorySliderSettings = {
 		loop: false,
@@ -1179,7 +1222,7 @@ $(document).ready(function () {
 	});
 
 	/////////// mfp popup - https://dimsemenov.com/plugins/magnific-popup/
-	const closeIcon = '<svg class="icon icon--close"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#close"></use></svg>'
+	const closeIcon = '<svg class="icon icon--close"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#close"></use></svg>'
 	// const closeIcon = '<svg class="icon icon--close"><use xlink:href="img/svg-sprite.svg#close"></use></svg>'
 	let mfpPopup = function(popupID, data) {
 		$.magnificPopup.open({
