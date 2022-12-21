@@ -854,8 +854,8 @@ $(document).ready(function () {
 	}
 
 	function menuAnimation() {
-		const bigNavItems = document.querySelectorAll('.big-nav__item')
-		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const bigNavItems = document.querySelectorAll('.big-nav__list li')
+		const smallNavItems = document.querySelectorAll('.small-nav__list li')
 		const topRow = document.querySelector('.menu__row--top')
 		const bottomRow = document.querySelector('.menu__row--bottom')
 
@@ -942,7 +942,6 @@ $(document).ready(function () {
 	const categorySlider = $('.category-slider');
 	const productNavSlider = $('.product-slider-navigation');
 	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
-	let sliderFlag = true;
 	// const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="img/svg-sprite.svg#triangle"></use></svg>'
 	const categorySliderSettings = {
 		loop: false,
@@ -985,20 +984,20 @@ $(document).ready(function () {
 		animateOut: 'fadeOut',
 		animateIn: 'fadeIn',
 		slideSpeed: 1,
-		// mouseDrag: false,
-		// touchDrag: false,
-		// pullDrag: false,
 		onTranslate: function(e){
 			const index = e.item.index;
 			productNavSlider.trigger('to.owl.carousel', index);
-			console.log(index)
+      const items = productNavSlider.find('.owl-item');
+
+      items.removeClass('bordered');
+			$(items[index]).addClass('bordered')
 		},
 	}
 	const productNavSliderSettings = {
 		loop: false,
 		nav: true,
 		dots: false,
-		items: 2,
+		items: 3,
 		margin: 0,
 		autoWidth: true,
 		mouseDrag: false,
@@ -1006,24 +1005,11 @@ $(document).ready(function () {
 		pullDrag: false,
 		navText: [sliderArrow, sliderArrow],
 		responsive: {
-			0: {
-			},
-			767: {
-
-			},
-			992: {
-			},
+			0: {},
+			767: {},
+			992: {},
 		},
-		onTranslate: function(e){
-			const slider = $(e.target)
-			var count = e.item.count;
-			const items = slider.find('.owl-item');
-			// const activeItems = count - 2;
-			const index = e.item.index;
-			items.removeClass('bordered');
-			$(items[index]).addClass('bordered')
-		},
-		onInitialized: function(e){
+		onInitialized: function(e) {
 			const slider = $(e.target);
 			const index = e.item.index;
 			const items = slider.find('.owl-item');
@@ -1046,6 +1032,7 @@ $(document).ready(function () {
 			// add class bordered
 			$('.product-slider-navigation__item').click(function (e) {
 				e.preventDefault();
+
 				const i = $(this).parent().index();
 				productSlider.trigger('to.owl.carousel', i);
 				items.removeClass('bordered');
@@ -1184,12 +1171,15 @@ $(document).ready(function () {
 				open: function() {
 					if (popupID === '#menu') {
 						$('.hamburger').addClass('is-active')
+
 						if (!isMobile) {
 							menuAnimation()
 						}
+
 						if (isMobile) {
 							menuResponsiveAnimation()
 						}
+
 						fpScrollSwitcher(false)
 					}
 					if (popupID === '#ask-popup') {
