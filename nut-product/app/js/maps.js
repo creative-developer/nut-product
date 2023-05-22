@@ -1,10 +1,14 @@
 var myMap;
 
 function init() {
+  const mapElement = $('.map')
+  const latitude = mapElement.attr('data-cords-latitude')
+  const longtitude = mapElement.attr('data-cords-longtitude')
+
 	myMap = new ymaps.Map(
 		'map',
 		{
-			center: [ 55.756893, 37.527795 ],
+			center: [latitude, longtitude],
 			zoom: 18,
 			controls: ["default"],
 			type: 'yandex#map',
@@ -13,7 +17,7 @@ function init() {
 			searchControlProvider: 'yandex#search'
 		});
 
-		myPlacemark = new ymaps.Placemark([ 55.756893, 37.527795 ], {
+		myPlacemark = new ymaps.Placemark([latitude, longtitude], {
 			hintContent: '',
 			balloonContent: ''
 		});
@@ -38,5 +42,4 @@ function mapRequest(fn) {
 }
 setTimeout(() => {
 	mapRequest(init)
-	console.log('ishledi')
 }, 2000);
