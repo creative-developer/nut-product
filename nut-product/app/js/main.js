@@ -51,19 +51,115 @@ $(document).ready(function () {
 			isMobile = false;
 		}
 	});
-	
+
+	$( 'form' ).each( function() {
+		$( this ).validate({
+			errorPlacement: function(error, element) {},
+			rules: {
+				name: {
+					required: true,
+					minlength: 3
+				},
+				phone: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				check: 'Обязательное поле',
+				name: '',
+				surname: '',
+				phone: '',
+				email: ''
+			},
+			submitHandler: function(form) {
+				formSubmit(form);
+			},
+		});
+	});
+
+	function formSubmit(form) {
+		var form = $(form); 
+		var formData = {};
+		formData.data = {};
+
+		// Serialize
+		form.find('input, textarea').each(function () {
+			var name = $(this).attr('name');
+			var title = $(this).attr('data-name');
+			var value = $(this).val();
+
+			formData.data[name] = {
+				title: title,
+				value: value
+			};
+
+			if (name === 'subject') {
+				formData.subject = {
+					value: value
+				};
+				delete formData.data.subject;
+			}
+		});
+
+		$.ajax({
+			type: 'POST',
+			url: '/wp-content/themes/nut-theme/assets/mail/mail.php',
+			dataType: 'json',
+			data: formData
+		}).done(function (data) {
+
+			if (data.status === 'success') {
+				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+					form.find('.form-result').addClass('form-result--success');
+				} else {
+					mfpPopup('#success');
+				}
+
+				setTimeout(function () {
+					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
+						form.find('.form-result').removeClass('form-result--success');
+					}
+					$.magnificPopup.close();
+					form.trigger('reset');
+				}, 6000);
+
+			} else {
+				alert('Ajax result: ' + data.status);
+			}
+
+		});
+		return false;
+	};
+
 	function fpInit() {
 		// fullpage config - https://github.com/alvarotrigo/fullPage.js
 		let fp = {
 			containerSelector: '.fp-sections',
-			anchors: ['home', 'flour', 'mash', 'paste', 'praline', 'spices', 'nuts', 'chopped-nuts', 'inventory', 'marchpane'],
 		};
+
+		const sectionClassNames = {
+			flour: 'category-section--flour',
+			mash: 'category-section--mash',
+			paste: 'category-section--paste',
+			praline: 'category-section--praline',
+			friedOnion: 'category-section--fried-onion',
+			spices: 'category-section--spices',
+			nuts: 'category-section--nuts',
+			choppedNuts: 'category-section--chopped-nuts',
+			inventory: 'category-section--inventory',
+			marchpane: 'category-section--marchpane',
+		}
 
 		const flags = {
 			flourFlag: true,
 			mashFlag: true,
 			pasteFlag: true,
 			pralineFlag: true,
+			friedOnionFlag: true,
 			spicesFlag: true,
 			nutsFlag: true,
 			choppedNutsFlag: true,
@@ -74,7 +170,6 @@ $(document).ready(function () {
 		new fullpage(fp.containerSelector, {
 			menu: false,
 			lockAnchors: false,
-			anchors: fp.anchors,
 			lockAnchors: false,
 			navigation: false,
 			showActiveTooltip: false,
@@ -96,64 +191,99 @@ $(document).ready(function () {
 					$('.main-header__logo').addClass('logo--hidden');
 				}
 
-				switch (destination.anchor) {
-					case 'flour':
-						if (flags.flourFlag) {
-							flourAnimation();
-							flags.flourFlag = false;
-						}
-						break;
-					case 'mash':
-						if (flags.mashFlag) {
-							mashAnimation();
-							flags.mashFlag = false;
-						}
-						break;
-					case 'paste':
-						if (flags.pasteFlag) {
-							pasteAnimation();
-							flags.pasteFlag = false;
-						}
-						break;
-					case 'praline':
-						if (flags.pralineFlag) {
-							pralineAnimation();
-							flags.pralineFlag = false;
-						}
-						break;
-					case 'spices':
-						if (flags.spicesFlag) {
-							spicesAnimation();
-							flags.spicesFlag = false;
-						}
-						break;
-					case 'nuts':
-						if (flags.nutsFlag) {
-							nutsAnimation();
-							flags.nutsFlag = false;
-						}
-						break;
-					case 'chopped-nuts':
-						if (flags.choppedNutsFlag) {
-							choppedNutsAnimation();
-							flags.choppedNutsFlag = false;
-						}
-						break;
-					case 'inventory':
-						if (flags.inventoryFlag) {
-							inventoryAnimation();
-							flags.inventoryFlag = false;
-						}
-						break;
-					case 'marchpane':
-						if (flags.marchpaneFlag) {
-							marchpaneAnimation();
-							flags.marchpaneFlag = false;
-						}
-						break;
-					default:
-						break;
+				const destinationItem = $(destination.item);
+
+				if (destinationItem.hasClass(sectionClassNames.flour)) {
+					if (flags.flourFlag) {
+						flourAnimation();
+						flags.flourFlag = false;
+					}
+
+					return
 				}
+
+				if (destinationItem.hasClass(sectionClassNames.mash)) {
+					if (flags.mashFlag) {
+						mashAnimation();
+						flags.mashFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.paste)) {
+					if (flags.pasteFlag) {
+						pasteAnimation();
+						flags.pasteFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.praline)) {
+					if (flags.pralineFlag) {
+						pralineAnimation();
+						flags.pralineFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.friedOnion)) {
+					if (flags.friedOnionFlag) {
+						friedOnionAnimation();
+						flags.friedOnionFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.spices)) {
+					if (flags.spicesFlag) {
+						spicesAnimation();
+						flags.spicesFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.nuts)) {
+					if (flags.nutsFlag) {
+						nutsAnimation();
+						flags.nutsFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.choppedNuts)) {
+					if (flags.choppedNutsFlag) {
+						choppedNutsAnimation();
+						flags.choppedNutsFlag = false;
+					}
+
+					return
+				}
+
+				if (destinationItem.hasClass(sectionClassNames.inventory)) {
+					if (flags.inventoryFlag) {
+						inventoryAnimation();
+						flags.inventoryFlag = false;
+					}
+
+					return
+				}
+				
+				if (destinationItem.hasClass(sectionClassNames.marchpane)) {
+					if (flags.marchpaneFlag) {
+						marchpaneAnimation();
+						flags.marchpaneFlag = false;
+					}
+
+					return
+				}
+
+				return
 			},
 			afterLoad: function (origin, destination, direction) {
 			},
@@ -438,6 +568,52 @@ $(document).ready(function () {
 			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
 		}, 2500);
 	}
+
+	function friedOnionAnimation() {
+		const productsLeftImg = document.querySelector('.products-presentation--fried-onion .products-presentation__img-wrap--left')
+		const productsRightImg = document.querySelector('.products-presentation--fried-onion .products-presentation__img-wrap--right')
+		const item1 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(1)')
+		const item2 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(2)')
+		const item3 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(3)')
+		const item4 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(4)')
+		const item5 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(5)')
+		const item6 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(6)')
+		const item7 = document.querySelector('.products-presentation--fried-onion .products-presentation__item:nth-child(7)')
+
+		// one-off animation
+		gsap.fromTo(productsRightImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(1)
+		gsap.fromTo(productsLeftImg, 1, { y: 150, opacity: 0 }, { y: 0, opacity: 1}).delay(0.8)
+		gsap.fromTo(item1, 0.5, { y: 30, scale: 0 }, { y:0, scale: 1}).delay(1.2)
+		gsap.fromTo(item2, 0.5, { y: 40, scale: 0 }, { y:0, scale: 1}).delay(1.3)
+		gsap.fromTo(item3, 0.5, { y: 50, scale: 0 }, { y:0, scale: 1}).delay(1.4)
+		gsap.fromTo(item4, 0.5, { y: 50, scale: 0 }, { y:0, scale: 1}).delay(1.6)
+		gsap.fromTo(item5, 0.5, { y: 50, scale: 0 }, { y:0, scale: 1}).delay(1.7)
+		gsap.fromTo(item6, 0.5, { y: 40, scale: 0 }, { y:0, scale: 1}).delay(1.8)
+		gsap.fromTo(item7, 0.5, { y: 30, scale: 0 }, { y:0, scale: 1}).delay(1.9)
+
+		function mouseMoveParallax() {
+			$('.category-section--fried-onion').on('mousemove', function (e) {
+				const posX = e.clientX / 100;
+				const posY = e.clientY / 100;
+				
+				// items animation
+				gsap.to(item1, 1, { x: posX, y: posY });
+				gsap.to(item2, 2, { x: posX, y: posY });
+				gsap.to(item3, 2.5, { x: posX, y: posX });
+				gsap.to(item4, 2, { x: -posX, y: -posY });
+				gsap.to(item5, 2, { x: posX, y: posY });
+				gsap.to(item6, 2, { x: -posX, y: -posY });
+				gsap.to(item7, 2, { x: -posX, y: -posY });
+			})
+
+		}
+		setTimeout(() => {
+			mouseMoveParallax()
+			// infinite animation
+			gsap.fromTo(productsLeftImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+			gsap.fromTo(productsRightImg, 2, { y: 0 }, { y: -25, repeat: -1, repeatDelay: 0, yoyo: true })
+		}, 2500);
+	}
 	
 	function spicesAnimation() {
 		const productsLeftImg = document.querySelector('.products-presentation--spices .products-presentation__img-wrap--left')
@@ -678,8 +854,8 @@ $(document).ready(function () {
 	}
 
 	function menuAnimation() {
-		const bigNavItems = document.querySelectorAll('.big-nav__item')
-		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const bigNavItems = document.querySelectorAll('.big-nav__list li')
+		const smallNavItems = document.querySelectorAll('.small-nav__list li')
 		const topRow = document.querySelector('.menu__row--top')
 		const bottomRow = document.querySelector('.menu__row--bottom')
 
@@ -701,8 +877,8 @@ $(document).ready(function () {
 	}
 
 	function menuResponsiveAnimation() {
-		const bigNavItems = document.querySelectorAll('.big-nav__item')
-		const smallNavItems = document.querySelectorAll('.small-nav__item')
+		const bigNavItems = document.querySelectorAll('.big-nav__list li')
+		const smallNavItems = document.querySelectorAll('.small-nav__list li')
 		const topRow = document.querySelector('.menu__row--top')
 		const bottomRow = document.querySelector('.menu__row--bottom')
 		const btn = document.querySelector('.menu__btn-wrap')
@@ -717,22 +893,22 @@ $(document).ready(function () {
 		
 		// big nav items animation
 		bigNavItems.forEach((item, index) => {
-			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.6 + (index / 20))
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.3 + (index / 40))
 		});
 		
 		// small nav items animation
 		smallNavItems.forEach((item, index) => {
-			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.8 + (index / 20))
+			gsap.fromTo(item, 0.4, { x: -150, opacity: 0 }, { x: 0, opacity: 1 }).delay(0.4 + (index / 40))
 		});
 
 		// btn animation
-		gsap.fromTo(btn, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.3)
+		gsap.fromTo(btn, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.8)
 
 		// feedback animation
-		gsap.fromTo(feedback, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.35)
+		gsap.fromTo(feedback, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.85)
 
 		// address animation
-		gsap.fromTo(address, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(1.4)
+		gsap.fromTo(address, 0.4, { y: 100, opacity: 0 }, { y: 0, opacity: 1 }).delay(0.9)
 	}
 
 	function servicesAnimation() {
@@ -765,7 +941,7 @@ $(document).ready(function () {
 	const productSlider = $('.product-slider');
 	const categorySlider = $('.category-slider');
 	const productNavSlider = $('.product-slider-navigation');
-	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
+	const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#triangle"></use></svg>'
 	// const sliderArrow = '<svg class="icon icon--triangle"><use xlink:href="img/svg-sprite.svg#triangle"></use></svg>'
 	const categorySliderSettings = {
 		loop: false,
@@ -789,7 +965,6 @@ $(document).ready(function () {
 		onInitialized: function(e){
 			
 			const slider = $(e.target);
-			console.log(slider)
 			const items = slider.find('.owl-item');
 			const images = slider.find('.product-item__img-wrap');
 			const getMaxOfArray = (numArray) => Math.max.apply(null, numArray);
@@ -809,24 +984,20 @@ $(document).ready(function () {
 		animateOut: 'fadeOut',
 		animateIn: 'fadeIn',
 		slideSpeed: 1,
-		mouseDrag: false,
-		touchDrag: false,
-		pullDrag: false,
-		responsive: {
-			0: {
-			},
-			767: {
+		onTranslate: function(e){
+			const index = e.item.index;
+			productNavSlider.trigger('to.owl.carousel', index);
+      const items = productNavSlider.find('.owl-item');
 
-			},
-			992: {
-			},
-		}
+      items.removeClass('bordered');
+			$(items[index]).addClass('bordered')
+		},
 	}
 	const productNavSliderSettings = {
 		loop: false,
 		nav: true,
 		dots: false,
-		items: 2,
+		items: 3,
 		margin: 0,
 		autoWidth: true,
 		mouseDrag: false,
@@ -834,43 +1005,40 @@ $(document).ready(function () {
 		pullDrag: false,
 		navText: [sliderArrow, sliderArrow],
 		responsive: {
-			0: {
-			},
-			767: {
-
-			},
-			992: {
-			},
+			0: {},
+			767: {},
+			992: {},
 		},
-		onTranslate: function(e){
-			const slider = $(e.target)
-			var count = e.item.count;
-			const items = slider.find('.owl-item');
-			const activeItems = count - 2;
-			const index = e.item.index;
-			items.removeClass('bordered');
-			$(items[index]).addClass('bordered')
-			productSlider.trigger('to.owl.carousel', index);
-			if (activeItems === index) {
-				slider.find('.owl-next').addClass('next-disabled')
-			}else {
-				slider.find('.owl-next').removeClass('next-disabled')
-			}
-		},
-		onInitialized: function(e){
+		onInitialized: function(e) {
 			const slider = $(e.target);
 			const index = e.item.index;
 			const items = slider.find('.owl-item');
+			const nextBtn = slider.find('.owl-next');
+			const prevBtn = slider.find('.owl-prev');
+
+			// next slide
+			nextBtn.click(function () {
+				productSlider.trigger('next.owl.carousel');
+			})
+			// prev slide 
+			prevBtn.click(function () {
+				productSlider.trigger('prev.owl.carousel');
+			})
+
+			// remove items
 			items.removeClass('bordered');
 			$(items[index]).addClass('bordered');
 
+			// add class bordered
 			$('.product-slider-navigation__item').click(function (e) {
 				e.preventDefault();
+
 				const i = $(this).parent().index();
 				productSlider.trigger('to.owl.carousel', i);
 				items.removeClass('bordered');
 				$(this).parent().addClass('bordered');
 			})
+
 			if (slider.find('.owl-nav').hasClass('disabled')) {
 				slider.parent().addClass('nav-disabled')
 			}
@@ -907,10 +1075,9 @@ $(document).ready(function () {
 			title: btn.text()
 		}
 
-		if (popupID === '#catalog'|| popupID === '#ask-popup') {
+		if (popupID === '#catalog' || popupID === '#ask-popup' || popupID === '#order-popup') {
 			popupPosition = true;
 		}
-
 
 		popupClassRemover(popupID)
 
@@ -926,75 +1093,6 @@ $(document).ready(function () {
 		}
 	});
 
-	// function baseTemplate(title, value) {
-	// 	const html = `
-	// 		<div class="info-list__row">
-	// 			<div class="info-list__title">${title}</div>
-	// 			<div class="info-list__value">${value}</div>
-	// 		</div>
-	// 	`
-	// 	$('.info-list').append($(html));
-	// }
-
-	// function serverRequest(path, id, btn) {
-	// 	fetch(path)
-	// 		.then(response => {
-	// 			try {
-	// 				if (response.ok) {
-	// 					return response.json()
-	// 				}
-	// 			} catch (error) {
-	// 				return response.json().then(error => {
-	// 					const e = new Error('Что-то пошло не так')
-	// 					e.data = error
-	// 					throw e
-	// 				})
-	// 			}
-	// 		})
-	// 		.then(json => {
-	// 			const filteredElem = json.filter(element => element.productId === id)
-	// 			if (filteredElem.length) {
-	// 				filteredElem[0].data.forEach(({title, value, body, images}) => {
-	// 					if (body !== undefined) {
-	// 						const filterStr = body.split('<br>');
-	// 						filterStr.forEach(text => {
-	// 							$('.product-info__desc').append(`<p>${text}</p>`)
-	// 						});
-	// 					}
-	// 					if (images !== undefined) {
-	// 						images.forEach(({src}) => {
-	// 							$('.product-slider').append(
-	// 							`	<div class="product-slider__item">
-	// 									<div class="product-slider__img-wrap">
-	// 										<img class="product-slider__img" src=${src} alt="">
-	// 									</div>
-	// 								</div>`
-	// 								)
-	// 							$('.product-slider-navigation').append(
-	// 								`<div class="product-slider-navigation__item">
-	// 									<div class="product-slider-navigation__img-wrap">
-	// 										<img class="product-slider-navigation__img" src=${src} alt="">
-	// 									</div>
-	// 								</div>`
-	// 							)
-	// 						});
-	// 					}
-	// 					if (title !== undefined || value !== undefined) {
-	// 						baseTemplate(title, value)
-	// 					}
-	// 				})
-	// 			}
-	// 		}).catch(err => {
-	// 			throw new Error(err)
-	// 		}).finally(() => {
-	// 			$('.preloader').addClass('preloader--hidden')
-	// 			productSlider.owlCarousel(productSliderSettings);
-	// 			// productNavSlider.owlCarousel(productNavSliderSettings);
-	// 			// productSliderNav()
-	// 		})
-	// 	$('.product-info__title').text(btn.text())
-	// 	$('.product-info__img-title--right').text($('.section__title').text())
-	// }
 	productSlider.owlCarousel(productSliderSettings);
 	productNavSlider.owlCarousel(productNavSliderSettings);
 
@@ -1010,16 +1108,8 @@ $(document).ready(function () {
 	$('.js-more-popup').click(function(e) {
 		e.preventDefault();
 		let popupID = $(this).attr('href');
-		// let productId = $(this).attr('data-Id');
-		// let btn = $(this)
-
-		// if (popupID === '#product') {
-		// 	popupPosition = true;
-		// 	$('.preloader').removeClass('preloader--hidden')
-		// }
 
 		popupClassRemover(popupID)
-		// serverRequest('js/data.json', productId, btn)
 
 		if ($.magnificPopup.instance.isOpen) {
 			$.magnificPopup.close();
@@ -1037,28 +1127,13 @@ $(document).ready(function () {
 	svg4everybody();
 
 
-	// $('.product-info__link').click(function (e) {
-	// 	e.preventDefault();
-	// 	const showHeight = $('.product-info__desc').outerHeight();
-	// 	const unShowHeight = 88;
-	// 	const toggleDesc = $('.product-info__toggle-desc');
-	// 	toggleDesc.toggleClass('show');
-	// 	if (toggleDesc.hasClass('show')) {
-	// 		toggleDesc.css('height', showHeight)
-	// 		$(this).text('Скрыть все')
-	// 	} else {
-	// 		toggleDesc.css('height', unShowHeight)
-	// 		$(this).text('Показать все')
-	// 	}
-	// })
-	
 	$('.js-scroll-down-fp').click(function (e) {
 		e.preventDefault();
 		fullpage_api.moveSectionDown();
 	})
 
 	// Phone input mask
-	$('input[type="tel"]').inputmask({
+	$('input[name="phone"]').inputmask({
 		mask: '+7 (999) 999-99-99',
 		showMaskOnHover: false,
 	});
@@ -1068,67 +1143,13 @@ $(document).ready(function () {
 		elements_selector: ".lazy"
 	});
 
-	// E-mail Ajax Send
-	$('form').submit(function(e) {
-		e.preventDefault();
-
-		let form = $(this);
-		let formData = {};
-		formData.data = {};
-
-		// Serialize
-		form.find('input, textarea').each(function() {
-			let name = $(this).attr('name');
-			let title = $(this).attr('data-name');
-			let value = $(this).val();
-
-			formData.data[name] = {
-				title: title,
-				value: value,
-			};
-
-			if (name === 'subject') {
-				formData.subject = {
-					value: value,
-				};
-				delete formData.data.subject;
-			}
-		});
-
-		$.ajax({
-			type: 'POST',
-			url: 'mail/mail.php',
-			dataType: 'json',
-			data: formData,
-		}).done(function(data) {
-			if (data.status === 'success') {
-				if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-					form.find('.form-result').addClass('form-result--success');
-				} else {
-					mfpPopup('#success');
-				}
-
-				setTimeout(function() {
-					if (form.closest('.mfp-wrap').hasClass('mfp-ready')) {
-						form.find('.form-result').removeClass('form-result--success');
-					}
-					$.magnificPopup.close();
-					form.trigger('reset');
-				}, 3000);
-			} else {
-				alert('Ajax result: ' + data.status);
-			}
-		});
-		return false;
-	});
-
 	////////// Load functions
 	$(window).on('load', function() {
 		//
 	});
 
 	/////////// mfp popup - https://dimsemenov.com/plugins/magnific-popup/
-	const closeIcon = '<svg class="icon icon--close"><use xlink:href="http://localhost/nut/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#close"></use></svg>'
+	const closeIcon = '<svg class="icon icon--close"><use xlink:href="/wp-content/themes/nut-theme/assets/img/svg-sprite.svg#close"></use></svg>'
 	// const closeIcon = '<svg class="icon icon--close"><use xlink:href="img/svg-sprite.svg#close"></use></svg>'
 	let mfpPopup = function(popupID, data) {
 		$.magnificPopup.open({
@@ -1150,12 +1171,15 @@ $(document).ready(function () {
 				open: function() {
 					if (popupID === '#menu') {
 						$('.hamburger').addClass('is-active')
+
 						if (!isMobile) {
 							menuAnimation()
 						}
+
 						if (isMobile) {
 							menuResponsiveAnimation()
 						}
+
 						fpScrollSwitcher(false)
 					}
 					if (popupID === '#ask-popup') {
