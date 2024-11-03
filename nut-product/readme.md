@@ -24,3 +24,5 @@ Author: [hattam](https://hattam.ru)
 - **[Pug+Bem](https://github.com/legostaev-vadim/gulp-pugbem)**
 - **[Pug+Bem for bootstrap](https://github.com/legostaev-vadim/gulp-pugbem/issues/1)**
 
+## Actual Project Path Local
+D:\projects\nut-product\nut-product
